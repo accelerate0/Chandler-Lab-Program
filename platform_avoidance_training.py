@@ -35,38 +35,30 @@ class Presets:
 #==========================================================#
 
 # =============NEED TO WORK ON=============== #
-# Data - Totals
-data_DIM_A = 6
-data_DIM_B = 1 \SHOCK ARRAY - ARRAY MUST BE 0x0 so can be used in ZEROARRAY FUNCTION
-data_array = ['1', '2', '3', '4', '5', '6']
-# How to integrate SHOCK ARRAY aka ARRAY MUST BE 0x0 so can be used in ZEROARRAY FUNCTION
-# Zeroarray via numpy aka such as zarray = numpy.zeros(100)
-"""
-data_A(0) = Lever Presses
-data_A(1) = Pellets delivered
-data_A(2) = Magazine Entries
-data_A(3) = Tone counter
-data_A(4) = InterBlock Interval counter
-data_A(5) = Shock counter
-"""
+# Data - Totals, Needs Work
+class DIM:
+    def __init__(DIM_A, 1, 2, 3, 4, 5, 6)
+        DIM_A.0 = Lever Presses
+        DIM_A.1 = Pellets delivered
+        DIM_A.2 = Magazine Entries
+        DIM_A.3 = Tone counter
+        DIM_A.4 = InterBlock Interval counter
+        DIM_A.5 = Shock counter
+        DIM_A.data_zarray = numpy.zeros(DIM_A.1, DIM_A.2, DIM_A.3, DIM_A.4, DIM_A.5, DIM_A.6)
+    DIM.B = 1
+    DIM.C = 1
+    DIM.D = 5000 # ARRAY OF TIMESTAMPS FOR PELLET DELIVERIES
+    DIM.E = 5000 # ARRAY OF TIMESTAMPS FOR LEVER PRESSES
+    DIM.F = 5000 # ARRAY OF TIMESTAMPS FOR PORT ENTRIES
+    DIM.G = 5000 # ARRAY OF TIMESTAMPS FOR TONE ONSET
+    DIM.H = 5000 # ARRAY OF TIMESTAMPS FOR SHOCK ONSET
+    DIM.J = 5000 # ARRAY OF TIMESTAMPS FOR INTER BLOCK INTERVAL ONSET
+    def __init__(DIM_X, 1, 2, 3) # SESSION VARIABLES
+        DIM_X.1 = VI Schedule timer
+        DIM_X.2 = Session timer
+        DIM_X.3 = ITI timer
 
-# ============================ #
 
-# =============NEED TO WORK ON=============== #
-#     TIMESTAMPS
-DIM_C = 1
-DIM_D = 5000 \ ARRAY OF TIMESTAMPS FOR PELLET DELIVERIES
-DIM_E = 5000 \ ARRAY OF TIMESTAMPS FOR LEVER PRESSES
-DIM F = 5000 \ ARRAY OF TIMESTAMPS FOR PORT ENTRIES
-DIM G = 5000 \ ARRAY OF TIMESTAMPS FOR TONE ONSET
-DIM H = 5000 \ ARRAY OF TIMESTAMPS FOR SHOCK ONSET
-DIM J = 5000 \ ARRAY OF TIMESTAMPS FOR INTER BLOCK INTERVAL ONSET
-# =============NEED TO WORK ON=============== #
-# SESSION VARIABLES
-DIM X = 3
-\X(0) = VI Schedule timer
-\X(1) = Session timer
-\X(2) = ITI timer
 # =============NEED TO WORK ON=============== #
 #    LISTS
 \VI OPTION LIST - This list will be initialized into a VI schedule
@@ -162,23 +154,4 @@ class Analogue_Output:
     def __init__(HouseLight, on, off):
         HouseLight.off = 0
         HouseLight.on = 1
-        
-
-
-    # Sample Method
-    def say_hi(self):
-        print('Hello, my name is', self.name)
-
-p = Person('Nikhil')
-p.say_hi()
-    inpt_RightLever = '1'
-    inpt_Magazine = '4'
-    outpt_RightOut = '1'
-    outpt_LeverLight = '2'
-    outpt_Pellet = '3'
-    outpt_Shock = '4'
-
-    outpt_Tone = '6'
-
-    outpt_TTLTone = '9'
-    outpt_TTLL = '10'
+# Work On It
