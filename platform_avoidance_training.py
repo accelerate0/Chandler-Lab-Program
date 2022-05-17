@@ -8,11 +8,9 @@ import time # For timer
 #==========================================================#
 
 class Channel:
-
     # Channel Inputs
     inpt_RightLever = '1'
     inpt_Magazine = '4'
-
     # Channel Outputs
     outpt_RightOut = '1'
     outpt_LeverLight = '2'
@@ -31,6 +29,10 @@ class Presets:
     const_CorrectResponse = 3 # Right lever press following the end of the VI timer
     const_ITI = 180 # Mean Intertrial Interval in seconds
     const_Shutdown = 12
+
+#==========================================================#
+#                         Arrays
+#==========================================================#
 
 # =============NEED TO WORK ON=============== #
 # Data - Totals
@@ -145,20 +147,38 @@ elif y_n_2_answer == "2": # Pseudonumeric Generator
 else:
     print("Please enter 1 or 2")
 
+
 # Construction of the Experiment
+class Analogue_Output:
+    def __init__(RightLever, on, off):
+        RightLever.off = 0
+        RightLever.on = 1
+    def __init__(LightLever, on, off):
+        LightLever.off = 0
+        LightLever.on = 1
+    def __init__(RightLight, on, off):
+        RightLight.off = 0
+        RightLight.on = 1
+    def __init__(HouseLight, on, off):
+        HouseLight.off = 0
+        HouseLight.on = 1
+        
 
 
-class Analogue_Input
-class Channel:
+    # Sample Method
+    def say_hi(self):
+        print('Hello, my name is', self.name)
+
+p = Person('Nikhil')
+p.say_hi()
     inpt_RightLever = '1'
     inpt_Magazine = '4'
-    # Channel Outputs
     outpt_RightOut = '1'
     outpt_LeverLight = '2'
     outpt_Pellet = '3'
     outpt_Shock = '4'
-    outpt_RightLight = '5'
+
     outpt_Tone = '6'
-    outpt_HouseLight = '7'
+
     outpt_TTLTone = '9'
     outpt_TTLL = '10'
