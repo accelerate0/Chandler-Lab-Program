@@ -8,28 +8,11 @@ import multiprocessing # For parallel running VI and ITI
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
 
-class Presets:
-    const_SessionLength = 3600 # Length of the entire experiment in sec
-    const_VISchedule = 30 # Variable interval schedule with mean interval of 30sec
-    const_CorrectResponse = 3 # Right lever press following the end of the VI timer
-    const_ITI = 180 # Mean Intertrial Interval in seconds
-
-# Reference Table at the moment, Will Either Delete Soon or Use to Robustly Integrate Pynapse Settings
-def Channel()
-    class iH10_1:
-        output_Left_Lever_Extension = Channel.1a
-        input_Left_Lever_Press = Channel.2a
-        output_Left_Lever_Light	= Channel.3a
-        output_Reward_Receptacle_Light = Channel.4a
-        output_House_Light = Channel.5a
-        output_Tone = Channel.6a
-        input_Reward_Receptacle_Beam_Break = Channel.7a
-        output_Pellet_Dispenser = Channel.9a
-        output_Shock = Channel.10a
-    class iH10_2:
-        output_Right_Lever_Extension = Channel.1b
-        input_Right_Lever_Press = Channel.2b
-        output_Right_Lever_Light = Channel.3b
+# Global Variables
+const_SessionLength = 3600 # Length of the entire experiment in sec
+const_VISchedule = 30 # Variable interval schedule with mean interval of 30sec
+const_CorrectResponse = 3 # Right lever press following the end of the VI timer
+const_ITI = 180 # Mean Intertrial Interval in seconds
 
 #==========================================================#
 #                Program: Preliminary                      #
@@ -41,11 +24,11 @@ print("Platform Avoidance Test", '\n', "Version 1.0", '\n', "By Erick Won", '\n'
 # Displays Set Variables and Presets
 print( "KEY VARIABLES:", '\n', '\n',
 "EXPERIMENTAL PRESETS:", '\n',
-"const_SessionLength =", Presets.const_SessionLength, '\n',
-"const_VISchedule =", Presets.const_VISchedule, '\n',
-"const_CorrectResponse =", Presets.const_CorrectResponse, '\n',
-"const_ITI =", Presets.const_ITI, '\n',
-"const_Shutdown =", Presets.const_Shutdown, '\n'
+"const_SessionLength =", const_SessionLength, '\n',
+"const_VISchedule =", const_VISchedule, '\n',
+"const_CorrectResponse =", const_CorrectResponse, '\n',
+"const_ITI =", const_ITI, '\n',
+"const_Shutdown =", const_Shutdown, '\n'
 )
 
 # User Double Check Measure via yes/no
@@ -62,7 +45,8 @@ else:
 #==========================================================#
 
 # Turning On Light and Lever
-class Always: # Special Pynapse Function 'Always'
+class Always:   #StateID = 0
+    # Special Pynapse Function 'Always'
     p_Rig.output_House_Light.turnOn()
     print('Light is On')
     p_Rig.output_Left_Lever_Extension.turnOn()
@@ -78,9 +62,9 @@ def Process_VI_Schedule():
     print ("Execute VI Schedule")
     class VI_Timer:
         import numpy as np
-        float_1 = np.random.normal(Presets.const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
-        float_2 = np.random.normal(Presets.const_VISchedule,3,1) # (mean average, standard deviation, amount of numbers)
-        float_3 = np.random.normal(Presets.const_VISchedule,3,1) # 3 for 3 VI intervals
+        float_1 = np.random.normal(const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
+        float_2 = np.random.normal(const_VISchedule,3,1) # (mean average, standard deviation, amount of numbers)
+        float_3 = np.random.normal(const_VISchedule,3,1) # 3 for 3 VI intervals
         print("The numbers generated are ", VI_Timer.float_1, " ", VI_Timer.float_2, " ", VI_Timer.float_3, " seconds")
         # VI Schedule Interval 1
         time.sleep(VI_Timer.float_1) # Delay
@@ -102,7 +86,7 @@ def Process_VI_Schedule():
             print('Lever Was Pressed & Logged For Float 3')
     # Creating Loop For VI Schedule Interval 1,2,3 inside 60 minute timer
     VI_start_time = time.time() # Starting 60 minute timer of the entire VI_Schedule
-    VI_seconds = Presets.const_SessionLength
+    VI_seconds = const_SessionLength
     while True: # Loops Until 60 minute runs out
         VI_current_time = time.time()
         VI_elapsed_time = VI_current_time - VI_start_time
@@ -126,7 +110,7 @@ def Process_ITI_Timer():
     # Generate Random Number For Timer
     class ITI_Timer:
         import numpy as np
-        ITI_Timer_Array = [np.random.normal(Presets.const_ITI,3,100)] # average, standard deviation, amount of numbers
+        ITI_Timer_Array = [np.random.normal(const_ITI,3,100)] # average, standard deviation, amount of numbers
         print("The numbers generated are ", ITI_Timer_Array, "seconds")
     # Declaring ITI Experimental Set Up
     def ITI_Timer_Event_Reg(): # Regular ITI Event
@@ -163,3 +147,8 @@ Exec_Process_VI_Schedule = Process(target=Process_VI_Schedule)
 Exec_Process_VI_Schedule.start()
 Exec_Process_ITI_Timer = Process(target=Process_ITI_Timer)
 Exec_Process_ITI_Timer.start()
+
+
+
+
+#
