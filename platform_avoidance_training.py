@@ -1,3 +1,5 @@
+# V 1.25
+
 import numpy # For Zero Arrays, Mathematical Functions, Optimizations, etc
 import sys # For Program Exiting
 import random # For random number generator and random choices
@@ -19,7 +21,7 @@ const_ITI = 180 # Mean Intertrial Interval in seconds
 #==========================================================#
 
 # Program Information
-print("Platform Avoidance Test", '\n', "Version 1.0", '\n', "By Erick Won", '\n', "Dr L Chandler Lab 2022", '\n', '\n', '\n')
+print("Platform Avoidance Test", '\n', "Version 1", '\n', "By Erick Won", '\n', "Dr L Chandler Lab 2022", '\n', '\n', '\n')
 
 # Displays Set Variables and Presets
 print( "KEY VARIABLES:", '\n', '\n',
