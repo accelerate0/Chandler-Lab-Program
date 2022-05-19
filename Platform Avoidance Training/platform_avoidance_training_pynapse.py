@@ -45,7 +45,7 @@ print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 )
 
 #==========================================================#
-#                   Actual Program                          #
+#                   Actual Program                         #
 #==========================================================#
 
 # Turning On Light and Lever
@@ -129,7 +129,7 @@ class Trial: #StateID = ?
                 p_Rig.output_Pellet_Dispenser.fire()
                 print('Lever Was Pressed')
                 p_State.switch(VI1_Timer)
-
+# _________________________________________ #
     def ITI_SetUp():
         class ITI_Initial:   #StateID = ?
             def s_State_enter():
@@ -173,7 +173,6 @@ class Trial: #StateID = ?
                 p_Timer.ITI_Timer.turnOn()
             def s_ITI_Timer_tick(count):
                 p_State_switch(ITI_Initial)
-
     def ITI_SetUp_Intervaling():
         for _ in range(3):
             ITI_SetUp()
@@ -182,6 +181,7 @@ class Trial: #StateID = ?
         for _ in range(3):
             ITI_SetUp_Intervaling()
 
+# =================+++++++================= #
 
 class Execution:   #StateID = ?
     def s_State_enter():
@@ -192,5 +192,4 @@ class Execution:   #StateID = ?
 
 
 
-
-#
+# =================+++++++================= #
