@@ -1,5 +1,6 @@
 # Pynapse Source #
 # V 1.5
+# WORKING ON STATE INTEGRATION
 
 import numpy # For Zero Arrays, Mathematical Functions, Optimizations, etc
 import sys # For Program Exiting
@@ -25,8 +26,7 @@ const_ITI = 180 # Mean Intertrial Interval in seconds
 print("Platform Avoidance Test", '\n', "Version 1", '\n', "By Erick Won", '\n', "Dr L Chandler Lab 2022", '\n', '\n', '\n')
 
 # Displays Set Variables and Presets
-print( "KEY VARIABLES:", '\n', '\n',
-"EXPERIMENTAL PRESETS:", '\n',
+print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 "const_SessionLength =", const_SessionLength, '\n',
 "const_VISchedule =", const_VISchedule, '\n',
 "const_CorrectResponse =", const_CorrectResponse, '\n',
@@ -61,18 +61,21 @@ class PreTrial:   #StateID = ?
         # VI Schedule Interval 1
         def First_input_Left_Lever_Press():
             time.sleep(VI_Timer.float_1) # Delay
+            s_
             p_Rig.output_Pellet_Dispenser.turnOn()
             p_Rig.output_Pellet_Dispenser.turnOff()
             print('Lever Was Pressed & Logged For Float 1')
         # VI Schedule Interval 2
         def Second_input_Left_Lever_Press():
             time.sleep(VI_Timer.float_2) # Delay
+            s_
             p_Rig.output_Pellet_Dispenser.turnOn()
             p_Rig.output_Pellet_Dispenser.turnOff()
             print('Lever Was Pressed & Logged For Float 2')
         # VI Schedule Interval 3
         def Third_input_Left_Lever_Press():
             time.sleep(VI_Timer.float_3) # Delay
+            s_
             p_Rig.output_Pellet_Dispenser.turnOn()
             p_Rig.output_Pellet_Dispenser.turnOff()
             print('Lever Was Pressed & Logged For Float 3')
@@ -84,6 +87,7 @@ class PreTrial:   #StateID = ?
             VI_current_time = time.time()
             VI_elapsed_time = VI_current_time - VI_start_time
             time.sleep(0.01) # Optimization of CPU Usage because "while" sucks
+            ### Replace With Pynapse Timer Function at some point ###
             First_input_Left_Lever_Press()
             ### INSERT TTL PULSE EVENT ###
             Second_input_Left_Lever_Press()
@@ -122,7 +126,7 @@ class PreTrial:   #StateID = ?
             for _ in range(3): # Executing ITI 3 Times
                 ITI_Timer_Event_Reg()
             ITI_Timer_Event_Third() # Execute Special Case Right After
-    def Process_ITI_Timer_Exec(): # Executing ITI_Intervaling_SetUp 3 Times, So ITI is Executed 9 Times
+    def Process_ITI_Timer_Exec(): # Executing ITI_Intervaling_SetUp 3 Times, So ITI is Executed 9 Times with Special Case every 3 ITI
         for _ in range(3):
             ITI_Intervaling_SetUp()
 
