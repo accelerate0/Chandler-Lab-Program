@@ -1,6 +1,5 @@
 # Pynapse Source #
 # V 1.5
-# WORKING ON STATE INTEGRATION
 
 import numpy # For Zero Arrays, Mathematical Functions, Optimizations, etc
 import sys # For Program Exiting
@@ -19,7 +18,6 @@ const_CorrectResponse = 3 # Right lever press following the end of the VI timer
 const_ITI = 180 # Mean Intertrial Interval in seconds
 
 # Creating VI Timer
-import numpy as np
 float_1 = np.random.normal(const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
 float_2 = np.random.normal(const_VISchedule,3,1) # (mean average, standard deviation, amount of numbers)
 float_3 = np.random.normal(const_VISchedule,3,1) # 3 for 3 VI intervals
@@ -161,8 +159,8 @@ class Trial: #StateID = ?
                 p_State_switch(ITI_Event)
         class ITI_Off:      #StateID = ?
             def s_State_enter():
-                p_Rig.output_Shock.turnOff() # Stopping Shock
-                p_Rig.output_Tone.turnOff() # Stopping Tone
+                p_Rig.output_Shock.turnOff()
+                p_Rig.output_Tone.turnOff()
 
     def ITI_SetUp_Third():
         class ITI_Initial:
@@ -189,7 +187,5 @@ class Execution:   #StateID = ?
         Exec_Process_VI_Schedule.start()
         Exec_Process_ITI_Timer = Process(target=Process_ITI_Timer_Exec)
         Exec_Process_ITI_Timer.start()
-
-
 
 # =================+++++++================= #
