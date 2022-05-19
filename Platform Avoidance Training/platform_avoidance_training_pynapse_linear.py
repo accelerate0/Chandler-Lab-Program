@@ -24,15 +24,7 @@ print("The numbers generated for VI are ", VI_Timer.float_1, " ", VI_Timer.float
 # Creating ITI Timer
 ITI_Timer_Array = [np.random.normal(const_ITI,3,100)] # average, standard deviation, amount of numbers
 print("The numbers generated are ", ITI_Timer_Array, "seconds")
-ITI_Timer1 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer2 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer3 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer4 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer5 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer6 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer7 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer8 = np.random.choice(ITI_Timer_Array, size=1)
-ITI_Timer9 = np.random.choice(ITI_Timer_Array, size=1)
+ITI_Ticker = 0
 
 #==========================================================#
 #                Program: Preliminary                      #
@@ -136,14 +128,17 @@ class VI3_Reward:   #StateID = ?
 
 
 class ITI_Initial:
+    def s_State_enter():
+        ITI_Timer = np.random.choice(ITI_Timer_Array, size=1)
+        ITI_Ticker = ITI_Ticker + 1
     def s_Mode_standby():
-        p_Timer.ITI_Timer.setPeriod(ITI_Timer1)
+        p_Timer.ITI_Timer.setPeriod(ITI_Timer)
         p_Timer.ITI_Timer.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.ITI_Timer.turnOn()
-    def s_VI_Timer_tick(count):
-        p_State_switch(ITI_Event)
-class ITI_Event_Tone:
+    def s_ITI_Timer_tick(count):
+        p_State_switch(ITI_Tone)
+class ITI_Tone:
     def s_State_enter():
         p_Rig.output_Tone.turnOn()
     def s_Mode_standby():
@@ -151,7 +146,7 @@ class ITI_Event_Tone:
         p_Timer.ITI_Timer.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.ITI_Timer.turnOn()
-    def s_VI_Timer_tick(count):
+    def s_ITI_Timer_tick(count):
         p_State_switch(ITI_Shock)
 class ITI_Shock:
     def s_Mode_standby():
@@ -159,44 +154,36 @@ class ITI_Shock:
         p_Timer.ITI_Timer.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.ITI_Timer.turnOn()
-    def s_VI_Timer_tick(count):
+    def s_ITI_Timer_tick(count):
         p_State_switch(ITI_Event)
-class ITI_Off:
+class ITI_Off:      #StateID = ?
     def s_State_enter():
-        time.sleep(28)
-        p_Rig.output_Shock.turnOn() # Starting Shock
-        time.sleep(2)
-        p_Rig.output_Shock.turnOff() # Stopping Shock
-        p_Rig.output_Tone.turnOff() # Stopping Tone
+        p_Rig.output_Shock.turnOff()
+        p_Rig.output_Tone.turnOff()
+        p_State_switch(ITI_Ticker_Check)
 
+class ITI_Ticker_Check:
+    def s_State_enter():
+        if ITI_Ticker = 3 or 6:
+            p_State_switch(ITI_3_Interval)
+        elif ITI_Ticker = 9:
+            p_State_switch(ITI_9_Interval)
+        else:
+            p_State_switch(ITI_Initial)
 
+class ITI_3_Interval:
+    def s_Mode_standby():
+        p_Timer.ITI_Timer.setPeriod(300)
+        p_Timer.ITI_Timer.setRepeats(1)
+    def s_Mode_recprev():
+        p_Timer.ITI_Timer.turnOn()
+    def s_ITI_Timer_tick(count):
+        p_State_switch(ITI_Initial)
 
-class
+class ITI_9_Interval:
+    def s_Mode_standby():
+        print('ITI operation done')
 
-
-        # Declaring ITI Experimental Set Up
-        def ITI_Timer_Event_Reg(): # Regular ITI Event
-            ITI_Timer1 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer2 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer3 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer4 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer5 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer6 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer7 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer8 = np.random.choice(VI_Timer_Array, size=1)
-            ITI_Timer9 = np.random.choice(VI_Timer_Array, size=1)
-
-            time.sleep(ITI_Timer)
-            p_Rig.output_Tone.turnOn() # Starting Tone
-            time.sleep(28)
-            p_Rig.output_Shock.turnOn() # Starting Shock
-            time.sleep(2)
-            p_Rig.output_Shock.turnOff() # Stopping Shock
-            p_Rig.output_Tone.turnOff() # Stopping Tone
-        # Declaring Special Case of ITI Experiment on Third Interval
-        def ITI_Timer_Event_Third():
-            Interblock_Interval = 300 # 5 minutes
-            time.sleep(Interblock_Interval)
 
 
 

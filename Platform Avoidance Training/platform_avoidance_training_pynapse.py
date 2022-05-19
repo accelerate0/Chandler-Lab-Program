@@ -1,5 +1,6 @@
 # Pynapse Source #
 # V 1.5
+# This is just a proof of concept
 
 import numpy # For Zero Arrays, Mathematical Functions, Optimizations, etc
 import sys # For Program Exiting
@@ -163,7 +164,7 @@ class Trial: #StateID = ?
                 p_Rig.output_Tone.turnOff()
 
     def ITI_SetUp_Third():
-        class ITI_Initial:
+        class ITI_Third_Interval:
             def s_Mode_standby():
                 p_Timer.ITI_Timer.setPeriod(300)
                 p_Timer.ITI_Timer.setRepeats(1)
