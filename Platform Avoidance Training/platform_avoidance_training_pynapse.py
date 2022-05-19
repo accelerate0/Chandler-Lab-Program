@@ -40,10 +40,12 @@ print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 # Turning On Light and Lever
 class Always:   #StateID = 0
     # Special Pynapse Function 'Always'
-    p_Rig.output_House_Light.turnOn()
-    print('Light is On')
-    p_Rig.output_Left_Lever_Extension.turnOn()
-    print('Lever is Out')
+    def s_Mode_recprev(): # Pseudo State Class
+        p_Rig.output_House_Light.turnOn()
+        print('Light is On')
+        p_Rig.output_Left_Lever_Extension.turnOn()
+        print('Lever is Out')
+        p_State.switch(PreTrial)
 
 # =================+++++++================= #
 
@@ -61,27 +63,28 @@ class PreTrial:   #StateID = ?
         # VI Schedule Interval 1
         def First_input_Left_Lever_Press():
             time.sleep(VI_Timer.float_1) # Delay
-            s_
-            p_Rig.output_Pellet_Dispenser.turnOn()
-            p_Rig.output_Pellet_Dispenser.turnOff()
-            print('Lever Was Pressed & Logged For Float 1')
+            def s_LeverPress_rise():
+                p_Rig.output_Pellet_Dispenser.turnOn()
+                p_Rig.output_Pellet_Dispenser.turnOff()
+                print('Lever Was Pressed & Logged For Float 1')
         # VI Schedule Interval 2
         def Second_input_Left_Lever_Press():
             time.sleep(VI_Timer.float_2) # Delay
-            s_
-            p_Rig.output_Pellet_Dispenser.turnOn()
-            p_Rig.output_Pellet_Dispenser.turnOff()
-            print('Lever Was Pressed & Logged For Float 2')
+            def s_LeverPress_rise():
+                p_Rig.output_Pellet_Dispenser.turnOn()
+                p_Rig.output_Pellet_Dispenser.turnOff()
+                print('Lever Was Pressed & Logged For Float 2')
         # VI Schedule Interval 3
         def Third_input_Left_Lever_Press():
             time.sleep(VI_Timer.float_3) # Delay
-            s_
-            p_Rig.output_Pellet_Dispenser.turnOn()
-            p_Rig.output_Pellet_Dispenser.turnOff()
-            print('Lever Was Pressed & Logged For Float 3')
+            def s_LeverPress_rise():
+                p_Rig.output_Pellet_Dispenser.turnOn()
+                p_Rig.output_Pellet_Dispenser.turnOff()
+                print('Lever Was Pressed & Logged For Float 3')
         # Creating Loop For VI Schedule Interval 1,2,3 inside 60 minute timer
         VI_start_time = time.time() # Starting 60 minute timer of the entire VI_Schedule
         VI_seconds = const_SessionLength
+
     def Process_VI_Schedule_Exec():
         while True: # Loops Until 60 minute runs out
             VI_current_time = time.time()
