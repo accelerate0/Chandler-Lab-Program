@@ -216,6 +216,10 @@ class Trial: #StateID = ?
         # Put some sort of case when entire ITI experiment is Finished
         print('ITI is finished')
 
+    def s_State_enter(): # Switches to Execution class
+        p_State.switch(Execution)
+
+
 # =================+++++++================= #
 # Attempt to execute VI and ITI in parallel
 class Execution:   #StateID = ?
