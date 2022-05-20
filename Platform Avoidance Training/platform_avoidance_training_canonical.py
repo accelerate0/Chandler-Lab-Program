@@ -1,5 +1,5 @@
 # Pynapse Source #
-# V 1.5
+# V 2
 # TO DO:
 # - Add recording measures on VI
 # - Correct some possible typos on comments
@@ -61,7 +61,7 @@ print("The numbers generated are ", ITI_Timer_Array, "seconds")
 #==========================================================#
 
 # Program Information
-print("Platform Avoidance Test", '\n', "Version 1", '\n', "By Erick Won", '\n', "Dr L Chandler Lab 2022", '\n', '\n', '\n')
+print("Platform Avoidance Test", '\n', "Version 2", '\n', "By Erick Won", '\n', "Dr L Chandler Lab 2022", '\n', '\n', '\n')
 
 # Displays Set Variables and Presets
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
