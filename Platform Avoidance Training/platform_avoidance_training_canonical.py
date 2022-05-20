@@ -2,30 +2,30 @@
 # V 1.5
 # This is just a proof of concept
 
-import numpy # For Zero Arrays, Mathematical Functions, Optimizations, etc
-import sys # For Program Exiting
-import random # For random number generator and random choices
-import time # For timer and time functions
-import multiprocessing # For parallel running VI and ITI
+import numpy                # For Zero Arrays, Mathematical Functions, Optimizations, etc
+import sys                  # For Program Exiting
+import random               # For random number generator and random choices
+import time                 # For timer and time functions
+import multiprocessing      # For parallel running VI and ITI
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
 
 # Global Variables
-const_SessionLength = 3600 # Length of the entire experiment in sec
-const_VISchedule = 30 # Variable interval schedule with mean interval of 30sec
-const_CorrectResponse = 3 # Right lever press following the end of the VI timer
-const_ITI = 180 # Mean Intertrial Interval in seconds
+const_SessionLength = 3600      # Length of the entire experiment (in sec)
+const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
+const_CorrectResponse = 3       # Right lever press timeout window following the end of the VI timer (in sec)
+const_ITI = 180                 # Mean Intertrial Interval (in sec)
 
-# Creating VI Timer
+# Creating VI Scheduling
 float_1 = np.random.normal(const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
 float_2 = np.random.normal(const_VISchedule,3,1) # (mean average, standard deviation, amount of numbers)
 float_3 = np.random.normal(const_VISchedule,3,1) # 3 for 3 VI intervals
 print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds")
 
-# Creating ITI Timer
-ITI_Timer_Array = [np.random.normal(const_ITI,3,100)] # average, standard deviation, amount of numbers
+# Creating ITI Scheduling
+ITI_Timer_Array = [np.random.normal(const_ITI,3,100)] # (average, standard deviation, amount of numbers)
 print("The numbers generated are ", ITI_Timer_Array, "seconds")
 
 #==========================================================#
@@ -40,33 +40,38 @@ print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 "const_SessionLength =", const_SessionLength, '\n',
 "const_VISchedule =", const_VISchedule, '\n',
 "const_CorrectResponse =", const_CorrectResponse, '\n',
-"const_ITI =", const_ITI, '\n'
+"const_ITI =", const_ITI, '\n', '\n', '\n'
 )
+
+# Please Read The readme.txt
+print( "PLEASE READ THE README.TXT BEFORE CONTINUING", '\n', '\n')
 
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
 
-# Turning On Light and Lever
+# Always class is special for Pynapse, everything here is always on
+# Set Global Timer For Entire Experiment
 class Always:   #StateID = 0
     def s_Mode_standby():
-        p_Timer.GlobalTimer.setPeriod(const_SessionLength)
-        p_Timer.GlobalTimer.setRepeats(1)
+        p_Timer.Global_Timer.setPeriod(const_SessionLength) # Length (sec)
+        p_Timer.Global_Timer.setRepeats(1) # Frequency
     def s_Mode_recprev():
-        p_Timer.GlobalTimer.turnOn()
-    def s_GlobalTimer_tick(count):
-        print('done')
-        syn.setModeStr('Idle')
+        p_Timer.Global_Timer.turnOn() # Turn on timer
+    def s_Global_Timer_tick(count):
+        print('60 minute timer finished')
+        print('The Experiment is Complete')
+        syn.setModeStr('Idle') # Shuts down synapse
 
 # =================+++++++================= #
 
 class PreTrial:    #StateID = ?
     def s_State_enter():
-        p_Rig.output_House_Light.turnOn()
+        p_Rig.output_House_Light.turnOn() # Turns on light
         print('Light is On')
-        p_Rig.output_Left_Lever_Extension.turnOn()
+        p_Rig.output_Left_Lever_Extension.turnOn() # Turns on left lever
         print('Lever is Out')
-        p_State.switch(VI1_Timer)
+        p_State.switch(Trial) # Switches to Trial class
 
 # =================+++++++================= #
 class Trial: #StateID = ?
@@ -82,7 +87,7 @@ class Trial: #StateID = ?
                 p_State_switch(VI1_Event)
         class VI1_Event:    #StateID = ?
             def s_State_enter():
-                p_State.setTimout(const_CorrectResponse, VI2_Timer) # Delay Time , Goto Class
+                p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time , Goto Class
             def s_LeverPress_rise():
                 p_State_switch(VI1_Reward)
         class VI1_Reward:   #StateID = ?
@@ -101,7 +106,7 @@ class Trial: #StateID = ?
                 p_State_switch(VI2_Event)
         class VI2_Event:    #StateID = ?
             def s_State_enter():
-                p_State.setTimout(const_CorrectResponse, VI3_Timer) # Delay Time , Goto Class
+                p_State.setTimout(const_CorrectResponse, VI3_Timer) # Window Time , Goto Class
             def s_LeverPress_rise():
                 p_State_switch(VI2_Reward)
         class VI2_Reward:   #StateID = ?
@@ -120,7 +125,7 @@ class Trial: #StateID = ?
                 p_State_switch(VI3_Event)
         class VI3_Event:    #StateID = ?
             def s_State_enter():
-                p_State.setTimout(const_CorrectResponse, VI1_Timer) # Delay Time , Goto Class
+                p_State.setTimout(const_CorrectResponse, VI1_Timer) # Window Time , Goto Class
             def s_LeverPress_rise():
                 p_State_switch(VI3_Reward)
         class VI3_Reward:   #StateID = ?
@@ -157,14 +162,14 @@ class Trial: #StateID = ?
             def s_Mode_recprev():
                 p_Timer.ITI_Timer.turnOn()
             def s_ITI_Timer_tick(count):
-                p_State_switch(ITI_Event)
+                p_State_switch(ITI_Off)
         class ITI_Off:      #StateID = ?
             def s_State_enter():
                 p_Rig.output_Shock.turnOff()
                 p_Rig.output_Tone.turnOff()
 
     def ITI_SetUp_Third():
-        class ITI_Third_Interval:
+        class ITI_Third_Interval:   #StateID = ?
             def s_Mode_standby():
                 p_Timer.ITI_Timer.setPeriod(300)
                 p_Timer.ITI_Timer.setRepeats(1)
@@ -172,6 +177,7 @@ class Trial: #StateID = ?
                 p_Timer.ITI_Timer.turnOn()
             def s_ITI_Timer_tick(count):
                 p_State_switch(ITI_Initial)
+
     def ITI_SetUp_Intervaling():
         for _ in range(3):
             ITI_SetUp()
