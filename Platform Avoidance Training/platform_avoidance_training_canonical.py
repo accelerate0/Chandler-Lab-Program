@@ -103,121 +103,121 @@ class PreTrial:    #StateID = ?
 
 # =================+++++++================= #
 class Trial: #StateID = ?
-    def Process_VI_Schedule_Exec():
+    def s_State_enter()
+        def Process_VI_Schedule_Exec():
 
-        class VI1_Timer:    #StateID = ?
-            def s_Mode_standby():
-                p_Timer.VI_Timer.setPeriod(float_1) # First random 30 sec timer
-                p_Timer.VI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.VI_Timer.turnOn()
-            def s_VI_Timer_tick(count):
-                p_State_switch(VI1_Event)
-        class VI1_Event:    #StateID = ?
-            def s_State_enter():
-                p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
-            def s_LeverPress_rise():
-                p_State_switch(VI1_Reward)
-        class VI1_Reward:   #StateID = ?
-            def s_State_enter():
-                p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
-                print('Lever Was Pressed')
-                p_State.switch(VI2_Timer)
+            class VI1_Timer:    #StateID = ?
+                def s_Mode_standby():
+                    p_Timer.VI_Timer.setPeriod(float_1) # First random 30 sec timer
+                    p_Timer.VI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.VI_Timer.turnOn()
+                def s_VI_Timer_tick(count):
+                    p_State_switch(VI1_Event)
+            class VI1_Event:    #StateID = ?
+                def s_State_enter():
+                    p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
+                def s_LeverPress_rise():
+                    p_State_switch(VI1_Reward)
+            class VI1_Reward:   #StateID = ?
+                def s_State_enter():
+                    p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
+                    print('Lever Was Pressed')
+                    p_State.switch(VI2_Timer)
 
-        class VI2_Timer:    #StateID = ?
-            def s_Mode_standby():
-                p_Timer.VI_Timer.setPeriod(float_2) # Second random 30 sec timer
-                p_Timer.VI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.VI_Timer.turnOn()
-            def s_VI_Timer_tick(count):
-                p_State_switch(VI2_Event)
-        class VI2_Event:    #StateID = ?
-            def s_State_enter():
-                p_State.setTimout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
-            def s_LeverPress_rise():
-                p_State_switch(VI2_Reward)
-        class VI2_Reward:   #StateID = ?
-            def s_State_enter():
-                p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
-                print('Lever Was Pressed')
-                p_State.switch(VI3_Timer)
+            class VI2_Timer:    #StateID = ?
+                def s_Mode_standby():
+                    p_Timer.VI_Timer.setPeriod(float_2) # Second random 30 sec timer
+                    p_Timer.VI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.VI_Timer.turnOn()
+                def s_VI_Timer_tick(count):
+                    p_State_switch(VI2_Event)
+            class VI2_Event:    #StateID = ?
+                def s_State_enter():
+                    p_State.setTimout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
+                def s_LeverPress_rise():
+                    p_State_switch(VI2_Reward)
+            class VI2_Reward:   #StateID = ?
+                def s_State_enter():
+                    p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
+                    print('Lever Was Pressed')
+                    p_State.switch(VI3_Timer)
 
-        class VI3_Timer:    #StateID = ?
-            def s_Mode_standby():
-                p_Timer.VI_Timer.setPeriod(float_3) # Third random 30 sec timer
-                p_Timer.VI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.VI_Timer.turnOn()
-            def s_VI_Timer_tick(count):
-                p_State_switch(VI3_Event)
-        class VI3_Event:    #StateID = ?
-            def s_State_enter():
-                p_State.setTimout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
-            def s_LeverPress_rise():
-                p_State_switch(VI3_Reward)
-        class VI3_Reward:   #StateID = ?
-            def s_State_enter():
-                p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
-                print('Lever Was Pressed')
-                p_State.switch(VI1_Timer)
-# _________________________________________ #
-    def ITI_SetUp():
-        class ITI_Initial:   #StateID = ?
-            def s_State_enter():
-                ITI_Timer = np.random.choice(ITI_Timer_Array, size=1)
-            def s_Mode_standby():
-                p_Timer.ITI_Timer.setPeriod(ITI_Timer)
-                p_Timer.ITI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.ITI_Timer.turnOn()
-            def s_ITI_Timer_tick(count):
-                p_State_switch(ITI_Tone)
-        class ITI_Tone:     #StateID = ?
-            def s_State_enter():
-                p_Rig.output_Tone.turnOn()
-            def s_Mode_standby():
-                p_Timer.ITI_Timer.setPeriod(28)
-                p_Timer.ITI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.ITI_Timer.turnOn()
-            def s_ITI_Timer_tick(count):
-                p_State_switch(ITI_Shock)
-        class ITI_Shock:     #StateID = ?
-            def s_Mode_standby():
-                p_Timer.ITI_Timer.setPeriod(2)
-                p_Timer.ITI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.ITI_Timer.turnOn()
-            def s_ITI_Timer_tick(count):
-                p_State_switch(ITI_Off)
-        class ITI_Off:      #StateID = ?
-            def s_State_enter():
-                p_Rig.output_Shock.turnOff()
-                p_Rig.output_Tone.turnOff()
+            class VI3_Timer:    #StateID = ?
+                def s_Mode_standby():
+                    p_Timer.VI_Timer.setPeriod(float_3) # Third random 30 sec timer
+                    p_Timer.VI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.VI_Timer.turnOn()
+                def s_VI_Timer_tick(count):
+                    p_State_switch(VI3_Event)
+            class VI3_Event:    #StateID = ?
+                def s_State_enter():
+                    p_State.setTimout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
+                def s_LeverPress_rise():
+                    p_State_switch(VI3_Reward)
+            class VI3_Reward:   #StateID = ?
+                def s_State_enter():
+                    p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
+                    print('Lever Was Pressed')
+                    p_State.switch(VI1_Timer)
+    # _________________________________________ #
+        def ITI_SetUp():
+            class ITI_Initial:   #StateID = ?
+                def s_State_enter():
+                    ITI_Timer = np.random.choice(ITI_Timer_Array, size=1)
+                def s_Mode_standby():
+                    p_Timer.ITI_Timer.setPeriod(ITI_Timer)
+                    p_Timer.ITI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.ITI_Timer.turnOn()
+                def s_ITI_Timer_tick(count):
+                    p_State_switch(ITI_Tone)
+            class ITI_Tone:     #StateID = ?
+                def s_State_enter():
+                    p_Rig.output_Tone.turnOn()
+                def s_Mode_standby():
+                    p_Timer.ITI_Timer.setPeriod(28)
+                    p_Timer.ITI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.ITI_Timer.turnOn()
+                def s_ITI_Timer_tick(count):
+                    p_State_switch(ITI_Shock)
+            class ITI_Shock:     #StateID = ?
+                def s_Mode_standby():
+                    p_Timer.ITI_Timer.setPeriod(2)
+                    p_Timer.ITI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.ITI_Timer.turnOn()
+                def s_ITI_Timer_tick(count):
+                    p_State_switch(ITI_Off)
+            class ITI_Off:      #StateID = ?
+                def s_State_enter():
+                    p_Rig.output_Shock.turnOff()
+                    p_Rig.output_Tone.turnOff()
 
-    def ITI_SetUp_Third():
-        class ITI_Third_Interval:   #StateID = ?
-            def s_Mode_standby():
-                p_Timer.ITI_Timer.setPeriod(300)
-                p_Timer.ITI_Timer.setRepeats(1)
-            def s_Mode_recprev():
-                p_Timer.ITI_Timer.turnOn()
-            def s_ITI_Timer_tick(count):
-                p_State_switch(ITI_Initial)
+        def ITI_SetUp_Third():
+            class ITI_Third_Interval:   #StateID = ?
+                def s_Mode_standby():
+                    p_Timer.ITI_Timer.setPeriod(300)
+                    p_Timer.ITI_Timer.setRepeats(1)
+                def s_Mode_recprev():
+                    p_Timer.ITI_Timer.turnOn()
+                def s_ITI_Timer_tick(count):
+                    p_State_switch(ITI_Initial)
 
-    def ITI_SetUp_Intervaling(): # This is 1 ITI 'interval'
-        for _ in range(3):  # Executes ITI (ITI_SetUp) 3 times
-            ITI_SetUp()
-        ITI_SetUp_Third()  # Executes Special Case (ITI_SetUp_Third) after 3rd ITI
-    def Process_ITI_Timer_Exec(): # Executes 3 ITI 'intervals'
-        for _ in range(3):
-            ITI_SetUp_Intervaling()
-        # Put some sort of case when entire ITI experiment is Finished
-        print('ITI is finished')
+        def ITI_SetUp_Intervaling(): # This is 1 ITI 'interval'
+            for _ in range(3):  # Executes ITI (ITI_SetUp) 3 times
+                ITI_SetUp()
+            ITI_SetUp_Third()  # Executes Special Case (ITI_SetUp_Third) after 3rd ITI
+        def Process_ITI_Timer_Exec(): # Executes 3 ITI 'intervals'
+            for _ in range(3):
+                ITI_SetUp_Intervaling()
+            # Put some sort of case when entire ITI experiment is Finished
+            print('ITI is finished')
 
-    def s_State_enter(): # Switches to Execution class
-        p_State.switch(Execution)
+        p_State.switch(Execution) # Switching Class
 
 
 # =================+++++++================= #
