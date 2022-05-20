@@ -216,7 +216,6 @@ class Trial: #StateID = ?
                 ITI_SetUp_Intervaling()
             # Put some sort of case when entire ITI experiment is Finished
             print('ITI is finished')
-
         p_State.switch(Execution) # Switching Class
 
 
