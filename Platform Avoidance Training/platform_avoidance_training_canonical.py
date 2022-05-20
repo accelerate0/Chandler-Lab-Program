@@ -217,7 +217,7 @@ class Trial: #StateID = ?
         print('ITI is finished')
 
 # =================+++++++================= #
-
+# Attempt to execute VI and ITI in parallel
 class Execution:   #StateID = ?
     def s_State_enter():
         Exec_Process_VI_Schedule = Process(target=Process_VI_Schedule_Exec)
