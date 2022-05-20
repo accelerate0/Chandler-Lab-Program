@@ -40,8 +40,8 @@ import multiprocessing      # For parallel running VI and ITI
 # Global Variables
 const_SessionLength = 3600      # Length of the entire experiment (in sec)
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
-const_CorrectResponse = 3       # Right lever press timeout window following the end of the VI timer (in sec)
-const_ITI = 180                 # Mean Intertrial Interval (in sec)
+const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
+const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
 
 # Creating VI Scheduling
 float_1 = np.random.normal(const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
