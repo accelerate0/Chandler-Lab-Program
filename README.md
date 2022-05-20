@@ -3,6 +3,6 @@
  (Working on Desc)
 
 # To Do:
- - Add synchronization of VI and ITI
- - Integrate all functions and stuff into the 2 class (pynapse constraint)
- - Add states functions
+ - Debugging
+ - Verbosity in comments
+ - Add recording of inputs
