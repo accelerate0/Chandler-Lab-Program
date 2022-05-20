@@ -18,10 +18,10 @@ import multiprocessing      # For parallel running VI and ITI
 # Naming matters as well as presetting certain things in Pynapse+Synapse.
 # Therefore the following attributes needs to be declared in the Synapse program:
 
-#  Regarding Timers:
-#    Global_Timer
-#    VI_Timer
-#    ITI_Timer
+#  Regarding Timers: (8 Characters max)
+#    Global Timer = Global_T
+#    VI Timer = VI_T
+#    ITI Timer = ITI_T
 
 #  Regarding inputs and outputs: (Variable names must be exact and case sensitive) (3-20 Characters)
 #      For iH10_1 Controller:
@@ -53,8 +53,8 @@ float_3 = np.random.normal(const_VISchedule,3,1) # 3 for 3 VI intervals
 print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds")
 
 # Creating ITI Scheduling
-ITI_Timer_Array = [np.random.normal(const_ITI,3,100)] # (average, standard deviation, amount of numbers)
-print("The numbers generated are ", ITI_Timer_Array, "seconds")
+ITI_T_Array = [np.random.normal(const_ITI,3,100)] # (average, standard deviation, amount of numbers)
+print("The numbers generated are ", ITI_T_Array, "seconds")
 
 #==========================================================#
 #                Program: Preliminary                      #
@@ -82,11 +82,11 @@ print( "PLEASE READ THE README.TXT BEFORE CONTINUING", '\n', '\n')
 # Set Global 60 minute Timer For Entire Experiment:
 class Always:   #StateID = 0
     def s_Mode_standby():
-        p_Timer.Global_Timer.setPeriod(const_SessionLength) # Length (sec)
-        p_Timer.Global_Timer.setRepeats(1) # Frequency
+        p_Timer.Global_T.setPeriod(const_SessionLength) # Length (sec)
+        p_Timer.Global_T.setRepeats(1) # Frequency
     def s_Mode_recprev():
-        p_Timer.Global_Timer.turnOn() # Turn on timer
-    def s_Global_Timer_tick(count):
+        p_Timer.Global_T.turnOn() # Turn on timer
+    def s_Global_T_tick(count):
         print('60 minute timer finished')
         print('The Experiment is Complete')
         syn.setModeStr('Idle') # Shuts down synapse
@@ -108,11 +108,11 @@ class Trial: #StateID = ?
 
             class VI1_Timer:    #StateID = ?
                 def s_Mode_standby():
-                    p_Timer.VI_Timer.setPeriod(float_1) # First random 30 sec timer
-                    p_Timer.VI_Timer.setRepeats(1)
+                    p_Timer.VI_T.setPeriod(float_1) # First random 30 sec timer
+                    p_Timer.VI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.VI_Timer.turnOn()
-                def s_VI_Timer_tick(count):
+                    p_Timer.VI_T.turnOn()
+                def s_VI_T_tick(count):
                     p_State_switch(VI1_Event)
             class VI1_Event:    #StateID = ?
                 def s_State_enter():
@@ -127,11 +127,11 @@ class Trial: #StateID = ?
 
             class VI2_Timer:    #StateID = ?
                 def s_Mode_standby():
-                    p_Timer.VI_Timer.setPeriod(float_2) # Second random 30 sec timer
-                    p_Timer.VI_Timer.setRepeats(1)
+                    p_Timer.VI_T.setPeriod(float_2) # Second random 30 sec timer
+                    p_Timer.VI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.VI_Timer.turnOn()
-                def s_VI_Timer_tick(count):
+                    p_Timer.VI_T.turnOn()
+                def s_VI_T_tick(count):
                     p_State_switch(VI2_Event)
             class VI2_Event:    #StateID = ?
                 def s_State_enter():
@@ -146,11 +146,11 @@ class Trial: #StateID = ?
 
             class VI3_Timer:    #StateID = ?
                 def s_Mode_standby():
-                    p_Timer.VI_Timer.setPeriod(float_3) # Third random 30 sec timer
-                    p_Timer.VI_Timer.setRepeats(1)
+                    p_Timer.VI_T.setPeriod(float_3) # Third random 30 sec timer
+                    p_Timer.VI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.VI_Timer.turnOn()
-                def s_VI_Timer_tick(count):
+                    p_Timer.VI_T.turnOn()
+                def s_VI_T_tick(count):
                     p_State_switch(VI3_Event)
             class VI3_Event:    #StateID = ?
                 def s_State_enter():
@@ -166,31 +166,31 @@ class Trial: #StateID = ?
         def ITI_SetUp():
             class ITI_Initial:   #StateID = ?
                 def s_State_enter():
-                    ITI_Timer = np.random.choice(ITI_Timer_Array, size=1)
+                    ITI_T = np.random.choice(ITI_T_Array, size=1)
                 def s_Mode_standby():
-                    p_Timer.ITI_Timer.setPeriod(ITI_Timer)
-                    p_Timer.ITI_Timer.setRepeats(1)
+                    p_Timer.ITI_T.setPeriod(ITI_T)
+                    p_Timer.ITI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.ITI_Timer.turnOn()
-                def s_ITI_Timer_tick(count):
+                    p_Timer.ITI_T.turnOn()
+                def s_ITI_T_tick(count):
                     p_State_switch(ITI_Tone)
             class ITI_Tone:     #StateID = ?
                 def s_State_enter():
                     p_Rig.o_Tone.turnOn()
                 def s_Mode_standby():
-                    p_Timer.ITI_Timer.setPeriod(28)
-                    p_Timer.ITI_Timer.setRepeats(1)
+                    p_Timer.ITI_T.setPeriod(28)
+                    p_Timer.ITI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.ITI_Timer.turnOn()
-                def s_ITI_Timer_tick(count):
+                    p_Timer.ITI_T.turnOn()
+                def s_ITI_T_tick(count):
                     p_State_switch(ITI_Shock)
             class ITI_Shock:     #StateID = ?
                 def s_Mode_standby():
-                    p_Timer.ITI_Timer.setPeriod(2)
-                    p_Timer.ITI_Timer.setRepeats(1)
+                    p_Timer.ITI_T.setPeriod(2)
+                    p_Timer.ITI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.ITI_Timer.turnOn()
-                def s_ITI_Timer_tick(count):
+                    p_Timer.ITI_T.turnOn()
+                def s_ITI_T_tick(count):
                     p_State_switch(ITI_Off)
             class ITI_Off:      #StateID = ?
                 def s_State_enter():
@@ -200,18 +200,18 @@ class Trial: #StateID = ?
         def ITI_SetUp_Third():
             class ITI_Third_Interval:   #StateID = ?
                 def s_Mode_standby():
-                    p_Timer.ITI_Timer.setPeriod(300)
-                    p_Timer.ITI_Timer.setRepeats(1)
+                    p_Timer.ITI_T.setPeriod(300)
+                    p_Timer.ITI_T.setRepeats(1)
                 def s_Mode_recprev():
-                    p_Timer.ITI_Timer.turnOn()
-                def s_ITI_Timer_tick(count):
+                    p_Timer.ITI_T.turnOn()
+                def s_ITI_T_tick(count):
                     p_State_switch(ITI_Initial)
 
         def ITI_SetUp_Intervaling(): # This is 1 ITI 'interval'
             for _ in range(3):  # Executes ITI (ITI_SetUp) 3 times
                 ITI_SetUp()
             ITI_SetUp_Third()  # Executes Special Case (ITI_SetUp_Third) after 3rd ITI
-        def Process_ITI_Timer_Exec(): # Executes 3 ITI 'intervals'
+        def Process_ITI_T_Exec(): # Executes 3 ITI 'intervals'
             for _ in range(3):
                 ITI_SetUp_Intervaling()
             # Put some sort of case when entire ITI experiment is Finished
@@ -226,7 +226,7 @@ class Execution:   #StateID = ?
     def s_State_enter():
         Exec_Process_VI_Schedule = Process(target=Process_VI_Schedule_Exec)
         Exec_Process_VI_Schedule.start()
-        Exec_Process_ITI_Timer = Process(target=Process_ITI_Timer_Exec)
-        Exec_Process_ITI_Timer.start()
+        Exec_Process_ITI_T = Process(target=Process_ITI_T_Exec)
+        Exec_Process_ITI_T.start()
 
 # =================+++++++================= #
