@@ -23,21 +23,21 @@ import multiprocessing      # For parallel running VI and ITI
 #    VI_Timer
 #    ITI_Timer
 
-#  Regarding inputs and outputs: (Variable names must be exact and case sensitive)
+#  Regarding inputs and outputs: (Variable names must be exact and case sensitive) (3-20 Characters)
 #      For iH10_1 Controller:
-#          Channel 1 = output_Left_Lever_Extension
-#          Channel 2 = input_Left_Lever_Press
-#          Channel 3 = output_Left_Lever_Light
-#          Channel 4 = output_Reward_Receptacle_Light
-#          Channel 5 = output_House_Light
-#          Channel 6 = output_Tone
-#          Channel 7 = input_Reward_Receptacle_Beam_Break
-#          Channel 9 = output_Pellet_Dispenser
-#          Channel 10 = output_Shock
+#          Channel 1 = o_L_Lever_Extension
+#          Channel 2 = i_L_Lever_Press
+#          Channel 3 = o_L_Lever_Light
+#          Channel 4 = o_Rew_Recep_Light
+#          Channel 5 = o_House_Light
+#          Channel 6 = o_Tone
+#          Channel 7 = i_Rew_Recep_Beam_Brk
+#          Channel 9 = o_Pellet_Dispenser
+#          Channel 10 = o_Shock
 #      For iH10_2 Controller:
-#          Channel 1 = output_Right_Lever_Extension
-#          Channel 2 = input_Right_Lever_Press
-#          Channel 3 = output_Right_Lever_Light
+#          Channel 1 = o_R_Lever_Extension
+#          Channel 2 = i_R_Lever_Press
+#          Channel 3 = o_R_Lever_Light
 
 
 # Global Variables
@@ -95,9 +95,9 @@ class Always:   #StateID = 0
 
 class PreTrial:    #StateID = ?
     def s_State_enter():
-        p_Rig.output_House_Light.turnOn() # Turns on light
+        p_Rig.o_House_Light.turnOn() # Turns on light
         print('Light is On')
-        p_Rig.output_Left_Lever_Extension.turnOn() # Turns on left lever
+        p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
         print('Lever is Out')
         p_State.switch(Trial) # Switches to Trial class
 
@@ -121,7 +121,7 @@ class Trial: #StateID = ?
                     p_State_switch(VI1_Reward)
             class VI1_Reward:   #StateID = ?
                 def s_State_enter():
-                    p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
+                    p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
                     print('Lever Was Pressed')
                     p_State.switch(VI2_Timer)
 
@@ -140,7 +140,7 @@ class Trial: #StateID = ?
                     p_State_switch(VI2_Reward)
             class VI2_Reward:   #StateID = ?
                 def s_State_enter():
-                    p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
+                    p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
                     print('Lever Was Pressed')
                     p_State.switch(VI3_Timer)
 
@@ -159,7 +159,7 @@ class Trial: #StateID = ?
                     p_State_switch(VI3_Reward)
             class VI3_Reward:   #StateID = ?
                 def s_State_enter():
-                    p_Rig.output_Pellet_Dispenser.fire() # Gives sucrose as reward
+                    p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
                     print('Lever Was Pressed')
                     p_State.switch(VI1_Timer)
     # _________________________________________ #
@@ -176,7 +176,7 @@ class Trial: #StateID = ?
                     p_State_switch(ITI_Tone)
             class ITI_Tone:     #StateID = ?
                 def s_State_enter():
-                    p_Rig.output_Tone.turnOn()
+                    p_Rig.o_Tone.turnOn()
                 def s_Mode_standby():
                     p_Timer.ITI_Timer.setPeriod(28)
                     p_Timer.ITI_Timer.setRepeats(1)
@@ -194,8 +194,8 @@ class Trial: #StateID = ?
                     p_State_switch(ITI_Off)
             class ITI_Off:      #StateID = ?
                 def s_State_enter():
-                    p_Rig.output_Shock.turnOff()
-                    p_Rig.output_Tone.turnOff()
+                    p_Rig.o_Shock.turnOff()
+                    p_Rig.o_Tone.turnOff()
 
         def ITI_SetUp_Third():
             class ITI_Third_Interval:   #StateID = ?
