@@ -1,6 +1,9 @@
 # Pynapse Source #
 # V 1.5
-# This is just a proof of concept
+# TO DO:
+# - Add recording measures on VI
+# - Correct some possible typos on comments
+# - Debuggin
 
 import numpy                # For Zero Arrays, Mathematical Functions, Optimizations, etc
 import sys                  # For Program Exiting
