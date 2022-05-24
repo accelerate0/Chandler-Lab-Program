@@ -5,7 +5,7 @@
 # - Correct some possible typos on comments
 # - Debuggin
 
-import numpy                # For Zero Arrays, Mathematical Functions, Optimizations, etc
+import numpy as np          # For Zero Arrays, Mathematical Functions, Optimizations, etc
 import sys                  # For Program Exiting
 import random               # For random number generator and random choices
 import time                 # For timer and time functions
@@ -90,6 +90,14 @@ class Always:   #StateID = 0
         print('60 minute timer finished')
         print('The Experiment is Complete')
         syn.setModeStr('Idle') # Shuts down synapse
+# =================+++++++================= #
+
+
+
+
+
+
+
 
 # =================+++++++================= #
 
@@ -197,24 +205,24 @@ class ITI_Off:      #StateID = ?
         p_Rig.o_Shock.turnOff()
         p_Rig.o_Tone.turnOff()
 
-class ITI_Ticker_Check:
+class ITI_Ticker_Check:      #StateID = ?
     def s_State_enter():
-        if ITI_Ticker = 3 or 6:
+        if ITI_Ticker == 3 or 6:
             p_State_switch(ITI_3_Interval)
-        elif ITI_Ticker = 9:
+        elif ITI_Ticker == 9:
             p_State_switch(ITI_9_Interval)
         else:
             p_State_switch(ITI_Initial)
 
-class ITI_3_Interval:
+class ITI_3_Interval:      #StateID = ?
     def s_Mode_standby():
         p_Timer.ITI_T.setPeriod(300)
         p_Timer.ITI_T.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.ITI_T.turnOn()
-    def s_ITI_Timer_tick(count):
+    def s_ITI_T_tick(count):
         p_State_switch(ITI_Initial)
 
-class ITI_9_Interval:
+class ITI_9_Interval:      #StateID = ?
     def s_Mode_standby():
         print('ITI operation done')
