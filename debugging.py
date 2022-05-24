@@ -21,7 +21,7 @@ class Test2:     #StateID = ?
         p_Rig.o_L_Lever_Light.turnOn() # Turns on left lever
         print('Left Lever Light is On')
 
-class Test3():
+class Test3:     #StateID = ?
     def s_State_enter():
         p_Rig.o_L_Lever_Extension.turnOn()
         print('left lever extended')
