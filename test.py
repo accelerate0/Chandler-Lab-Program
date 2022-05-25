@@ -60,8 +60,8 @@ print("The numbers generated are ", ITI_T_Array, "seconds")
 #                Program: Preliminary                      #
 #==========================================================#
 
-# Program Information
-print("Platform Avoidance Test", '\n', "Version 2", '\n', "By Erick Won", '\n', "Dr L Chandler Lab 2022", '\n', '\n', '\n')
+
+
 
 # Displays Set Variables and Presets
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
