@@ -252,13 +252,13 @@ class VI1_Timer:    #StateID = ?
         print('VI 1: Started')
     def s_VI_T_tick(count):
         if s_VI_T_tick(count) == float_1:
-            p_State_switch(VI1_Event)
+            p_State.switch(VI1_Event)
 class VI1_Event:    #StateID = ?
     def s_State_enter():
-        p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
+        p_State.setTimeout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
         print('VI 1: Lever was pressed')
-        p_State_switch(VI1_Reward)
+        p_State.switch(VI1_Reward)
 class VI1_Reward:   #StateID = ?
     def s_State_enter():
         p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
@@ -273,12 +273,12 @@ class VI2_Timer:    #StateID = ?
         print('VI 2: Started')
     def s_VI_T_tick(count):
         if s_VI_T_tick(count) == float_2:
-            p_State_switch(VI2_Event)
+            p_State.switch(VI2_Event)
 class VI2_Event:    #StateID = ?
     def s_State_enter():
-        p_State.setTimout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
+        p_State.setTimeout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
-        p_State_switch(VI2_Reward)
+        p_State.switch(VI2_Reward)
         print('VI 2: Lever was pressed')
 class VI2_Reward:   #StateID = ?
     def s_State_enter():
@@ -294,12 +294,12 @@ class VI3_Timer:    #StateID = ?
         print('VI 3: Started')
     def s_VI_T_tick(count):
         if s_VI_T_tick(count) == float_3:
-            p_State_switch(VI3_Event)
+            p_State.switch(VI3_Event)
 class VI3_Event:    #StateID = ?
     def s_State_enter():
-        p_State.setTimout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
+        p_State.setTimeout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
-        p_State_switch(VI3_Reward)
+        p_State.switch(VI3_Reward)
         print('VI 3: Lever was pressed')
 class VI3_Reward:   #StateID = ?
     def s_State_enter():
