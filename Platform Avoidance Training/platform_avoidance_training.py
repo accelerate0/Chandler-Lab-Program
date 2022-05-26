@@ -118,7 +118,7 @@ class Always:   #StateID = 0
         # ===== Conditional Based ITI Scheduling ===== #
         # _____ First ITI Interval _____ #
     def s_ITI_T_tick(count):
-        if s_ITI_T_tick(count) == 9999
+        if s_ITI_T_tick(count) == 9999:
             print('something went wrong')
         elif s_ITI_T_tick(count) == ITI_T1:
             p_Rig.o_Tone.turnOn()
