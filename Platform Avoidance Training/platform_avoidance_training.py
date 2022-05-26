@@ -118,76 +118,94 @@ class Always:   #StateID = 0
         # _____ First ITI Interval _____ #
     def s_ITI_T_tick(count):
         if s_ITI_T_tick(count) == ITI_T1:
+            print('ITI 1 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T1 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T1 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 1 completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T2:
+            print('ITI 2 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T2 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T2 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 2 completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T3:
+            print('ITI 3 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T3 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T3 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 3 completed')
         # _____ Second ITI Interval _____ #
         if s_ITI_T_tick(count) == ITI_T4:
+            print('ITI 4 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T4 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T4 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 4 completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T5:
+            print('ITI 5 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T5 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T5 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 5 completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T6:
+            print('ITI 6 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T6 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T6 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 6 completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T7:
+            print('ITI 7 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T7 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T7 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 7 completed')
         # _____ Third ITI Interval _____ #
         if s_ITI_T_tick(count) == ITI_T8:
+            print('ITI 8 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T8 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T8 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 8 completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T9:
+            print('ITI 9 started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T9 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T9 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
+            print('ITI 9 completed')
             print ("ITI Intervaling is done")
 
 # =================+++++++================= #
@@ -207,6 +225,7 @@ class VI1_Timer:    #StateID = ?
         p_Timer.VI_T.setPeriod(float_1) # First random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
         p_Timer.VI_T.turnOn()
+        print('VI 1 started')
     def s_VI_T_tick(count):
         if s_VI_T_tick(count) == float_1:
             p_State_switch(VI1_Event)
@@ -214,11 +233,12 @@ class VI1_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
+        print('VI 1 Lever was pressed')
         p_State_switch(VI1_Reward)
 class VI1_Reward:   #StateID = ?
     def s_State_enter():
         p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
-        print('Lever Was Pressed')
+        print('VI 1 sucrose was dispensed')
         p_State.switch(VI2_Timer)
 
 class VI2_Timer:    #StateID = ?
