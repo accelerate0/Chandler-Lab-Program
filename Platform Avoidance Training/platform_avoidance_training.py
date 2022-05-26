@@ -121,7 +121,7 @@ class Always:   #StateID = 0
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         print('Starting the global experimental 3600 sec timer')
-        p_Timer.GlobA_T.turnOn() # Turn on timer
+        p_Timer.Global_T.turnOn() # Turn on timer
     def s_Global_T_tick(const_ExperimentTime):
             print('60 min has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
