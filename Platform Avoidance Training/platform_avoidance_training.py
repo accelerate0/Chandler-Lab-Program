@@ -264,9 +264,8 @@ class VI1_Timer:    #StateID = ?
         p_Timer.VI_T.setRepeats(float_1)
         p_Timer.VI_T.turnOn()
         print('VI 1: Started')
-    def s_VI_T_tick(count):
-        if s_VI_T_tick(count) == float_1:
-            p_State.switch(VI1_Event)
+    def s_VI_T_tick(float_1):
+        p_State.switch(VI1_Event)
 class VI1_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimeout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
@@ -287,9 +286,8 @@ class VI2_Timer:    #StateID = ?
         p_Timer.VI_T.setRepeats(float_2)
         p_Timer.VI_T.turnOn()
         print('VI 2: Started')
-    def s_VI_T_tick(count):
-        if s_VI_T_tick(count) == float_2:
-            p_State.switch(VI2_Event)
+    def s_VI_T_tick(float_2):
+        p_State.switch(VI2_Event)
 class VI2_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimeout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
@@ -310,9 +308,8 @@ class VI3_Timer:    #StateID = ?
         p_Timer.VI_T.setRepeats(float_3)
         p_Timer.VI_T.turnOn()
         print('VI 3: Started')
-    def s_VI_T_tick(count):
-        if s_VI_T_tick(count) == float_3:
-            p_State.switch(VI3_Event)
+    def s_VI_T_tick(float_3):
+        p_State.switch(VI3_Event)
 class VI3_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimeout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
