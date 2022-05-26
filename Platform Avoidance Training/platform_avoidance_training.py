@@ -195,7 +195,7 @@ class VI1_Timer:    #StateID = ?
 class VI1_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
-    def s_LeverPress_rise():
+    def s_i_L_Lever_Press_rise():
         p_State_switch(VI1_Reward)
 class VI1_Reward:   #StateID = ?
     def s_State_enter():
@@ -213,7 +213,7 @@ class VI2_Timer:    #StateID = ?
 class VI2_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
-    def s_LeverPress_rise():
+    def s_i_L_Lever_Press_rise():
         p_State_switch(VI2_Reward)
 class VI2_Reward:   #StateID = ?
     def s_State_enter():
@@ -231,7 +231,7 @@ class VI3_Timer:    #StateID = ?
 class VI3_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
-    def s_LeverPress_rise():
+    def s_i_L_Lever_Press_rise():
         p_State_switch(VI3_Reward)
 class VI3_Reward:   #StateID = ?
     def s_State_enter():
