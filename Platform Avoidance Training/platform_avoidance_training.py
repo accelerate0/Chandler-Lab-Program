@@ -261,7 +261,8 @@ class VI1_Event:    #StateID = ?
         p_State.switch(VI1_Reward)
 class VI1_Reward:   #StateID = ?
     def s_State_enter():
-        p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
+        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 1: Sucrose dispensed')
         p_State.switch(VI2_Timer)
 
@@ -282,7 +283,8 @@ class VI2_Event:    #StateID = ?
         print('VI 2: Lever was pressed')
 class VI2_Reward:   #StateID = ?
     def s_State_enter():
-        p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
+        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 2: Sucrose dispensed')
         p_State.switch(VI3_Timer)
 
@@ -303,7 +305,8 @@ class VI3_Event:    #StateID = ?
         print('VI 3: Lever was pressed')
 class VI3_Reward:   #StateID = ?
     def s_State_enter():
-        p_Rig.o_Pellet_Dispenser.fire() # Gives sucrose as reward
+        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 3: Sucrose dispensed')
         p_State.switch(VI1_Timer)
 
