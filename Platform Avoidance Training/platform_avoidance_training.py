@@ -246,6 +246,7 @@ class PreTrial:    #StateID = ?
 
 class VI1_Timer:    #StateID = ?
     def s_State_enter():
+        p_Timer.VI_T.turnOff()
         p_Timer.VI_T.setPeriod(float_1) # First random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
         p_Timer.VI_T.turnOn()
@@ -268,6 +269,7 @@ class VI1_Reward:   #StateID = ?
 
 class VI2_Timer:    #StateID = ?
     def s_State_enter():
+        p_Timer.VI_T.turnOff()
         p_Timer.VI_T.setPeriod(float_2) # Second random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
         p_Timer.VI_T.turnOn()
@@ -290,6 +292,7 @@ class VI2_Reward:   #StateID = ?
 
 class VI3_Timer:    #StateID = ?
     def s_State_enter():
+        p_Timer.VI_T.turnOff()
         p_Timer.VI_T.setPeriod(float_3) # Third random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
         p_Timer.VI_T.turnOn()
