@@ -2,9 +2,8 @@
 # V 4
 
 import numpy as np
-import sys
 import random
-import time
+import math
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -52,21 +51,21 @@ const_CorrectResponse = 3       # Right lever press timeout threshold window fol
 const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
 
 # Creating VI Scheduling
-float_1 = np.random.normal(const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
-float_2 = np.random.normal(const_VISchedule,3,1) # (mean average, standard deviation, amount of numbers)
-float_3 = np.random.normal(const_VISchedule,3,1) # 3 for 3 VI intervals
+float_1 = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random number generator via floating point of Gaussian function
+float_2 = int(np.round(np.random.normal(const_VISchedule,5,1))) # (mean average, standard deviation, amount of numbers)
+float_3 = int(np.round(np.random.normal(const_VISchedule,5,1))) # 3 for 3 VI intervals
 print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds")
 
 # Creating ITI Scheduling
-ITI_Float_1 = np.random.normal(const_ITI,5,1)
-ITI_Float_2 = np.random.normal(const_ITI,5,1)
-ITI_Float_3 = np.random.normal(const_ITI,5,1)
-ITI_Float_4 = np.random.normal(const_ITI,5,1)
-ITI_Float_5 = np.random.normal(const_ITI,5,1)
-ITI_Float_6 = np.random.normal(const_ITI,5,1)
-ITI_Float_7 = np.random.normal(const_ITI,5,1)
-ITI_Float_8 = np.random.normal(const_ITI,5,1)
-ITI_Float_9 = np.random.normal(const_ITI,5,1)
+ITI_Float_1 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_2 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_3 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_4 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_5 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_6 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_7 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_8 = int(np.round(np.random.normal(const_ITI,5,1)))
+ITI_Float_9 = int(np.round(np.random.normal(const_ITI,5,1)))
 print("The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds")
 ITI_T1 = ITI_Float_1
 ITI_T2 = ITI_Float_1 + ITI_Float_2
