@@ -1,5 +1,5 @@
 # Pynapse Source #
-# V 3
+# V 4
 
 import numpy as np
 import sys
@@ -100,7 +100,6 @@ class Always:   #StateID = 0
         p_Timer.GlobA_T.setPeriod(1000) # Length (sec)
         p_Timer.GlobA_T.setRepeats(3) # Frequency
         p_Timer.GlobA_T.turnOn() # Turn on timer
-    def s_Mode_recprev():
         print('Starting the 4000 sec ITI timer', '\n', 'NOTE: Experiment will finish before ITI timer completes')
         p_Timer.ITI_T.setPeriod(1000) # Length (sec)
         p_Timer.ITI_T.setRepeats(4) # Frequency
