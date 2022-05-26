@@ -90,13 +90,12 @@ print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 
 
 class Always:   #StateID = 0
-    def s_Mode_standby():
-        print('Setting up Global & ITI Timers')
-        p_Timer.GlobA_T.setPeriod(1000) # Length (sec)
-        p_Timer.GlobA_T.setRepeats(3) # Frequency
-        p_Timer.ITI_T.setPeriod(1000) # Length (sec)
-        p_Timer.ITI_T.setRepeats(4) # Frequency
     def s_Mode_recprev():
+        print('Setting up Global & ITI Timers')
+        p_Timer.GlobA_T.setPeriod(1) # Length (sec)
+        p_Timer.GlobA_T.setRepeats(3600) # Frequency
+        p_Timer.ITI_T.setPeriod(1) # Length (sec)
+        p_Timer.ITI_T.setRepeats(4444) # Frequency
         print('Starting the global experimental 3000 sec timer')
         p_Timer.GlobA_T.turnOn() # Turn on timer
         print('Starting the 4000 sec ITI timer', '\n', 'NOTE: Experiment will finish before ITI timer completes')
