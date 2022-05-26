@@ -206,7 +206,6 @@ class VI1_Timer:    #StateID = ?
     def s_State_enter():
         p_Timer.VI_T.setPeriod(float_1) # First random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
-    def s_Mode_recprev():
         p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
         if s_VI_T_tick(count) == float_1:
