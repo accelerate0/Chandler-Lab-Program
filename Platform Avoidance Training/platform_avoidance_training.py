@@ -49,17 +49,15 @@ float_3 = np.random.normal(const_VISchedule,3,1) # 3 for 3 VI intervals
 print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds")
 
 # Creating ITI Scheduling
-ITI_T_Array = [np.random.normal(const_ITI,3,100)] # (average, standard deviation, amount of numbers)
-print("The numbers generated are ", ITI_T_Array, "seconds")
-ITI_Float_1 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_2 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_3 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_4 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_5 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_6 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_7 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_8 = np.random.choice(ITI_T_Array, size=1)
-ITI_Float_9 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_1 = np.random.normal(const_ITI,1,1)
+ITI_Float_2 = np.random.normal(const_ITI,1,1)
+ITI_Float_3 = np.random.normal(const_ITI,1,1)
+ITI_Float_4 = np.random.normal(const_ITI,1,1)
+ITI_Float_5 = np.random.normal(const_ITI,1,1)
+ITI_Float_6 = np.random.normal(const_ITI,1,1)
+ITI_Float_7 = np.random.normal(const_ITI,1,1)
+ITI_Float_8 = np.random.normal(const_ITI,1,1)
+ITI_Float_9 = np.random.normal(const_ITI,1,1)
 print("The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds")
 ITI_T1 = ITI_Float_1
 ITI_T2 = ITI_Float_1 + ITI_Float_2
@@ -192,7 +190,7 @@ class VI1_Timer:    #StateID = ?
     def s_Mode_recprev():
         p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
-        if def s_VI_T_tick(count) == float_1:
+        if s_VI_T_tick(count) == float_1:
             p_State_switch(VI1_Event)
 class VI1_Event:    #StateID = ?
     def s_State_enter():
@@ -210,7 +208,7 @@ class VI2_Timer:    #StateID = ?
         p_Timer.VI_T.setPeriod(float_2) # Second random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
     def s_VI_T_tick(count):
-        if def s_VI_T_tick(count) == float_2:
+        if s_VI_T_tick(count) == float_2:
             p_State_switch(VI2_Event)
 class VI2_Event:    #StateID = ?
     def s_State_enter():
@@ -228,7 +226,7 @@ class VI3_Timer:    #StateID = ?
         p_Timer.VI_T.setPeriod(float_3) # Third random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
     def s_VI_T_tick(count):
-        if def s_VI_T_tick(count) == float_3:
+        if s_VI_T_tick(count) == float_3:
             p_State_switch(VI3_Event)
 class VI3_Event:    #StateID = ?
     def s_State_enter():
