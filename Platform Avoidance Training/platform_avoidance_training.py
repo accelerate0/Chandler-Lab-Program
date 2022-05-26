@@ -54,7 +54,6 @@ const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
 float_1 = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random number generator via floating point of Gaussian function
 float_2 = int(np.round(np.random.normal(const_VISchedule,5,1))) # (mean average, standard deviation, amount of numbers)
 float_3 = int(np.round(np.random.normal(const_VISchedule,5,1))) # 3 for 3 VI intervals
-print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds")
 
 # Creating ITI Scheduling
 ITI_Float_1 = int(np.round(np.random.normal(const_ITI,5,1)))
@@ -66,26 +65,25 @@ ITI_Float_6 = int(np.round(np.random.normal(const_ITI,5,1)))
 ITI_Float_7 = int(np.round(np.random.normal(const_ITI,5,1)))
 ITI_Float_8 = int(np.round(np.random.normal(const_ITI,5,1)))
 ITI_Float_9 = int(np.round(np.random.normal(const_ITI,5,1)))
-print("The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds")
+
 ITI_T1 = ITI_Float_1
-ITI_T2 = ITI_Float_1 + ITI_Float_2
-ITI_T3 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3
-ITI_T4 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + 300
-ITI_T5 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + 300
-ITI_T6 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + 300
-ITI_T7 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + ITI_Float_7 + 300
-ITI_T8 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + ITI_Float_7 + ITI_Float_8 + 600
-ITI_T9 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + ITI_Float_7 + ITI_Float_8 + ITI_Float_9 + 600
+ITI_T2 = ITI_T1 + ITI_Float_2 + 30
+ITI_T3 = ITI_T2 + ITI_Float_3 + 30
+ITI_T4 = ITI_T3 + ITI_Float_4 + 300 + 30
+ITI_T5 = ITI_T4 + ITI_Float_5 + 30
+ITI_T6 = ITI_T5 + ITI_Float_6 + 30
+ITI_T7 = ITI_T6 + ITI_Float_7 + 300 + 30
+ITI_T8 = ITI_T7 + ITI_Float_8 + 30
+ITI_T9 = ITI_T8 + ITI_Float_9 + 30
 
 # Displays Set Variables and Presets
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 "const_VISchedule =", const_VISchedule, '\n',
 "const_CorrectResponse =", const_CorrectResponse, '\n',
-"const_ITI =", const_ITI, '\n', '\n', '\n'
+"const_ITI =", const_ITI, '\n', '\n', '\n',
+"The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds", '\n', '\n',
+"The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
 )
-
-# Please Read The readme.txt
-print( "PLEASE READ THE README.TXT BEFORE CONTINUING", '\n', '\n')
 
 #==========================================================#
 #                   Actual Program                         #
@@ -118,14 +116,14 @@ class Always:   #StateID = 0
         # _____ First ITI Interval _____ #
     def s_ITI_T_tick(count):
         if s_ITI_T_tick(count) == ITI_T1:
-            print('ITI 1 started')
+            print('ITI 1 Started')
             p_Rig.o_Tone.turnOn()
         if s_ITI_T_tick(count) == ITI_T1 + 28:
             p_Rig.o_Shock.turnOn()
         if s_ITI_T_tick(count) == ITI_T1 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 1 completed')
+            print('ITI 1 Completed')
         # === #
         if s_ITI_T_tick(count) == ITI_T2:
             print('ITI 2 started')
