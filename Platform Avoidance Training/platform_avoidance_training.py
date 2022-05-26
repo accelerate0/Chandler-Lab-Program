@@ -51,15 +51,25 @@ print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, 
 # Creating ITI Scheduling
 ITI_T_Array = [np.random.normal(const_ITI,3,100)] # (average, standard deviation, amount of numbers)
 print("The numbers generated are ", ITI_T_Array, "seconds")
-ITI_T1 = np.random.choice(ITI_T_Array, size=1)
-ITI_T2 = np.random.choice(ITI_T_Array, size=1)
-ITI_T3 = np.random.choice(ITI_T_Array, size=1)
-ITI_T4 = np.random.choice(ITI_T_Array, size=1)
-ITI_T5 = np.random.choice(ITI_T_Array, size=1)
-ITI_T6 = np.random.choice(ITI_T_Array, size=1)
-ITI_T7 = np.random.choice(ITI_T_Array, size=1)
-ITI_T8 = np.random.choice(ITI_T_Array, size=1)
-ITI_T9 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_1 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_2 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_3 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_4 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_5 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_6 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_7 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_8 = np.random.choice(ITI_T_Array, size=1)
+ITI_Float_9 = np.random.choice(ITI_T_Array, size=1)
+print("The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds")
+ITI_T1 = ITI_Float_1
+ITI_T2 = ITI_Float_1 + ITI_Float_2
+ITI_T3 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3
+ITI_T4 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + 300
+ITI_T5 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + 300
+ITI_T6 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + 300
+ITI_T7 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + ITI_Float_7 + 300
+ITI_T8 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + ITI_Float_7 + ITI_Float_8 + 600
+ITI_T9 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + ITI_Float_6 + ITI_Float_7 + ITI_Float_8 + ITI_Float_9 + 600
 
 # Displays Set Variables and Presets
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
@@ -76,7 +86,7 @@ print( "PLEASE READ THE README.TXT BEFORE CONTINUING", '\n', '\n')
 #                   Actual Program                         #
 #==========================================================#
 
-# Always class is special for Pynapse, everything here is always on(?)
+# Always class: Special class for Pynapse where conditionals here is always being checked
 # Set Global 60 minute Timer For Entire Experiment:
 class Always:   #StateID = 0
     def s_Mode_recprev():
@@ -87,25 +97,82 @@ class Always:   #StateID = 0
         if s_Global_T_tick(count) == const_SessionLength:
             print('60 minute timer finished')
             print('The Experiment is Complete')
-            syn.setModeStr('Idle') # Shuts down synapse
+            syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
+        # ===== Conditional Based ITI Scheduling ===== #
+        # _____ First ITI Interval _____ #
         elif s_Global_T_tick(count) == ITI_T1:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2:
+        elif s_Global_T_tick(count) == ITI_T1 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # === #
+        elif s_Global_T_tick(count) == ITI_T2:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3:
+        elif s_Global_T_tick(count) == ITI_T2 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T2 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # === #
+        elif s_Global_T_tick(count) == ITI_T3:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4:
+        elif s_Global_T_tick(count) == ITI_T3 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T3 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # _____ Second ITI Interval _____ #
+        elif s_Global_T_tick(count) == ITI_T4:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5:
+        elif s_Global_T_tick(count) == ITI_T4 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T4 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # === #
+        elif s_Global_T_tick(count) == ITI_T5:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6:
+        elif s_Global_T_tick(count) == ITI_T5 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T5 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # === #
+        elif s_Global_T_tick(count) == ITI_T6:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6 + ITI_T7:
+        elif s_Global_T_tick(count) == ITI_T6 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T6 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # === #
+        elif s_Global_T_tick(count) == ITI_T7:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6 + ITI_T7 + ITI_T8:
+        elif s_Global_T_tick(count) == ITI_T7 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T7 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # _____ Third ITI Interval _____ #
+        elif s_Global_T_tick(count) == ITI_T8:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6 + ITI_T7 + ITI_T8 + ITI_T9:
+        elif s_Global_T_tick(count) == ITI_T8 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T8 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
+        # === #
+        elif s_Global_T_tick(count) == ITI_T9:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T9 + 28:
+            p_Rig.o_Shock.turnOn()
+        elif s_Global_T_tick(count) == ITI_T9 + 30:
+            p_Rig.o_Tone.turnOff()
+            p_Rig.o_Shock.turnOff()
             print ("ITI Intervaling is done")
+
 # =================+++++++================= #
 
 class PreTrial:    #StateID = ?
@@ -142,8 +209,6 @@ class VI2_Timer:    #StateID = ?
     def s_State_enter():
         p_Timer.VI_T.setPeriod(float_2) # Second random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
         if def s_VI_T_tick(count) == float_2:
             p_State_switch(VI2_Event)
@@ -162,8 +227,6 @@ class VI3_Timer:    #StateID = ?
     def s_State_enter():
         p_Timer.VI_T.setPeriod(float_3) # Third random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
         if def s_VI_T_tick(count) == float_3:
             p_State_switch(VI3_Event)
@@ -178,54 +241,10 @@ class VI3_Reward:   #StateID = ?
         print('Lever Was Pressed')
         p_State.switch(VI1_Timer)
 
-# _________________________________________ #
-
-class ITI_Initial:   #StateID = ?
-    def s_State_enter():
-        ITI_T = np.random.choice(ITI_T_Array, size=1)
-        ITI_Ticker = ITI_Ticker + 1
-    def s_Mode_standby():
-        p_Timer.ITI_T.setPeriod(ITI_T)
-        p_Timer.ITI_T.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.ITI_T.turnOn()
-    def s_ITI_T_tick(count):
-        p_State_switch(ITI_Tone)
-class ITI_Tone:     #StateID = ?
-    def s_State_enter():
-        p_Rig.o_Tone.turnOn()
-    def s_Mode_standby():
-        p_Timer.ITI_T.setPeriod(28)
-        p_Timer.ITI_T.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.ITI_T.turnOn()
-    def s_ITI_T_tick(count):
-        p_State_switch(ITI_Shock)
-class ITI_Shock:     #StateID = ?
-    def s_Mode_standby():
-        p_Timer.ITI_T.setPeriod(2)
-        p_Timer.ITI_T.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.ITI_T.turnOn()
-    def s_ITI_T_tick(count):
-        p_State_switch(ITI_Off)
-
-class ITI_Off:      #StateID = ?
-    def s_State_enter():
-        p_Rig.o_Shock.turnOff()
-        p_Rig.o_Tone.turnOff()
 
 
 
-class ITI_3_Interval:      #StateID = ?
-    def s_Mode_standby():
-        p_Timer.ITI_T.setPeriod(300)
-        p_Timer.ITI_T.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.ITI_T.turnOn()
-    def s_ITI_T_tick(count):
-        p_State_switch(ITI_Initial)
 
-class ITI_9_Interval:      #StateID = ?
-    def s_Mode_standby():
-        print('ITI operation done')
+
+
+# = #
