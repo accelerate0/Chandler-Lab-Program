@@ -1,14 +1,10 @@
- Pynapse Source #
-# V 2
-# TO DO:
-# - Add recording measures on VI
-# - Correct some possible typos on comments
-# - Debuggin
+# Pynapse Source #
+# V 3
 
-import numpy as np          # For Zero Arrays, Mathematical Functions, Optimizations, etc
-import sys                  # For Program Exiting
-import random               # For random number generator and random choices
-import time                 # For timer and time functions
+import numpy as np
+import sys
+import random
+import time
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -22,7 +18,8 @@ import time                 # For timer and time functions
 #    VI Timer = VI_T
 #    ITI Timer = ITI_T
 
-#  Regarding inputs and outputs: (Variable names must be exact and case sensitive) (3-20 Characters)
+#  Regarding inputs and outputs: (Variable names must be exact and case sensitive) (3-20 Characters):
+#
 #      For iH10_1 Controller:
 #          Channel 1 = o_L_Lever_Extension
 #          Channel 2 = i_L_Lever_Press
@@ -39,12 +36,11 @@ import time                 # For timer and time functions
 #          Channel 3 = o_R_Lever_Light
 
 
-# Global Variables
+# Global Variables:
 const_SessionLength = 3600      # Length of the entire experiment (in sec)
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
 const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
-ITI_Ticker = 0
 
 # Creating VI Scheduling
 float_1 = np.random.normal(const_VISchedule,3,1) # Random number generator via floating point of Gaussian function
@@ -55,13 +51,15 @@ print("The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, 
 # Creating ITI Scheduling
 ITI_T_Array = [np.random.normal(const_ITI,3,100)] # (average, standard deviation, amount of numbers)
 print("The numbers generated are ", ITI_T_Array, "seconds")
-
-#==========================================================#
-#                Program: Preliminary                      #
-#==========================================================#
-
-
-
+ITI_T1 = np.random.choice(ITI_T_Array, size=1)
+ITI_T2 = np.random.choice(ITI_T_Array, size=1)
+ITI_T3 = np.random.choice(ITI_T_Array, size=1)
+ITI_T4 = np.random.choice(ITI_T_Array, size=1)
+ITI_T5 = np.random.choice(ITI_T_Array, size=1)
+ITI_T6 = np.random.choice(ITI_T_Array, size=1)
+ITI_T7 = np.random.choice(ITI_T_Array, size=1)
+ITI_T8 = np.random.choice(ITI_T_Array, size=1)
+ITI_T9 = np.random.choice(ITI_T_Array, size=1)
 
 # Displays Set Variables and Presets
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
@@ -81,24 +79,33 @@ print( "PLEASE READ THE README.TXT BEFORE CONTINUING", '\n', '\n')
 # Always class is special for Pynapse, everything here is always on(?)
 # Set Global 60 minute Timer For Entire Experiment:
 class Always:   #StateID = 0
-    def s_Mode_standby():
+    def s_Mode_recprev():
         p_Timer.Global_T.setPeriod(const_SessionLength) # Length (sec)
         p_Timer.Global_T.setRepeats(1) # Frequency
-    def s_Mode_recprev():
         p_Timer.Global_T.turnOn() # Turn on timer
     def s_Global_T_tick(count):
-        print('60 minute timer finished')
-        print('The Experiment is Complete')
-        syn.setModeStr('Idle') # Shuts down synapse
-# =================+++++++================= #
-
-
-
-
-
-
-
-
+        if s_Global_T_tick(count) == const_SessionLength:
+            print('60 minute timer finished')
+            print('The Experiment is Complete')
+            syn.setModeStr('Idle') # Shuts down synapse
+        elif s_Global_T_tick(count) == ITI_T1:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6 + ITI_T7:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6 + ITI_T7 + ITI_T8:
+            p_Rig.o_Tone.turnOn()
+        elif s_Global_T_tick(count) == ITI_T1 + ITI_T2 + ITI_T3 + ITI_T4 + ITI_T5 + ITI_T6 + ITI_T7 + ITI_T8 + ITI_T9:
+            print ("ITI Intervaling is done")
 # =================+++++++================= #
 
 class PreTrial:    #StateID = ?
@@ -107,18 +114,19 @@ class PreTrial:    #StateID = ?
         print('Light is On')
         p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
         print('Lever is Out')
-        p_State.switch(VI1_Timer, ITI_Initial) # Switches to Trial class
+        p_State.switch(VI1_Timer) # Switches to Trial class
 
 # =================+++++++================= #
 
 class VI1_Timer:    #StateID = ?
-    def s_Mode_standby():
-        p_Timer.VI_T.setPeriod(float_1) # First random 30 sec timer
+    def s_State_enter():
+        p_Timer.VI_T.setPeriod(float_1) # First random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
-        p_State_switch(VI1_Event)
+        if def s_VI_T_tick(count) == float_1:
+            p_State_switch(VI1_Event)
 class VI1_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
@@ -131,13 +139,14 @@ class VI1_Reward:   #StateID = ?
         p_State.switch(VI2_Timer)
 
 class VI2_Timer:    #StateID = ?
-    def s_Mode_standby():
-        p_Timer.VI_T.setPeriod(float_2) # Second random 30 sec timer
+    def s_State_enter():
+        p_Timer.VI_T.setPeriod(float_2) # Second random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
-        p_State_switch(VI2_Event)
+        if def s_VI_T_tick(count) == float_2:
+            p_State_switch(VI2_Event)
 class VI2_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
@@ -150,13 +159,14 @@ class VI2_Reward:   #StateID = ?
         p_State.switch(VI3_Timer)
 
 class VI3_Timer:    #StateID = ?
-    def s_Mode_standby():
-        p_Timer.VI_T.setPeriod(float_3) # Third random 30 sec timer
+    def s_State_enter():
+        p_Timer.VI_T.setPeriod(float_3) # Third random ~30 sec timer
         p_Timer.VI_T.setRepeats(1)
     def s_Mode_recprev():
         p_Timer.VI_T.turnOn()
     def s_VI_T_tick(count):
-        p_State_switch(VI3_Event)
+        if def s_VI_T_tick(count) == float_3:
+            p_State_switch(VI3_Event)
 class VI3_Event:    #StateID = ?
     def s_State_enter():
         p_State.setTimout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
@@ -205,14 +215,7 @@ class ITI_Off:      #StateID = ?
         p_Rig.o_Shock.turnOff()
         p_Rig.o_Tone.turnOff()
 
-class ITI_Ticker_Check:      #StateID = ?
-    def s_State_enter():
-        if ITI_Ticker == 3 or 6:
-            p_State_switch(ITI_3_Interval)
-        elif ITI_Ticker == 9:
-            p_State_switch(ITI_9_Interval)
-        else:
-            p_State_switch(ITI_Initial)
+
 
 class ITI_3_Interval:      #StateID = ?
     def s_Mode_standby():
