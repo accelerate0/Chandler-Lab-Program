@@ -21,8 +21,8 @@ import time
 # Timer Variables:
 #    GlobA_T = Global 1000 sec Timer
 #    GlobB_T = Global 600 sec Timer = GlobB_T
-#    VI Timer = VI_T
-#    ITI Timer = ITI_T
+#    VI_T = Timer for VI intervaling
+#    ITI_T = ITI Timer for ITI intervaling
 #
 # ==++== Channels ==++==
 # NOTE: Regarding inputs and outputs
