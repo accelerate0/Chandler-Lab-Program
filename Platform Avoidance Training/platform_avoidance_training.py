@@ -16,10 +16,8 @@ import numpy as np
 #    Timers can only be 8 Characters max and have only a 1000 sec maximum interval, therefore, the 1000 sec timer is repeated 3 times followed by a 600 sec timer
 #    Fill timers into timer slot in synapse; Enable Epoch Store
 # Timer Variables:
-#    GlobA_T = Global 1000 sec Timer
-#    GlobB_T = Global 600 sec Timer = GlobB_T
+#    Global_T = Global Experimental sec Timer defined by const_ExperimentTime
 #    VI_T = Timer for VI intervaling
-#    ITI_T = ITI Timer for ITI intervaling
 #
 # ==++== Channels ==++==
 # NOTE: Regarding inputs and outputs
@@ -47,6 +45,7 @@ import numpy as np
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
 const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
+const_ExperimentTime = 3600     # Time of Entire Experiment
 
 # Creating VI Scheduling
 float_1 = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random number generator via floating point of Gaussian function
@@ -78,6 +77,7 @@ ITI_T9 = ITI_T8 + ITI_Float_9 + 30
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 "const_VISchedule =", const_VISchedule, '\n',
 "const_CorrectResponse =", const_CorrectResponse, '\n',
+"const_ExperimentTime =", const_ExperimentTime, '\n',
 "const_ITI =", const_ITI, '\n', '\n', '\n',
 "The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds", '\n', '\n',
 "The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
@@ -91,140 +91,129 @@ print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
-        print('Setting up Global & ITI Timers')
-        p_Timer.GlobA_T.setPeriod(1) # Length (sec)
-        p_Timer.GlobA_T.setRepeats(3600) # Frequency
-        p_Timer.ITI_T.setPeriod(1) # Length (sec)
-        p_Timer.ITI_T.setRepeats(4444) # Frequency
-        print('Starting the global experimental 3000 sec timer')
+        print('Setting up Global Timer ')
+        p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
+        p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
+        print('Starting the global experimental 3600 sec timer')
         p_Timer.GlobA_T.turnOn() # Turn on timer
-        print('Starting the 4000 sec ITI timer', '\n', 'NOTE: Experiment will finish before ITI timer completes')
-        p_Timer.ITI_T.turnOn() # Turn on timer
-    def s_GlobA_T_tick(count):
-        if s_GlobA_T_tick(count) == 3000:
-            print('3000 sec timer completed', '\n', 'Starting the last global experimental 600 sec timer')
-            p_Timer.GlobB_T.setPeriod(600) # Length (sec)
-            p_Timer.GlobB_T.setRepeats(1) # Frequency
-            p_Timer.GlobB_T.turnOn() # Turn on timer
-    def s_GlobB_T_tick(count):
-        if s_GlobB_T_tick(count) == 600:
-            print('600 sec timer complete', '\n', '60 min has passed and experiment is completed')
+    def s_Global_T_tick(count):
+        if s_Global_T_tick(count) == 3600:
+            print('60 min has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         # ===== Conditional Based ITI Scheduling ===== #
         # _____ First ITI Interval _____ #
-    def s_ITI_T_tick(count):
-        if s_ITI_T_tick(count) == ITI_T1:
+        elif s_Global_T_tick(count) == ITI_T1:
             print('ITI 1: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 1: Tone On')
-        if s_ITI_T_tick(count) == ITI_T1 + 28:
+        elif s_Global_T_tick(count) == ITI_T1 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 1: Shock On')
-        if s_ITI_T_tick(count) == ITI_T1 + 30:
+        elif s_Global_T_tick(count) == ITI_T1 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 1: Turn off Shock & Tone')
             print('ITI 1: Completed')
         # === #
-        if s_ITI_T_tick(count) == ITI_T2:
+        elif s_Global_T_tick(count) == ITI_T2:
             print('ITI 2: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 2: Tone On')
-        if s_ITI_T_tick(count) == ITI_T2 + 28:
+        elif s_Global_T_tick(count) == ITI_T2 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 2: Shock On')
-        if s_ITI_T_tick(count) == ITI_T2 + 30:
+        elif s_Global_T_tick(count) == ITI_T2 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 2: Turn off Shock & Tone')
             print('ITI 2: Completed')
         # === #
-        if s_ITI_T_tick(count) == ITI_T3:
+        elif s_Global_T_tick(count) == ITI_T3:
             print('ITI 3: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 3: Tone On')
-        if s_ITI_T_tick(count) == ITI_T3 + 28:
+        elif s_Global_T_tick(count) == ITI_T3 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 3: Shock On')
-        if s_ITI_T_tick(count) == ITI_T3 + 30:
+        elif s_Global_T_tick(count) == ITI_T3 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 3: Turn off Shock & Tone')
             print('ITI 3: Completed')
         # _____ Second ITI Interval _____ #
-        if s_ITI_T_tick(count) == ITI_T4:
+        elif s_Global_T_tick(count) == ITI_T4:
             print('ITI 4: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 4: Tone On')
-        if s_ITI_T_tick(count) == ITI_T4 + 28:
+        elif s_Global_T_tick(count) == ITI_T4 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 4: Shock On')
-        if s_ITI_T_tick(count) == ITI_T4 + 30:
+        elif s_Global_T_tick(count) == ITI_T4 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 4: Turn off Shock & Tone')
             print('ITI 4: Completed')
         # === #
-        if s_ITI_T_tick(count) == ITI_T5:
+        elif s_Global_T_tick(count) == ITI_T5:
             print('ITI 5: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 5: Tone On')
-        if s_ITI_T_tick(count) == ITI_T5 + 28:
+        elif s_Global_T_tick(count) == ITI_T5 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 5: Shock On')
-        if s_ITI_T_tick(count) == ITI_T5 + 30:
+        elif s_Global_T_tick(count) == ITI_T5 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 5: Turn off Shock & Tone')
             print('ITI 5: Completed')
         # === #
-        if s_ITI_T_tick(count) == ITI_T6:
+        elif s_Global_T_tick(count) == ITI_T6:
             print('ITI 6: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 6: Tone On')
-        if s_ITI_T_tick(count) == ITI_T6 + 28:
+        elif s_Global_T_tick(count) == ITI_T6 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 6: Shock On')
-        if s_ITI_T_tick(count) == ITI_T6 + 30:
+        elif s_Global_T_tick(count) == ITI_T6 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 6: Turn off Shock & Tone')
             print('ITI 6: Completed')
         # === #
-        if s_ITI_T_tick(count) == ITI_T7:
+        elif s_Global_T_tick(count) == ITI_T7:
             print('ITI 7: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 7: Tone On')
-        if s_ITI_T_tick(count) == ITI_T7 + 28:
+        elif s_Global_T_tick(count) == ITI_T7 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 7: Shock On')
-        if s_ITI_T_tick(count) == ITI_T7 + 30:
+        elif s_Global_T_tick(count) == ITI_T7 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 7: Turn off Shock & Tone')
             print('ITI 7: Completed')
         # _____ Third ITI Interval _____ #
-        if s_ITI_T_tick(count) == ITI_T8:
+        elif s_Global_T_tick(count) == ITI_T8:
             print('ITI 8: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 8: Tone On')
-        if s_ITI_T_tick(count) == ITI_T8 + 28:
+        elif s_Global_T_tick(count) == ITI_T8 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 8: Shock On')
-        if s_ITI_T_tick(count) == ITI_T8 + 30:
+        elif s_Global_T_tick(count) == ITI_T8 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 8: Turn off Shock & Tone')
             print('ITI 8: Completed')
         # === #
-        if s_ITI_T_tick(count) == ITI_T9:
+        elif s_Global_T_tick(count) == ITI_T9:
             print('ITI 9: Started')
             p_Rig.o_Tone.turnOn()
             print('ITI 9: Tone On')
-        if s_ITI_T_tick(count) == ITI_T9 + 28:
+        elif s_Global_T_tick(count) == ITI_T9 + 28:
             p_Rig.o_Shock.turnOn()
             print('ITI 9: Shock On')
-        if s_ITI_T_tick(count) == ITI_T9 + 30:
+        elif s_Global_T_tick(count) == ITI_T9 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI 9: Turn off Shock & Tone')
@@ -246,8 +235,8 @@ class PreTrial:    #StateID = ?
 class VI1_Timer:    #StateID = ?
     def s_State_enter():
         p_Timer.VI_T.turnOff()
-        p_Timer.VI_T.setPeriod(float_1) # First random ~30 sec timer
-        p_Timer.VI_T.setRepeats(1)
+        p_Timer.VI_T.setPeriod(1) # First random ~30 sec timer
+        p_Timer.VI_T.setRepeats(float_1)
         p_Timer.VI_T.turnOn()
         print('VI 1: Started')
     def s_VI_T_tick(count):
@@ -269,8 +258,8 @@ class VI1_Reward:   #StateID = ?
 class VI2_Timer:    #StateID = ?
     def s_State_enter():
         p_Timer.VI_T.turnOff()
-        p_Timer.VI_T.setPeriod(float_2) # Second random ~30 sec timer
-        p_Timer.VI_T.setRepeats(1)
+        p_Timer.VI_T.setPeriod(1) # Second random ~30 sec timer
+        p_Timer.VI_T.setRepeats(float_2)
         p_Timer.VI_T.turnOn()
         print('VI 2: Started')
     def s_VI_T_tick(count):
@@ -292,8 +281,8 @@ class VI2_Reward:   #StateID = ?
 class VI3_Timer:    #StateID = ?
     def s_State_enter():
         p_Timer.VI_T.turnOff()
-        p_Timer.VI_T.setPeriod(float_3) # Third random ~30 sec timer
-        p_Timer.VI_T.setRepeats(1)
+        p_Timer.VI_T.setPeriod(1) # Third random ~30 sec timer
+        p_Timer.VI_T.setRepeats(float_3)
         p_Timer.VI_T.turnOn()
         print('VI 3: Started')
     def s_VI_T_tick(count):
