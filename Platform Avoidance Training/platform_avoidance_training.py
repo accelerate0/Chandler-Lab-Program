@@ -91,6 +91,7 @@ print( "EXPERIMENTAL PRESETS:", '\n', '\n',
 
 class Always:   #StateID = 0
     def s_Mode_standby():
+        print('Setting up Global & ITI Timers')
         p_Timer.GlobA_T.setPeriod(1000) # Length (sec)
         p_Timer.GlobA_T.setRepeats(3) # Frequency
         p_Timer.ITI_T.setPeriod(1000) # Length (sec)
@@ -236,9 +237,9 @@ class Always:   #StateID = 0
 class PreTrial:    #StateID = ?
     def s_State_enter():
         p_Rig.o_House_Light.turnOn() # Turns on light
-        print('Light is On')
+        print('Pretrial: Light is On')
         p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
-        print('Lever is Out')
+        print('Pretrial: Lever is Out')
         p_State.switch(VI1_Timer) # Switches to Trial class
 
 # =================+++++++================= #
