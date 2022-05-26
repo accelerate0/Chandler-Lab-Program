@@ -9,17 +9,27 @@ import time
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
-
-# Naming matters as well as presetting certain things in Pynapse+Synapse.
-# Therefore the following attributes needs to be declared in the Synapse program:
-
-#  Regarding Timers: (8 Characters max)
-#    Global Timer = Global_T
+#
+# ==++== PRETEXT ==++==
+#   Naming matters as well as presetting certain things in Pynapse+Synapse (EVERYTHING IS CASE SENSITIVE)
+#   Therefore the following attributes needs to be declared in the Synapse program:
+#
+# ==++== TIMERS ==++==
+# NOTE:
+#    Timers can only be 8 Characters max and have only a 1000 sec maximum interval, therefore, the 1000 sec timer is repeated 3 times followed by a 600 sec timer
+#    Fill timers into timer slot in synapse; Enable Epoch Store
+# Timer Variables:
+#    GlobA_T = Global 1000 sec Timer
+#    GlobB_T = Global 600 sec Timer = GlobB_T
 #    VI Timer = VI_T
 #    ITI Timer = ITI_T
-
-#  Regarding inputs and outputs: (Variable names must be exact and case sensitive) (3-20 Characters):
 #
+# ==++== Channels ==++==
+# NOTE: Regarding inputs and outputs
+#    Variable names must be exact and case sensitive as well as (3-20 Characters):\\
+#    Variable name nomenclature: o/i_L/R_NAME
+#    o/i for output/input, L/R for Left/Right
+# Channel Assignments:
 #      For iH10_1 Controller:
 #          Channel 1 = o_L_Lever_Extension
 #          Channel 2 = i_L_Lever_Press
@@ -37,7 +47,6 @@ import time
 
 
 # Global Variables:
-const_SessionLength = 3600      # Length of the entire experiment (in sec)
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
 const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
@@ -71,7 +80,6 @@ ITI_T9 = ITI_Float_1 + ITI_Float_2 + ITI_Float_3 + ITI_Float_4 + ITI_Float_5 + I
 
 # Displays Set Variables and Presets
 print( "EXPERIMENTAL PRESETS:", '\n', '\n',
-"const_SessionLength =", const_SessionLength, '\n',
 "const_VISchedule =", const_VISchedule, '\n',
 "const_CorrectResponse =", const_CorrectResponse, '\n',
 "const_ITI =", const_ITI, '\n', '\n', '\n'
@@ -83,90 +91,104 @@ print( "PLEASE READ THE README.TXT BEFORE CONTINUING", '\n', '\n')
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
-
 # Always class: Special class for Pynapse where conditionals here is always being checked
-# Set Global 60 minute Timer For Entire Experiment:
+
+
 class Always:   #StateID = 0
     def s_Mode_recprev():
-        p_Timer.Global_T.setPeriod(const_SessionLength) # Length (sec)
-        p_Timer.Global_T.setRepeats(1) # Frequency
-        p_Timer.Global_T.turnOn() # Turn on timer
-    def s_Global_T_tick(count):
-        if s_Global_T_tick(count) == const_SessionLength:
-            print('60 minute timer finished')
-            print('The Experiment is Complete')
+        print('Starting the global experimental 3000 sec timer')
+        p_Timer.GlobA_T.setPeriod(1000) # Length (sec)
+        p_Timer.GlobA_T.setRepeats(3) # Frequency
+        p_Timer.GlobA_T.turnOn() # Turn on timer
+    def s_Mode_recprev():
+        print('Starting the 4000 sec ITI timer', '\n', 'NOTE: Experiment will finish before ITI timer completes')
+        p_Timer.ITI_T.setPeriod(1000) # Length (sec)
+        p_Timer.ITI_T.setRepeats(4) # Frequency
+        p_Timer.ITI_T.turnOn() # Turn on timer
+    def s_GlobA_T_tick(count):
+        if s_GlobA_T_tick(count) == 3000:
+            print('3000 sec timer completed', '\n', 'Starting the last global experimental 600 sec timer')
+            p_Timer.GlobB_T.setPeriod(600) # Length (sec)
+            p_Timer.GlobB_T.setRepeats(1) # Frequency
+            p_Timer.GlobB_T.turnOn() # Turn on timer
+    def s_GlobB_T_tick(count):
+        if s_GlobB_T_tick(count) == 600:
+            print('600 sec timer complete', '\n', '60 min has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         # ===== Conditional Based ITI Scheduling ===== #
         # _____ First ITI Interval _____ #
-        elif s_Global_T_tick(count) == ITI_T1:
+    def s_ITI_T_tick(count):
+        if s_ITI_T_tick(count) == 9999
+            print('something went wrong')
+        elif s_ITI_T_tick(count) == ITI_T1:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + 28:
+        elif s_ITI_T_tick(count) == ITI_T1 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T1 + 30:
+        elif s_ITI_T_tick(count) == ITI_T1 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # === #
-        elif s_Global_T_tick(count) == ITI_T2:
+        elif s_ITI_T_tick(count) == ITI_T2:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T2 + 28:
+        elif s_ITI_T_tick(count) == ITI_T2 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T2 + 30:
+        elif s_ITI_T_tick(count) == ITI_T2 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # === #
-        elif s_Global_T_tick(count) == ITI_T3:
+        elif s_ITI_T_tick(count) == ITI_T3:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T3 + 28:
+        elif s_ITI_T_tick(count) == ITI_T3 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T3 + 30:
+        elif s_ITI_T_tick(count) == ITI_T3 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # _____ Second ITI Interval _____ #
-        elif s_Global_T_tick(count) == ITI_T4:
+        elif s_ITI_T_tick(count) == ITI_T4:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T4 + 28:
+        elif s_ITI_T_tick(count) == ITI_T4 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T4 + 30:
+        elif s_ITI_T_tick(count) == ITI_T4 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # === #
-        elif s_Global_T_tick(count) == ITI_T5:
+        elif s_ITI_T_tick(count) == ITI_T5:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T5 + 28:
+        elif s_ITI_T_tick(count) == ITI_T5 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T5 + 30:
+        elif s_ITI_T_tick(count) == ITI_T5 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # === #
-        elif s_Global_T_tick(count) == ITI_T6:
+        elif s_ITI_T_tick(count) == ITI_T6:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T6 + 28:
+        elif s_ITI_T_tick(count) == ITI_T6 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T6 + 30:
+        elif s_ITI_T_tick(count) == ITI_T6 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # === #
-        elif s_Global_T_tick(count) == ITI_T7:
+        elif s_ITI_T_tick(count) == ITI_T7:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T7 + 28:
+        elif s_ITI_T_tick(count) == ITI_T7 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T7 + 30:
+        elif s_ITI_T_tick(count) == ITI_T7 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # _____ Third ITI Interval _____ #
-        elif s_Global_T_tick(count) == ITI_T8:
+        elif s_ITI_T_tick(count) == ITI_T8:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T8 + 28:
+        elif s_ITI_T_tick(count) == ITI_T8 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T8 + 30:
+        elif s_ITI_T_tick(count) == ITI_T8 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
         # === #
-        elif s_Global_T_tick(count) == ITI_T9:
+        elif s_ITI_T_tick(count) == ITI_T9:
             p_Rig.o_Tone.turnOn()
-        elif s_Global_T_tick(count) == ITI_T9 + 28:
+        elif s_ITI_T_tick(count) == ITI_T9 + 28:
             p_Rig.o_Shock.turnOn()
-        elif s_Global_T_tick(count) == ITI_T9 + 30:
+        elif s_ITI_T_tick(count) == ITI_T9 + 30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print ("ITI Intervaling is done")
