@@ -2,8 +2,6 @@
 # V 4
 
 import numpy as np
-import random
-import math
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
