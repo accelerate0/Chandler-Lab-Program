@@ -122,6 +122,7 @@ class Always:   #StateID = 0
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         print('Starting the global experimental 3600 sec timer')
         p_Timer.Global_T.start() # Turn on timer
+        p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         if count == const_ExperimentTime:
             print('60 min has passed and experiment is completed')
