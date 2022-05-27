@@ -99,16 +99,6 @@ ITI_T9 = ITI_T8 + ITI_Float_9 + 30
 ITI_T9_28 = ITI_T9 + 28
 ITI_T9_30 = ITI_T9 + 30
 
-# Displays Set Variables and Presets
-print( "EXPERIMENTAL PRESETS:", '\n', '\n',
-"const_VISchedule =", const_VISchedule, '\n',
-"const_CorrectResponse =", const_CorrectResponse, '\n',
-"const_ExperimentTime =", const_ExperimentTime, '\n',
-"const_ITI =", const_ITI, '\n', '\n', '\n',
-"The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds", '\n', '\n',
-"The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
-)
-
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
@@ -122,6 +112,14 @@ class Always:   #StateID = 0
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         print('Starting the global experimental 3600 sec timer')
         p_Timer.Global_T.start() # Turn on timer
+        print( "EXPERIMENTAL PRESETS:", '\n', '\n',
+        "const_VISchedule =", const_VISchedule, '\n',
+        "const_CorrectResponse =", const_CorrectResponse, '\n',
+        "const_ExperimentTime =", const_ExperimentTime, '\n',
+        "const_ITI =", const_ITI, '\n', '\n', '\n',
+        "The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds", '\n', '\n',
+        "The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
+        )
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         if count == const_ExperimentTime:
@@ -309,6 +307,7 @@ class VI3_Timer:    #StateID = ?
         p_Timer.VI_T.setRepeats(float_3)
         p_Timer.VI_T.start()
         print('VI 3: Timer Started')
+    def s_VI_T_tick(count):
         if count == float_3:
             p_State.switch(VI3_Event)
 class VI3_Event:    #StateID = ?
