@@ -7,40 +7,6 @@ import time
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
-#
-# ==++== PRETEXT ==++==
-#   Naming matters as well as presetting certain things in Pynapse+Synapse (EVERYTHING IS CASE SENSITIVE)
-#   Therefore the following attributes needs to be declared in the Synapse program:
-#
-# ==++== TIMERS ==++==
-# NOTE:
-#    Timers can only be 8 Characters max and have only a 1000 sec maximum interval, therefore, the 1000 sec timer is repeated 3 times followed by a 600 sec timer
-#    Fill timers into timer slot in synapse; Enable Epoch Store
-# Timer Variables:
-#    Global_T = Global Experimental sec Timer defined by const_ExperimentTime
-#    VI_T = Timer for VI intervaling
-#
-# ==++== Channels ==++==
-# NOTE: Regarding inputs and outputs
-#    Variable names must be exact and case sensitive as well as (3-20 Characters):\\
-#    Variable name nomenclature: o/i_L/R_NAME
-#    o/i for output/input, L/R for Left/Right
-# Channel Assignments:
-#      For iH10_1 Controller:
-#          Channel 1 = o_L_Lever_Extension
-#          Channel 2 = i_L_Lever_Press
-#          Channel 3 = o_L_Lever_Light
-#          Channel 4 = o_Rew_Recep_Light
-#          Channel 5 = o_House_Light
-#          Channel 6 = o_Tone
-#          Channel 7 = i_Rew_Recep_Beam_Brk
-#          Channel 9 = o_Pellet_Dispenser
-#          Channel 10 = o_Shock
-#      For iH10_2 Controller:
-#          Channel 1 = o_R_Lever_Extension
-#          Channel 2 = i_R_Lever_Press
-#          Channel 3 = o_R_Lever_Light
-
 
 # Global Variables:
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
