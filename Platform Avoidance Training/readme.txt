@@ -15,13 +15,14 @@ READ BEFORE CONTINUING:
 
       Timer iCon Settings:
         General Options:
-            Name: Global_T OR VI_T
+            Name: Global_T or VI_T
             Epoc Save: checked
-            ID: GloT
+            ID: GloT or VI_T
         Shape:
             Control: Trigger
             Period 1.000 seconds
-            Repeats: 3600
+            Repeats: 1
+                NOTE: This setting does not matter as it will be changed in the script
             Early Pulse: Not checked
             Sync: Not checked
 
