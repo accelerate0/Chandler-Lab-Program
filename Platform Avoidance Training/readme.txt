@@ -1,54 +1,33 @@
-Quick Run Down on how to use:
-(OLD NEEDS UPDATING)
+READ BEFORE CONTINUING:
 
-+==============================+
-SCRIPTS
-
-There are two important scripts in this folder and choose one of the two"
-  platform_avoidance_training_pynapse.py = more pynapse runtime oriented
-  platform_avoidance_training_canonical.py = uses more complicated python functionalities
-The rest you may ignore
-
-+==============================+
-DECLARING PRESETS
-
-Naming matters as well as presetting certain things in Pynapse+Synapse. t
-Therefore the following attributes needs to be declared in the Synapse program:
-
-  Regarding Timers:
-    Global_Timer
-    VI_Timer
-    ITI_Timer
-
-  Regarding inputs and outputs: (Variable names must be exact and case sensitive)
-      For iH10_1 Controller:
-          Channel 1 = output_Left_Lever_Extension
-          Channel 2 = input_Left_Lever_Press
-          Channel 3 = output_Left_Lever_Light
-          Channel 4 = output_Reward_Receptacle_Light
-          Channel 5 = output_House_Light
-          Channel 6 = output_Tone
-          Channel 7 = input_Reward_Receptacle_Beam_Break
-          Channel 9 = output_Pellet_Dispenser
-          Channel 10 = output_Shock
-      For iH10_2 Controller:
-          Channel 1 = output_Right_Lever_Extension
-          Channel 2 = input_Right_Lever_Press
-          Channel 3 = output_Right_Lever_Light
-
-+==============================+
-DEBUGGING AND SAMPLE CODE:
-
--___________-
-Check if each timer works (5 seconds):
-
-class Test:   #StateID = 0
-    def s_Mode_standby():
-        p_Timer.INSERTTIMERNAME.setPeriod(5)
-        p_Timer.INSERTTIMERNAME.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.INSERTTIMERNAME.turnOn()
-    def s_INSERTTIMERNAME_tick(count):
-        print('done')
-        syn.setModeStr('Idle')
--___________-
+  ==++== PRETEXT ==++==
+    Naming matters as well as presetting certain things in Pynapse+Synapse
+    Everything in Pynapse is case-sensitive
+    Never use spaces or non-alphanumeric characters, always use underscore (_) to denote spaces
+    
+  ==++== TIMERS ==++==
+  Fill timers into timer slot in synapse; Enable Epoch Store
+  Timer Variables:
+     Global_T = Global Experimental sec Timer defined by const_ExperimentTime
+     VI_T = Timer for VI intervaling
+ 
+  ==++== Channels ==++==
+  NOTE: Regarding inputs and outputs
+     Variable names must be exact and case sensitive as well as (3-20 Characters):\\
+     Variable name nomenclature: o/i_L/R_NAME
+     o/i for output/input, L/R for Left/Right
+  Channel Assignments:
+       For iH10_1 Controller:
+           Channel 1 = o_L_Lever_Extension
+           Channel 2 = i_L_Lever_Press
+           Channel 3 = o_L_Lever_Light
+           Channel 4 = o_Rew_Recep_Light
+           Channel 5 = o_House_Light
+           Channel 6 = o_Tone
+           Channel 7 = i_Rew_Recep_Beam_Brk
+           Channel 9 = o_Pellet_Dispenser
+           Channel 10 = o_Shock
+       For iH10_2 Controller:
+           Channel 1 = o_R_Lever_Extension
+           Channel 2 = i_R_Lever_Press
+           Channel 3 = o_R_Lever_Light
