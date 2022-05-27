@@ -121,10 +121,10 @@ class Always:   #StateID = 0
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         print('Starting the global experimental 3600 sec timer')
-        p_Timer.Global_T.turnOn() # Turn on timer
+        p_Timer.Global_T.start() # Turn on timer
     def s_Global_T_tick(const_ExperimentTime):
-            print('60 min has passed and experiment is completed')
-            syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
+        print('60 min has passed and experiment is completed')
+        syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         # ===== Conditional Based ITI Scheduling ===== #
         # _____ First ITI Interval _____ #
     def s_Global_T_tick(ITI_T1):
@@ -259,10 +259,9 @@ class PreTrial:    #StateID = ?
 
 class VI1_Timer:    #StateID = ?
     def s_State_enter():
-        p_Timer.VI_T.turnOff()
         p_Timer.VI_T.setPeriod(1) # First random ~30 sec timer
         p_Timer.VI_T.setRepeats(float_1)
-        p_Timer.VI_T.turnOn()
+        p_Timer.VI_T.start()
         print('VI 1: Started')
     def s_VI_T_tick(float_1):
         p_State.switch(VI1_Event)
@@ -281,10 +280,9 @@ class VI1_Reward:   #StateID = ?
 
 class VI2_Timer:    #StateID = ?
     def s_State_enter():
-        p_Timer.VI_T.turnOff()
         p_Timer.VI_T.setPeriod(1) # Second random ~30 sec timer
         p_Timer.VI_T.setRepeats(float_2)
-        p_Timer.VI_T.turnOn()
+        p_Timer.VI_T.start()
         print('VI 2: Started')
     def s_VI_T_tick(float_2):
         p_State.switch(VI2_Event)
@@ -303,10 +301,9 @@ class VI2_Reward:   #StateID = ?
 
 class VI3_Timer:    #StateID = ?
     def s_State_enter():
-        p_Timer.VI_T.turnOff()
         p_Timer.VI_T.setPeriod(1) # Third random ~30 sec timer
         p_Timer.VI_T.setRepeats(float_3)
-        p_Timer.VI_T.turnOn()
+        p_Timer.VI_T.start()
         print('VI 3: Started')
     def s_VI_T_tick(float_3):
         p_State.switch(VI3_Event)
