@@ -74,3 +74,14 @@ READ BEFORE CONTINUING:
          const_CorrectResponse = 3       Right lever press timeout threshold window following the end of the VI timer (in sec)
          const_ITI = 180                 Mean InterTrial Interval (ITI) (in sec)
          const_ExperimentTime = 3600     Time of Entire Experiment (in sec)
+
+
+==++== PYNAPSE ==++==
+
+Steps to integrate code into Pynapse
+    1) Open "platform_avoidance_training.py" in GitHub
+    2) Click "Raw" button which is on the top right of the code display box
+        Alternatively use this link:
+        https://raw.githubusercontent.com/accelerate0/Chandler-Lab-Program/main/Platform%20Avoidance%20Training/platform_avoidance_training.py
+    3) Copy and Paste the code into Pynapse
+    4) Click Commit, make sure no error messages are displayed and the file has been loaded successfully
