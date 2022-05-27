@@ -254,6 +254,7 @@ class PreTrial:    #StateID = ?
         print('Pretrial: Light is On')
         p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
         print('Pretrial: Lever is Out')
+    def s_State_exit():
         p_State.switch(VI1_Timer) # Switches to Trial class
 
 # =================+++++++================= #
@@ -278,6 +279,7 @@ class VI1_Reward:   #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 1: Sucrose dispensed')
+    def s_State_exit():
         p_State.switch(VI2_Timer)
 
 class VI2_Timer:    #StateID = ?
@@ -300,6 +302,7 @@ class VI2_Reward:   #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 2: Sucrose dispensed')
+    def s_State_exit():
         p_State.switch(VI3_Timer)
 
 class VI3_Timer:    #StateID = ?
@@ -321,6 +324,7 @@ class VI3_Reward:   #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 3: Sucrose dispensed')
+    def s_State_exit():
         p_State.switch(VI1_Timer)
 
 
