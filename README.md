@@ -1,4 +1,5 @@
-# Chandler Lab Program
- Experimental set up involving the integration of Python 3 to iCon Controllers and Med-Associate via Pynapse
- (Working on Desc)
+# Dr. Chandler Lab Program Scripts
+ Collection of Python 3 scripts for utilization in the Pynapse runtime environment
+ Behavioral Experimental set up involvies usage of iCon Controllers (by Med-Associates) via Pynapse
+ Currently only platform avoidance training is functional
 
