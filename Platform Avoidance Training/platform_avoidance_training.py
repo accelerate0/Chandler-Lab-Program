@@ -2,6 +2,7 @@
 # V 6
 
 import numpy as np
+import time
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -275,6 +276,7 @@ class VI1_Event:    #StateID = ?
 class VI1_Reward:   #StateID = ?
     def s_State_enter():
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 1: Sucrose dispensed')
         p_State.switch(VI2_Timer)
@@ -297,6 +299,7 @@ class VI2_Event:    #StateID = ?
 class VI2_Reward:   #StateID = ?
     def s_State_enter():
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 2: Sucrose dispensed')
         p_State.switch(VI3_Timer)
@@ -319,6 +322,7 @@ class VI3_Event:    #StateID = ?
 class VI3_Reward:   #StateID = ?
     def s_State_enter():
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI 3: Sucrose dispensed')
         p_State.switch(VI1_Timer)
