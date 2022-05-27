@@ -1,5 +1,4 @@
 Quick Run Down on how to use:
-(OLD NEEDS UPDATING)
 
 +==============================+
 SCRIPTS
@@ -10,17 +9,34 @@ There are two important scripts in this folder and choose one of the two"
 The rest you may ignore
 
 +==============================+
-DECLARING PRESETS
+TIMER PRESET IN iCON
 
-Naming matters as well as presetting certain things in Pynapse+Synapse. t
-Therefore the following attributes needs to be declared in the Synapse program:
-
+Naming matters as well as presetting certain things in Pynapse+Synapse.
+Therefore the following attributes needs to be declared in the Synapse program itself:
   Regarding Timers:
-    Global_Timer
-    VI_Timer
-    ITI_Timer
+    Timer iCon Settings:
+      General Options:
+        Name: Global_Timer OR VI_T
+        Epoc Save: checked
+        ID: GloT
+      Shape:
+        Control: Trigger
+        Period 1.000 seconds
+        Repeats: 3600
+        Early Pulse: Not checked
+        Sync: Not checked
+    Timer Function:
+      VI_Timer: Timer variable responsible for VI Scheduling, defined by 3 randomly generated numbers
+      Global_T: The global timer responsible for timing the entire experiment as well as the ITI portion
+
++==============================+
+CHANNEL INPUT/OUTPUT PRESET IN iCON
 
   Regarding inputs and outputs: (Variable names must be exact and case sensitive)
+      Format is:
+          Controller
+              Channel Assignment = Variable Name = Epoc Store ID
+
       For iH10_1 Controller:
           Channel 1 = output_Left_Lever_Extension
           Channel 2 = input_Left_Lever_Press
@@ -36,19 +52,10 @@ Therefore the following attributes needs to be declared in the Synapse program:
           Channel 2 = input_Right_Lever_Press
           Channel 3 = output_Right_Lever_Light
 
-+==============================+
-DEBUGGING AND SAMPLE CODE:
-
--___________-
-Check if each timer works (5 seconds):
-
-class Test:   #StateID = 0
-    def s_Mode_standby():
-        p_Timer.INSERTTIMERNAME.setPeriod(5)
-        p_Timer.INSERTTIMERNAME.setRepeats(1)
-    def s_Mode_recprev():
-        p_Timer.INSERTTIMERNAME.turnOn()
-    def s_INSERTTIMERNAME_tick(count):
-        print('done')
-        syn.setModeStr('Idle')
--___________-
+      Regarding Input/Output Logic Settings:
+          Hal Input Port: Not checked
+          Triggered Pulse: Not checked
+          Sync: Not checked
+          Invert Output: Not checked
+          Epoc Store: Enabled
+          Fill in the Epoch ID to the respected assignment
