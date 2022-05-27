@@ -1,11 +1,14 @@
 READ BEFORE CONTINUING:
 
 ==++== PRETEXT ==++==
+
     Naming matters as well as presetting certain things in Pynapse+Synapse
     Everything in Pynapse is case-sensitive
     Never use spaces or non-alphanumeric characters, always use underscore (_) to denote spaces
 
+
 ==++== TIMERS ==++==
+
   Fill timers into timer slot in the Synapse software
   Naming matters as well as presetting certain things in Pynapse+Synapse.
   Therefore the following attributes needs to be declared in the Synapse program itself:
@@ -26,7 +29,9 @@ READ BEFORE CONTINUING:
           VI_Timer: Timer variable responsible for VI Scheduling, defined by 3 randomly generated numbers, defined by float_1,2,3
           Global_T: The global timer responsible for timing the entire experiment as well as the ITI portion, defined by const_ExperimentTime
 
+
 ==++== CHANNEL INPUT/OUTPUT ==++==
+
   NOTE: Regarding inputs and outputs
      Variable names must be exact and case sensitive as well as (3-20 Characters):\\
      Variable name nomenclature: o/i_L/R_NAME
@@ -58,3 +63,14 @@ READ BEFORE CONTINUING:
          Invert Output: Not checked
          Epoc Store: Enabled
          Fill in the Epoch ID to the respected assignment
+
+
+
+==++== CHANNEL INPUT/OUTPUT ==++==
+
+  NOTE: There are 4 main global variables
+
+         const_VISchedule = 30           Variable interval schedule with mean interval (in sec)
+         const_CorrectResponse = 3       Right lever press timeout threshold window following the end of the VI timer (in sec)
+         const_ITI = 180                 Mean InterTrial Interval (ITI) (in sec)
+         const_ExperimentTime = 3600     Time of Entire Experiment (in sec)
