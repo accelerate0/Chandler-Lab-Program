@@ -84,12 +84,18 @@ class Always:   #StateID = 0
         "const_CorrectResponse =", const_CorrectResponse, '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
         "const_ITI =", const_ITI, '\n', '\n', '\n',
-        "The numbers generated for VI are ", float_1, " ", float_2, " ", float_3, " seconds", '\n', '\n',
-        "The numbers chosen are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
+        "The VI numbers generated are ", float_1, " ", float_2, " ", float_3, " seconds", '\n', '\n',
+        "The ITI numbers generated are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
         )
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
-        if count == const_ExperimentTime:
+        if count == 900:
+            print('15 minutes have passed')
+        elif count == 1800:
+            print('30 minutes have passed')
+        elif count == 2700:
+            print('45 minutes have passed')
+        elif count == const_ExperimentTime:
             print('60 min has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         # ===== Conditional Based ITI Scheduling ===== #
