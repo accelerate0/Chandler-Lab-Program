@@ -12,11 +12,6 @@ const_CorrectResponse = 3       # Right lever press timeout threshold window fol
 const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
 const_ExperimentTime = 3600    # Time of Entire Experiment
 
-# Creating VI Scheduling
-float_1 = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random number generator via floating point of Gaussian function
-float_2 = int(np.round(np.random.normal(const_VISchedule,5,1))) # (mean average, standard deviation, amount of numbers)
-float_3 = int(np.round(np.random.normal(const_VISchedule,5,1))) # 3 for 3 VI intervals
-
 # Creating ITI Scheduling
 ITI_Float_1 = int(np.round(np.random.normal(const_ITI,5,1)))
 ITI_Float_2 = int(np.round(np.random.normal(const_ITI,5,1)))
