@@ -110,7 +110,7 @@ class ITI_1_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 1: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_1:
+        if count == ITI_T1:
             p_Rig.o_Tone.turnOn()
             print('ITI 1: Tone On')
             p_State.switch(ITI_1_Event)
@@ -140,7 +140,7 @@ class ITI_2_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 2: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_2:
+        if count == ITI_T2:
             p_Rig.o_Tone.turnOn()
             print('ITI 2: Tone On')
             p_State.switch(ITI_2_Event)
@@ -170,7 +170,7 @@ class ITI_3_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 3: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_3:
+        if count == ITI_T3:
             p_Rig.o_Tone.turnOn()
             print('ITI 3: Tone On')
             p_State.switch(ITI_3_Event)
@@ -200,7 +200,7 @@ class ITI_4_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 4: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_4:
+        if count == ITI_T4:
             p_Rig.o_Tone.turnOn()
             print('ITI 4: Tone On')
             p_State.switch(ITI_4_Event)
@@ -230,7 +230,7 @@ class ITI_5_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 5: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_5:
+        if count == ITI_T5:
             p_Rig.o_Tone.turnOn()
             print('ITI 5: Tone On')
             p_State.switch(ITI_5_Event)
@@ -260,7 +260,7 @@ class ITI_6_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 6: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_6:
+        if count == ITI_T6:
             p_Rig.o_Tone.turnOn()
             print('ITI 6: Tone On')
             p_State.switch(ITI_6_Event)
@@ -290,7 +290,7 @@ class ITI_7_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 7: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_7:
+        if count == ITI_T7:
             p_Rig.o_Tone.turnOn()
             print('ITI 7: Tone On')
             p_State.switch(ITI_7_Event)
@@ -320,7 +320,7 @@ class ITI_8_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 8: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_8:
+        if count == ITI_T8:
             p_Rig.o_Tone.turnOn()
             print('ITI 8: Tone On')
             p_State.switch(ITI_8_Event)
@@ -350,7 +350,7 @@ class ITI_9_Timer:      #StateID = ?
     def s_State_enter():
         print('ITI 9: Timer Started')
     def s_Global_T_tick(count):
-        if count == ITI_9:
+        if count == ITI_T9:
             p_Rig.o_Tone.turnOn()
             print('ITI 9: Tone On')
             p_State.switch(ITI_9_Event)
