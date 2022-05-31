@@ -94,8 +94,6 @@ class Always:   #StateID = 0
         elif count == const_ExperimentTime:
             print('60 min has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
-        elif count == ITI_T9_30:
-            print('ITI Completed, Entering Grace Period')
 
 # =================+++++++================= #
 
@@ -379,9 +377,13 @@ class ITI_9_Event:      #StateID = ?
             p_Rig.o_Shock.turnOff()
             print('ITI 9: Turn off Shock & Tone')
             print('ITI 9: Completed')
-            p_State.switch(ITI_9_Timer)
+            p_State.switch(Finish)
 
-
+class Finish:      #StateID = ?
+    def s_State_enter():
+        print('ITI Intervaling Finished, entering grace period')
+    def s_Global_T_tick(count):
+        print(const_ExperimentTime - count, 'sec before shutdown')
 
 
 
