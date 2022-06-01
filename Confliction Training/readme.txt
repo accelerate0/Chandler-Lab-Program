@@ -70,7 +70,6 @@ READ BEFORE CONTINUING:
 
   NOTE: There are 3 main global variables
 
-         const_CorrectResponse = 3       Right lever press timeout threshold window following the end of the VI timer (in sec)
          const_ITI = 180                 Mean InterTrial Interval (ITI) (in sec)
          const_ExperimentTime = 3600     Time of Entire Experiment (in sec)
 
