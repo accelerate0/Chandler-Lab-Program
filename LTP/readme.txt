@@ -83,6 +83,6 @@ Steps to integrate code into Pynapse
     1) Open "platform_avoidance_training.py" in GitHub
     2) Click "Raw" button which is on the top right of the code display box
         Alternatively use this link:
-        https://raw.githubusercontent.com/accelerate0/Chandler-Lab-Program/main/Platform%20Avoidance%20Training/platform_avoidance_training.py
+        https://raw.githubusercontent.com/accelerate0/Chandler-Lab-Program/main/Avoidance%20Training/avoidance_training.py
     3) Copy and Paste the code into Pynapse
     4) Click Commit, make sure no error messages are displayed and the file has been loaded successfully
