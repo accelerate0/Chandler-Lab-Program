@@ -77,7 +77,7 @@ READ BEFORE CONTINUING:
 ==++== PYNAPSE ==++==
 
 Steps to integrate code into Pynapse
-    1) Open "platform_avoidance_training.py" in GitHub
+    1) Open "confliction_training.py" in GitHub
     2) Click "Raw" button which is on the top right of the code display box
         Alternatively use this link:
         https://raw.githubusercontent.com/accelerate0/Chandler-Lab-Program/main/Confliction%20Training/confliction_training.py
