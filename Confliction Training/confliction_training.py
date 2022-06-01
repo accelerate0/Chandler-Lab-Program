@@ -8,7 +8,6 @@ import time
 #==========================================================#
 
 # Global Variables:
-const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
 const_ExperimentTime = 3600    # Time of Entire Experiment
 
@@ -73,7 +72,6 @@ class Always:   #StateID = 0
         print('Starting the global experimental 3600 sec timer')
         p_Timer.Global_T.start() # Turn on timer
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
-        "const_CorrectResponse =", const_CorrectResponse, '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
         "const_ITI =", const_ITI, '\n', '\n', '\n',
         "The ITI numbers generated are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
