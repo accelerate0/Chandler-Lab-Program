@@ -19,14 +19,10 @@ import time
 #==========================================================#
 
 # Global Variables:
-const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
+const_ITI = 30                 # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
 const_ExperimentTime = 4500     # Time of Entire Experiment
 
-# Defining Variables
-ITI_Ticker = 0
-ITI_T = 0
-ITI_T_30 = 0
-ITI_Float = 0
+
 
 
 #==========================================================#
@@ -75,12 +71,18 @@ class PreTrial:    #StateID = ?
 
 class ITI_Timer_First:      #StateID = ?
     def s_State_enter():
+        # Defining Variables
+        ITI_Ticker = 0
+        ITI_T = 0
+        ITI_T_30 = 0
+        ITI_Float = 0
+        # ===== #
         print('ITI 1 Timer: Timer is initiating')
         ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
         ITI_T = ITI_Float
         ITI_Ticker == ITI_Ticker + 1
         print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
-        print('ITI 1 Timer:Total time elapsed is 0 sec')
+        print('ITI 1 Timer: Total time elapsed is 0 sec')
     def s_Global_T_tick(count):
         if count == ITI_T:
             print('ITI Event: Switching to ITI Event')
