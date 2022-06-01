@@ -68,7 +68,7 @@ READ BEFORE CONTINUING:
 
 ==++== CHANNEL INPUT/OUTPUT ==++==
 
-  NOTE: There are 3 main global variables
+  NOTE: There are 2 main global variables
 
          const_ITI = 180                 Mean InterTrial Interval (ITI) (in sec)
          const_ExperimentTime = 3600     Time of Entire Experiment (in sec)
