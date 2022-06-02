@@ -12,10 +12,10 @@ const_ITI = 15                      # Mean InterTrial Interval (ITI) (in sec) CH
 const_ExperimentTime = 4500         # Time of Entire Experiment
 
 # Global Variables that are changing:
-ITI_Ticker = 0              # Tracks amount of time ITI has looped
-ITI_T = 0                           # ITI Timer (sec)
-ITI_T_30 = 0
-ITI_Float = 0
+ITI_Ticker = 0                      # Tracks amount of time ITI has looped
+ITI_T = 0                           # Summated ITI Timer (sec)
+ITI_T_30 = 0                        # Summated ITI Timer (sec)
+ITI_Float = 0                       # ITI Timer (sec)
 
 
 #==========================================================#
