@@ -1,0 +1,192 @@
+NOTE THIS WAS USING const_ITI = 15 FOR TESTING PURPOSES
+
+
+
+Setting up Global Timer 
+Starting the global experimental 3600 sec timer
+EXPERIMENTAL PRESETS: 
+ 
+ const_ExperimentTime = 4500 
+ const_ITI = 15 
+ 
+ 
+
+Pretrial: House Light is On
+Pretrial: Left Lever is Out
+ITI 1 Timer:, Timer is initiating
+ITI 1 Timer: Randomly chose 21 sec for the 1 interval out of 20
+ITI 1 Timer: Total time elapsed is 0 sec
+ITI Event: Switching to ITI Event
+ITI 1 Event: Event Started
+ITI 1 Event: Left Lever Light Turned On
+ITI 1 Event: Turn off Left Lever Light
+ITI 1 Event: Completed
+ITI Loop: Timer is initiating
+ITI  2  Loop: Randomly chose 18 sec for the 2 interval out of 20
+ITI  2  Loop: Total time elapsed is 69 sec
+ITI  2  Event: Switching to ITI Event
+ITI  2  Event: Event Started
+ITI  2  Event: Left Lever Light Turned On
+ITI  2  Event: Turn off Left Lever Light
+ITI  2  Event: Completed
+ITI Loop: Timer is initiating
+ITI  3  Loop: Randomly chose 9 sec for the 3 interval out of 20
+ITI  3  Loop: Total time elapsed is 108 sec
+ITI  3  Event: Switching to ITI Event
+ITI  3  Event: Event Started
+ITI  3  Event: Left Lever Light Turned On
+ITI  3  Event: Turn off Left Lever Light
+ITI  3  Event: Completed
+ITI Loop: Timer is initiating
+ITI  4  Loop: Randomly chose 24 sec for the 4 interval out of 20
+ITI  4  Loop: Total time elapsed is 162 sec
+ITI  4  Event: Switching to ITI Event
+ITI  4  Event: Event Started
+ITI  4  Event: Left Lever Light Turned On
+ITI  4  Event: Turn off Left Lever Light
+ITI  4  Event: Completed
+ITI Loop: Timer is initiating
+ITI  5  Loop: Randomly chose 5 sec for the 5 interval out of 20
+ITI  5  Loop: Total time elapsed is 197 sec
+ITI  5  Event: Switching to ITI Event
+ITI  5  Event: Event Started
+ITI  5  Event: Left Lever Light Turned On
+ITI  5  Event: Turn off Left Lever Light
+ITI  5  Event: Completed
+ITI Loop: Timer is initiating
+ITI  6  Loop: Randomly chose 13 sec for the 6 interval out of 20
+ITI  6  Loop: Total time elapsed is 240 sec
+ITI  6  Event: Switching to ITI Event
+ITI  6  Event: Event Started
+ITI  6  Event: Left Lever Light Turned On
+ITI  6  Event: Turn off Left Lever Light
+ITI  6  Event: Completed
+ITI Loop: Timer is initiating
+ITI  7  Loop: Randomly chose 14 sec for the 7 interval out of 20
+ITI  7  Loop: Total time elapsed is 284 sec
+ITI  7  Event: Switching to ITI Event
+ITI  7  Event: Event Started
+ITI  7  Event: Left Lever Light Turned On
+ITI  7  Event: Turn off Left Lever Light
+ITI  7  Event: Completed
+ITI Loop: Timer is initiating
+ITI  8  Loop: Randomly chose 15 sec for the 8 interval out of 20
+ITI  8  Loop: Total time elapsed is 329 sec
+ITI  8  Event: Switching to ITI Event
+ITI  8  Event: Event Started
+ITI  8  Event: Left Lever Light Turned On
+ITI  8  Event: Turn off Left Lever Light
+ITI  8  Event: Completed
+ITI Loop: Timer is initiating
+ITI  9  Loop: Randomly chose 15 sec for the 9 interval out of 20
+ITI  9  Loop: Total time elapsed is 374 sec
+ITI  9  Event: Switching to ITI Event
+ITI  9  Event: Event Started
+ITI  9  Event: Left Lever Light Turned On
+ITI  9  Event: Turn off Left Lever Light
+ITI  9  Event: Completed
+ITI Loop: Timer is initiating
+ITI  10  Loop: Randomly chose 18 sec for the 10 interval out of 20
+ITI  10  Loop: Total time elapsed is 422 sec
+ITI  10  Event: Switching to ITI Event
+ITI  10  Event: Event Started
+ITI  10  Event: Left Lever Light Turned On
+ITI  10  Event: Turn off Left Lever Light
+ITI  10  Event: Completed
+ITI Loop: Timer is initiating
+ITI  11  Loop: Randomly chose 18 sec for the 11 interval out of 20
+ITI  11  Loop: Total time elapsed is 470 sec
+ITI  11  Event: Switching to ITI Event
+ITI  11  Event: Event Started
+ITI  11  Event: Left Lever Light Turned On
+ITI  11  Event: Turn off Left Lever Light
+ITI  11  Event: Completed
+ITI Loop: Timer is initiating
+ITI  12  Loop: Randomly chose 18 sec for the 12 interval out of 20
+ITI  12  Loop: Total time elapsed is 518 sec
+ITI  12  Event: Switching to ITI Event
+ITI  12  Event: Event Started
+ITI  12  Event: Left Lever Light Turned On
+ITI  12  Event: Turn off Left Lever Light
+ITI  12  Event: Completed
+ITI Loop: Timer is initiating
+ITI  13  Loop: Randomly chose 17 sec for the 13 interval out of 20
+ITI  13  Loop: Total time elapsed is 565 sec
+ITI  13  Event: Switching to ITI Event
+ITI  13  Event: Event Started
+ITI  13  Event: Left Lever Light Turned On
+ITI  13  Event: Turn off Left Lever Light
+ITI  13  Event: Completed
+ITI Loop: Timer is initiating
+ITI  14  Loop: Randomly chose 14 sec for the 14 interval out of 20
+ITI  14  Loop: Total time elapsed is 609 sec
+ITI  14  Event: Switching to ITI Event
+ITI  14  Event: Event Started
+ITI  14  Event: Left Lever Light Turned On
+ITI  14  Event: Turn off Left Lever Light
+ITI  14  Event: Completed
+ITI Loop: Timer is initiating
+ITI  15  Loop: Randomly chose 12 sec for the 15 interval out of 20
+ITI  15  Loop: Total time elapsed is 651 sec
+ITI  15  Event: Switching to ITI Event
+ITI  15  Event: Event Started
+ITI  15  Event: Left Lever Light Turned On
+ITI  15  Event: Turn off Left Lever Light
+ITI  15  Event: Completed
+ITI Loop: Timer is initiating
+ITI  16  Loop: Randomly chose 17 sec for the 16 interval out of 20
+ITI  16  Loop: Total time elapsed is 698 sec
+ITI  16  Event: Switching to ITI Event
+ITI  16  Event: Event Started
+ITI  16  Event: Left Lever Light Turned On
+ITI  16  Event: Turn off Left Lever Light
+ITI  16  Event: Completed
+ITI Loop: Timer is initiating
+ITI  17  Loop: Randomly chose 16 sec for the 17 interval out of 20
+ITI  17  Loop: Total time elapsed is 744 sec
+ITI  17  Event: Switching to ITI Event
+ITI  17  Event: Event Started
+ITI  17  Event: Left Lever Light Turned On
+ITI  17  Event: Turn off Left Lever Light
+ITI  17  Event: Completed
+ITI Loop: Timer is initiating
+ITI  18  Loop: Randomly chose 18 sec for the 18 interval out of 20
+ITI  18  Loop: Total time elapsed is 792 sec
+ITI  18  Event: Switching to ITI Event
+ITI  18  Event: Event Started
+ITI  18  Event: Left Lever Light Turned On
+ITI  18  Event: Turn off Left Lever Light
+ITI  18  Event: Completed
+ITI Loop: Timer is initiating
+ITI  19  Loop: Randomly chose 12 sec for the 19 interval out of 20
+ITI  19  Loop: Total time elapsed is 834 sec
+ITI  19  Event: Switching to ITI Event
+ITI  19  Event: Event Started
+ITI  19  Event: Left Lever Light Turned On
+ITI  19  Event: Turn off Left Lever Light
+ITI  19  Event: Completed
+ITI Loop: Timer is initiating
+ITI  20  Loop: Randomly chose 17 sec for the 20 interval out of 20
+ITI  20  Loop: Total time elapsed is 881 sec
+ITI  20  Loop: ITI has reached 20th trial
+ITI 20: ITI Intervaling Finished, entering grace period
+3635 sec before shutdown (Experiment Finished)
+3634 sec before shutdown (Experiment Finished)
+3633 sec before shutdown (Experiment Finished)
+3632 sec before shutdown (Experiment Finished)
+3631 sec before shutdown (Experiment Finished)
+3630 sec before shutdown (Experiment Finished)
+3629 sec before shutdown (Experiment Finished)
+3628 sec before shutdown (Experiment Finished)
+3627 sec before shutdown (Experiment Finished)
+3626 sec before shutdown (Experiment Finished)
+3625 sec before shutdown (Experiment Finished)
+3624 sec before shutdown (Experiment Finished)
+3623 sec before shutdown (Experiment Finished)
+3622 sec before shutdown (Experiment Finished)
+3621 sec before shutdown (Experiment Finished)
+3620 sec before shutdown (Experiment Finished)
+3619 sec before shutdown (Experiment Finished)
+3618 sec before shutdown (Experiment Finished)
+3617 sec before shutdown (Experiment Finished)
+3616 sec before shutdown (Experiment Finished)
