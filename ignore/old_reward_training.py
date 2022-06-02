@@ -1,5 +1,16 @@
 # Pynapse Source #
 
+# From Rivera et al 2021
+# After completing avoidance training, rats were placed in the same
+# operant chambers with sucrose pellets available only during 30 s
+# periods when a light cue positioned above the pellet dispenser
+# was illuminated (see Figure 1). A pellet was dispensed with
+# each lever press (one-to-one). Each reward conditioning session
+# consisted of 20 trials and ∼180 s inter-trial intervals. A total
+# of three sessions were given across 3 days, a point where most
+# animals reached the criterion of limiting pressing to the period of
+# the light cue.
+
 import numpy as np
 import time
 
@@ -7,20 +18,17 @@ import time
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
 
-# Global Variables that are constant:
-const_ITI = 30                      # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
-const_ExperimentTime = 4500         # Time of Entire Experiment
+# Global Variables:
+const_ITI = 30                 # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
+const_ExperimentTime = 4500     # Time of Entire Experiment
 
-# Global Variables that are changing:
-ITI_Ticker = 0              # Tracks amount of time ITI has looped
-ITI_T = 0                           # ITI Timer (sec)
-ITI_T_30 = 0
-ITI_Float = 0
+
 
 
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
+# Always class: Special class for Pynapse where conditionals here is always being checked
 
 
 class Always:   #StateID = 0
@@ -63,10 +71,16 @@ class PreTrial:    #StateID = ?
 
 class ITI_Timer_First:      #StateID = ?
     def s_State_enter():
+        # Defining Variables
+        ITI_Ticker = 0
+        ITI_T = 0
+        ITI_T_30 = 0
+        ITI_Float = 0
+        # ===== #
         print('ITI 1 Timer: Timer is initiating')
-        p_Global.ITI_Float.write(int(np.round(np.random.normal(const_ITI,5,1))))
-        p_Global.ITI_T.write(ITI_Float)
-        p_Global.ITI_Ticker.inc(delta=1)
+        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+        ITI_T = ITI_Float
+        ITI_Ticker == ITI_Ticker + 1
         print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
         print('ITI 1 Timer: Total time elapsed is 0 sec')
     def s_Global_T_tick(count):
@@ -86,8 +100,7 @@ class ITI_Event_First:      #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI 1 Event: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        p_Global.ITI_T_30.write(ITI_T)
-        p_Global.ITI_T_30.inc(30)
+        ITI_T_30 = ITI_T + 30
         if count == ITI_T_30:
             p_Rig.o_L_Lever_Light.turnOff()
             print('ITI 1 Event: Turn off Left Lever Light')
@@ -99,11 +112,14 @@ class ITI_Event_First:      #StateID = ?
 class ITI_Timer_Loop:      #StateID = ?
     def s_State_enter():
         # Defining Variables
+        ITI_Ticker = ITI_Ticker
+        ITI_T = ITI_T
+        ITI_T_30 = ITI_T_30
+        ITI_Float = ITI_Float
         print('ITI Loop: Timer is initiating')
-        p_Global.ITI_Float.write(int(np.round(np.random.normal(const_ITI,5,1))))
-        p_Global.ITI_T.inc(ITI_Float)
-        p_Global.ITI_T.inc(ITI_T_30)
-        p_Global.ITI_Ticker.inc(1)
+        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+        ITI_T = ITI_Float + ITI_T_30
+        ITI_Ticker == ITI_Ticker + 1
         print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
         print('ITI ', ITI_Ticker,' Loop: Total time elapsed is', ITI_T, 'sec')
         if ITI_Ticker == 20:
@@ -126,8 +142,7 @@ class ITI_Event_Loop:      #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        p_Global.ITI_T_30.write(ITI_T)
-        p_Global.ITI_T_30.inc(30)
+        ITI_T_30 = ITI_T + 30
         if count == ITI_T_30:
             p_Rig.o_L_Lever_Light.turnOff()
             print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light')
