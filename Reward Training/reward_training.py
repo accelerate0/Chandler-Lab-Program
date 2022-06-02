@@ -64,7 +64,8 @@ class PreTrial:    #StateID = ?
 class ITI_Timer_First:      #StateID = ?
     def s_State_enter():
         print('ITI 1 Timer: Timer is initiating')
-        p_Global.ITI_Float.write(int(np.round(np.random.normal(const_ITI,5,1))))
+        global ITI_Float
+        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
         p_Global.ITI_T.write(ITI_Float)
         p_Global.ITI_Ticker.inc(delta=1)
         print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
@@ -100,7 +101,8 @@ class ITI_Timer_Loop:      #StateID = ?
     def s_State_enter():
         # Defining Variables
         print('ITI Loop: Timer is initiating')
-        p_Global.ITI_Float.write(int(np.round(np.random.normal(const_ITI,5,1))))
+        global ITI_Float
+        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
         p_Global.ITI_T.inc(ITI_Float)
         p_Global.ITI_T.inc(ITI_T_30)
         p_Global.ITI_Ticker.inc(1)
