@@ -8,7 +8,7 @@ import time
 #==========================================================#
 
 # Global Variables that are constant:
-const_ITI = 15                      # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
+const_ITI = 180                      # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
 const_ExperimentTime = 4500         # Time of Entire Experiment
 
 # Global Variables that are changing:
