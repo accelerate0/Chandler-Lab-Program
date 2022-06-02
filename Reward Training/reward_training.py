@@ -58,16 +58,15 @@ class PreTrial:    #StateID = ?
         print('Pretrial: Left Lever is Out')
         p_State.switch(ITI_Timer_First) # Switches to Trial class
 
-
 # =================+++++++================= #
 
 class ITI_Timer_First:      #StateID = ?
     def s_State_enter():
-        print('ITI 1 Timer: Timer is initiating')
-        global ITI_Float
+        global ITI_Float, ITI_T, ITI_Ticker
+        print('ITI 1 Timer:, Timer is initiating')
         ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
-        p_Global.ITI_T.write(ITI_Float)
-        p_Global.ITI_Ticker.inc(delta=1)
+        ITI_T = ITI_Float
+        ITI_Ticker = ITI_Ticker + 1
         print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
         print('ITI 1 Timer: Total time elapsed is 0 sec')
     def s_Global_T_tick(count):
@@ -87,8 +86,8 @@ class ITI_Event_First:      #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI 1 Event: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        p_Global.ITI_T_30.write(ITI_T)
-        p_Global.ITI_T_30.inc(30)
+        global ITI_T_30
+        ITI_T_30 = ITI_T + 30
         if count == ITI_T_30:
             p_Rig.o_L_Lever_Light.turnOff()
             print('ITI 1 Event: Turn off Left Lever Light')
@@ -99,13 +98,11 @@ class ITI_Event_First:      #StateID = ?
 
 class ITI_Timer_Loop:      #StateID = ?
     def s_State_enter():
-        # Defining Variables
+        global ITI_Float, ITI_T, ITI_Ticker
         print('ITI Loop: Timer is initiating')
-        global ITI_Float
         ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
-        p_Global.ITI_T.inc(ITI_Float)
-        p_Global.ITI_T.inc(ITI_T_30)
-        p_Global.ITI_Ticker.inc(1)
+        ITI_T = ITI_Float + ITI_T_30
+        ITI_Ticker = ITI_Ticker + 1
         print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
         print('ITI ', ITI_Ticker,' Loop: Total time elapsed is', ITI_T, 'sec')
         if ITI_Ticker == 20:
@@ -128,8 +125,8 @@ class ITI_Event_Loop:      #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        p_Global.ITI_T_30.write(ITI_T)
-        p_Global.ITI_T_30.inc(30)
+        global ITI_T_30
+        ITI_T_30 = ITI_T + 30
         if count == ITI_T_30:
             p_Rig.o_L_Lever_Light.turnOff()
             print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light')
