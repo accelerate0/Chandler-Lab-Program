@@ -110,6 +110,7 @@ class ITI_1_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T1:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 1: Tone On')
             p_State.switch(ITI_1_Event)
 
@@ -127,8 +128,9 @@ class ITI_1_Event:      #StateID = ?
             print('ITI 1: Shock On')
         elif count == ITI_T1_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 1: Turn off Shock & Tone')
+            print('ITI 1: Turn off Shock & Left Lever Light & Tone')
             print('ITI 1: Completed')
             p_State.switch(ITI_2_Timer)
 
@@ -140,6 +142,7 @@ class ITI_2_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T2:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 2: Tone On')
             p_State.switch(ITI_2_Event)
 
@@ -157,8 +160,9 @@ class ITI_2_Event:      #StateID = ?
             print('ITI 2: Shock On')
         elif count == ITI_T2_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 2: Turn off Shock & Tone')
+            print('ITI 2: Turn off Shock & Left Lever Light & Tone')
             print('ITI 2: Completed')
             p_State.switch(ITI_3_Timer)
 
@@ -170,6 +174,7 @@ class ITI_3_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T3:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 3: Tone On')
             p_State.switch(ITI_3_Event)
 
@@ -187,8 +192,9 @@ class ITI_3_Event:      #StateID = ?
             print('ITI 3: Shock On')
         elif count == ITI_T3_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 3: Turn off Shock & Tone')
+            print('ITI 3: Turn off Shock & Left Lever Light & Tone')
             print('ITI 3: Completed')
             p_State.switch(ITI_4_Timer)
 
@@ -200,6 +206,7 @@ class ITI_4_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T4:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 4: Tone On')
             p_State.switch(ITI_4_Event)
 
@@ -217,8 +224,9 @@ class ITI_4_Event:      #StateID = ?
             print('ITI 4: Shock On')
         elif count == ITI_T4_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 4: Turn off Shock & Tone')
+            print('ITI 4: Turn off Shock & Left Lever Light & Tone')
             print('ITI 4: Completed')
             p_State.switch(ITI_5_Timer)
 
@@ -230,6 +238,7 @@ class ITI_5_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T5:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 5: Tone On')
             p_State.switch(ITI_5_Event)
 
@@ -247,8 +256,9 @@ class ITI_5_Event:      #StateID = ?
             print('ITI 5: Shock On')
         elif count == ITI_T5_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 5: Turn off Shock & Tone')
+            print('ITI 5: Turn off Shock & Left Lever Light & Tone')
             print('ITI 5: Completed')
             p_State.switch(ITI_6_Timer)
 
@@ -260,6 +270,7 @@ class ITI_6_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T6:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 6: Tone On')
             p_State.switch(ITI_6_Event)
 
@@ -277,8 +288,9 @@ class ITI_6_Event:      #StateID = ?
             print('ITI 6: Shock On')
         elif count == ITI_T6_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 6: Turn off Shock & Tone')
+            print('ITI 6: Turn off Shock & Left Lever Light & Tone')
             print('ITI 6: Completed')
             p_State.switch(ITI_7_Timer)
 
@@ -290,6 +302,7 @@ class ITI_7_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T7:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 7: Tone On')
             p_State.switch(ITI_7_Event)
 
@@ -307,8 +320,9 @@ class ITI_7_Event:      #StateID = ?
             print('ITI 7: Shock On')
         elif count == ITI_T7_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 7: Turn off Shock & Tone')
+            print('ITI 7: Turn off Shock & Left Lever Light & Tone')
             print('ITI 7: Completed')
             p_State.switch(ITI_8_Timer)
 
@@ -320,6 +334,7 @@ class ITI_8_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T8:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 8: Tone On')
             p_State.switch(ITI_8_Event)
 
@@ -337,8 +352,9 @@ class ITI_8_Event:      #StateID = ?
             print('ITI 8: Shock On')
         elif count == ITI_T8_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 8: Turn off Shock & Tone')
+            print('ITI 8: Turn off Shock & Left Lever Light & Tone')
             print('ITI 8: Completed')
             p_State.switch(ITI_9_Timer)
 
@@ -350,6 +366,7 @@ class ITI_9_Timer:      #StateID = ?
     def s_Global_T_tick(count):
         if count == ITI_T9:
             p_Rig.o_Tone.turnOn()
+            p_Rig.o_L_Lever_Light.turnOn()
             print('ITI 9: Tone On')
             p_State.switch(ITI_9_Event)
 
@@ -367,8 +384,9 @@ class ITI_9_Event:      #StateID = ?
             print('ITI 9: Shock On')
         elif count == ITI_T9_30:
             p_Rig.o_Tone.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI 9: Turn off Shock & Tone')
+            print('ITI 9: Turn off Shock & Left Lever Light & Tone')
             print('ITI 9: Completed')
             p_State.switch(Finish)
 
