@@ -254,7 +254,7 @@ class ITI_6_Event:      #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI 6: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        elif count == ITI_T6_30:
+        if count == ITI_T6_30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_L_Lever_Light.turnOff()
             print('ITI 6: Turn off Left Lever Light & Tone')
@@ -338,7 +338,7 @@ class ITI_9_Event:      #StateID = ?
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI 9: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        elif count == ITI_T9_30:
+        if count == ITI_T9_30:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_L_Lever_Light.turnOff()
             print('ITI 9: Turn off Left Lever Light & Tone')
