@@ -1,3 +1,4 @@
+Script is tested and working
 READ BEFORE CONTINUING:
 
 ==++== PRETEXT ==++==
