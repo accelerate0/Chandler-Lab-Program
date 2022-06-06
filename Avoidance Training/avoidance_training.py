@@ -232,6 +232,7 @@ class PreTrial:    #StateID = ?
 
 class VI1_Timer:    #StateID = ?
     def s_State_enter():
+        p_Rig.o_L_Lever_Light.turnOff()
         p_Timer.VI_T.setPeriod(1) # First random ~30 sec timer
         p_Timer.VI_T.setRepeats(float_1)
         p_Timer.VI_T.start()
@@ -242,6 +243,8 @@ class VI1_Timer:    #StateID = ?
 class VI1_Event:    #StateID = ?
     def s_State_enter():
         print('VI 1: Entering Event')
+        p_Rig.o_L_Lever_Light.turnOn()
+        print('VI 1: Left Lever Light On')
         p_State.setTimeout(const_CorrectResponse, VI2_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
         print('VI 1: Lever was pressed')
@@ -256,6 +259,7 @@ class VI1_Reward:   #StateID = ?
 
 class VI2_Timer:    #StateID = ?
     def s_State_enter():
+        p_Rig.o_L_Lever_Light.turnOff()
         p_Timer.VI_T.setPeriod(1) # Second random ~30 sec timer
         p_Timer.VI_T.setRepeats(float_2)
         p_Timer.VI_T.start()
@@ -266,6 +270,8 @@ class VI2_Timer:    #StateID = ?
 class VI2_Event:    #StateID = ?
     def s_State_enter():
         print('VI 2: Entering Event')
+        p_Rig.o_L_Lever_Light.turnOn()
+        print('VI 1: Left Lever Light On')
         p_State.setTimeout(const_CorrectResponse, VI3_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
         p_State.switch(VI2_Reward)
@@ -280,6 +286,7 @@ class VI2_Reward:   #StateID = ?
 
 class VI3_Timer:    #StateID = ?
     def s_State_enter():
+        p_Rig.o_L_Lever_Light.turnOff()
         p_Timer.VI_T.setPeriod(1) # Third random ~30 sec timer
         p_Timer.VI_T.setRepeats(float_3)
         p_Timer.VI_T.start()
@@ -290,6 +297,8 @@ class VI3_Timer:    #StateID = ?
 class VI3_Event:    #StateID = ?
     def s_State_enter():
         print('VI 3: Entering Event')
+        p_Rig.o_L_Lever_Light.turnOn()
+        print('VI 1: Left Lever Light On')
         p_State.setTimeout(const_CorrectResponse, VI1_Timer) # Window Time aka Threshold, Goto Class
     def s_i_L_Lever_Press_rise():
         p_State.switch(VI3_Reward)
