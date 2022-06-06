@@ -1,3 +1,5 @@
+This script has been tested and found to be working
+
 READ BEFORE CONTINUING:
 
 ==++== PRETEXT ==++==
