@@ -43,20 +43,20 @@ READ BEFORE CONTINUING:
      Controller
          Channel Assignment = Variable Name = Epoc Store ID
 
-     For iH10_1 Controller:
-         Channel 1 = output_Left_Lever_Extension
-         Channel 2 = input_Left_Lever_Press
-         Channel 3 = output_Left_Lever_Light
-         Channel 4 = output_Reward_Receptacle_Light
-         Channel 5 = output_House_Light
-         Channel 6 = output_Tone
-         Channel 7 = input_Reward_Receptacle_Beam_Break
-         Channel 9 = output_Pellet_Dispenser
-         Channel 10 = output_Shock
-     For iH10_2 Controller:
-         Channel 1 = output_Right_Lever_Extension
-         Channel 2 = input_Right_Lever_Press
-         Channel 3 = output_Right_Lever_Light
+         For iH10_1 Controller:
+             Channel 1 = o_L_Lever_Extension
+             Channel 2 = i_L_Lever_Press
+             Channel 3 = o_L_Lever_Light
+             Channel 4 = o_Reward_R_Light
+             Channel 5 = o_House_Light
+             Channel 6 = o_Tone
+             Channel 7 = i_Reward_R_B_B
+             Channel 9 = o_Pellet_Dispenser
+             Channel 10 = o_Shock
+         For iH10_2 Controller:
+             Channel 1 = o_R_Lever_Extension
+             Channel 2 = i_R_Lever_Press
+             Channel 3 = o_R_Lever_Light
 
      Regarding Input/Output Logic Settings:
          Hal Input Port: Not checked
