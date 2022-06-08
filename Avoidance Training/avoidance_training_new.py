@@ -2,7 +2,9 @@
 
 import numpy as np
 import time
-
+# ISSUES
+# ITI Tone is 300 seconds
+# Keeps going after ITI 9 FIXED?
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
@@ -46,7 +48,7 @@ class Always:   #StateID = 0
         print('Switching to PreTrial class')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
-        global ITI_Ticker, ITI_Float, ITI_T, ITI_T_28, ITI_T_30, ITI_T_1
+        global ITI_Ticker, ITI_Float, ITI_T, ITI_T_28, ITI_T_30
         if count == const_ExperimentTime:
             print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
@@ -62,31 +64,28 @@ class Always:   #StateID = 0
         elif count == ITI_T:
             ITI_Ticker = ITI_Ticker + 1
             print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
-            if ITI_Ticker == 4:
-                ITI_T = ITI_T + 300
-            elif ITI_Ticker == 7:
-                ITI_T = ITI_T + 300
+            if ITI_Ticker < 10:
+                if ITI_Ticker == 4:
+                    ITI_T = ITI_T + 300
+                elif ITI_Ticker == 7:
+                    ITI_T = ITI_T + 300
+                ITI_T_28 = ITI_T + 28
+                ITI_T_30 = ITI_T + 30
+                p_Rig.o_Tone.turnOn()
+                print('ITI ', ITI_Ticker,': Tone On')
             elif ITI_Ticker == 10:
                 print('ITI Finished')
-                ITI_Ticker = 0
-                ITI_Float = 0
-                ITI_T = 0
-                ITI_T_28 = 0
-                ITI_T_30 = 0
-                ITI_T_1 = 0
-            ITI_T_28 = ITI_T + 28
-            ITI_T_30 = ITI_T + 30
-            p_Rig.o_Tone.turnOn()
-            print('ITI ', ITI_Ticker,': Tone On')
         elif count == ITI_T_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI ', ITI_Ticker,': Shock On')
+            if ITI_Ticker < 10:
+                p_Rig.o_Shock.turnOn()
+                print('ITI ', ITI_Ticker,': Shock On')
         elif count == ITI_T_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI ', ITI_Ticker,': Tone & Shock Off')
-            ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
-            ITI_T = ITI_T_30 + ITI_Float
+            if ITI_Ticker < 10:
+                p_Rig.o_Tone.turnOff()
+                p_Rig.o_Shock.turnOff()
+                print('ITI ', ITI_Ticker,': Tone & Shock Off')
+                ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+                ITI_T = ITI_T_30 + ITI_Float
 
 # =================+++++++================= #
 
@@ -154,7 +153,6 @@ class VI_Reward:   #StateID = ?
         print('VI ', VI_Ticker,' Reward: Sucrose dispensed')
         print('VI ', VI_Ticker,' Reward: Switching to Timer class')
         p_State.switch(VI_Reset)
-
 class VI_Reset:   #StateID = ?
     def s_State_enter():
         global VI_Ticker
