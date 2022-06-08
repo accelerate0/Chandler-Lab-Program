@@ -59,6 +59,7 @@ class Always:   #StateID = 0
         # ===== Conditional Based ITI Scheduling: 1 Time ===== #
         elif count == ITI_T_1:
             print('ITI 1: Initiating')
+            print('ITI 1: Generated', ITI_T_1, '(sec) as the first ITI')
             ITI_T_28 = ITI_T_1 + 28
             ITI_T_30 = ITI_T_1 + 30
             ITI_Ticker = ITI_Ticker + 1
@@ -66,6 +67,7 @@ class Always:   #StateID = 0
             print('ITI 1: Tone On')
         # ===== Conditional Based ITI Scheduling: Looping 2-9 ===== #
         elif count == ITI_T:
+            print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
             if ITI_Ticker == 4:
                 ITI_T = ITI_T + 300
             elif ITI_Ticker == 7:
