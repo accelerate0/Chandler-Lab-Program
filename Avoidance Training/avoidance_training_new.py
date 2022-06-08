@@ -3,7 +3,7 @@
 import numpy as np
 import time
 # ISSUES
-# ITI Tone is 300 seconds
+# ITI Tone is 300 seconds FIXED?
 # Keeps going after ITI 9 FIXED?
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -67,10 +67,15 @@ class Always:   #StateID = 0
             if ITI_Ticker < 10:
                 if ITI_Ticker == 4:
                     ITI_T = ITI_T + 300
+                    ITI_T_28 = ITI_T + 28
+                    ITI_T_30 = ITI_T + 30
                 elif ITI_Ticker == 7:
                     ITI_T = ITI_T + 300
-                ITI_T_28 = ITI_T + 28
-                ITI_T_30 = ITI_T + 30
+                    ITI_T_28 = ITI_T + 28
+                    ITI_T_30 = ITI_T + 30
+                else
+                    ITI_T_28 = ITI_T + 28
+                    ITI_T_30 = ITI_T + 30
                 p_Rig.o_Tone.turnOn()
                 print('ITI ', ITI_Ticker,': Tone On')
             elif ITI_Ticker == 10:
