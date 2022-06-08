@@ -60,6 +60,7 @@ class Always:   #StateID = 0
             print('ITI 1: Tone On')
         # ===== Conditional Based ITI Scheduling: Looping 2-9 ===== #
         elif count == ITI_T:
+            ITI_Ticker = ITI_Ticker + 1
             print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
             if ITI_Ticker == 4:
                 ITI_T = ITI_T + 300
@@ -74,7 +75,6 @@ class Always:   #StateID = 0
                 ITI_T_30 = -100000
             ITI_T_28 = ITI_T + 28
             ITI_T_30 = ITI_T + 30
-            ITI_Ticker = ITI_Ticker + 1
             p_Rig.o_Tone.turnOn()
             print('ITI ', ITI_Ticker,': Tone On')
         elif count == ITI_T_28:
