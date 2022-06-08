@@ -42,8 +42,8 @@ class Always:   #StateID = 0
         "const_CorrectResponse =", const_CorrectResponse, '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
         "const_ITI =", const_ITI, '\n', '\n', '\n',
-        "The VI numbers generated are ", VI1_Float, " ", VI2_Float, " ", VI3_Float, " seconds", '\n', '\n'
-        )
+        "The VI numbers generated are ", VI1_Float, " ", VI2_Float, " ", VI3_Float, " seconds", '\n', '\n')
+        print('Switching to PreTrial class')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         global ITI_Ticker, ITI_Float, ITI_T, ITI_T_28, ITI_T_30
@@ -54,7 +54,7 @@ class Always:   #StateID = 0
         elif count == 2700:
             print('45 minutes have passed')
         elif count == const_ExperimentTime:
-            print(const_ExperimentTime, 'sec (60 min) has passed and experiment is completed')
+            print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         # ===== Conditional Based ITI Scheduling: 1 Time ===== #
         elif count == ITI_T_1:
