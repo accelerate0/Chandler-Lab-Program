@@ -68,11 +68,11 @@ class Always:   #StateID = 0
                 ITI_T = ITI_T + 300
             elif ITI_Ticker == 10:
                 print('ITI Finished')
-                ITI_Ticker = -100000
-                ITI_Float = -100000
-                ITI_T = -100000
-                ITI_T_28 = -100000
-                ITI_T_30 = -100000
+                ITI_Ticker = 0
+                ITI_Float = 0
+                ITI_T = 0
+                ITI_T_28 = 0
+                ITI_T_30 = 0
             ITI_T_28 = ITI_T + 28
             ITI_T_30 = ITI_T + 30
             p_Rig.o_Tone.turnOn()
