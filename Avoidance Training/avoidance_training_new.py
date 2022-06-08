@@ -137,7 +137,7 @@ class VI_Timer:    #StateID = ?
         p_Timer.VI_T.start()
         print('VI ', VI_Ticker,' Timer: Starting timer')
     def s_VI_T_tick(count):
-        if  VI_Ticker == 1:
+        if VI_Ticker == 1:
             if count == VI1_Float:
                 print('VI 1 Timer: Interval complete, switching to Event class')
                 p_State.switch(VI_Event)
