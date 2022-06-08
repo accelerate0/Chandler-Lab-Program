@@ -164,3 +164,636 @@ VI 1: Timer Started
 VI 2: Timer Started
 VI 3: Timer Started
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Setting up Global Timer 
+Starting the global experimental 3600 sec timer
+EXPERIMENTAL PRESETS: 
+ 
+ const_VISchedule = 30 
+ const_CorrectResponse = 3 
+ const_ExperimentTime = 3600 
+ const_ITI = 180 
+ 
+ 
+ The VI numbers generated are  18   37   36  seconds 
+ 
+
+Switching to PreTrial class
+Pretrial: Light is On
+Pretrial: Lever is Out
+Pretrial: Switching to VI 1 Timer Class
+Entering VI  1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI 1: Initiating
+ITI 1: Tone On
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI  2 : Tone On
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+ITI  3 : Tone On
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+ITI  4 : Tone On
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+15 minutes have passed
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+ITI  5 : Tone On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+ITI  6 : Tone On
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+ITI 1: Shock On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI 1: Tone & Shock Off
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+ITI  7 : Tone On
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+ITI  8 : Tone On
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+30 minutes have passed
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI  9 : Tone On
+ITI 1: Shock On
+ITI 1: Tone & Shock Off
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+VI 3 Timer: Interval complete, switching to Event class
+VI  3  Event: Entering Event class
+VI  3  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  4
+VI Interval reset back to VI 1
+VI 1 Timer: Initiating timer
+VI  1  Timer: Turned off lever light
+VI  1  Timer: Starting timer
+VI 1 Timer: Interval complete, switching to Event class
+VI  1  Event: Entering Event class
+VI  1  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  2
+VI 2 Timer: Initiating timer
+VI  2  Timer: Turned off lever light
+VI  2  Timer: Starting timer
+VI 2 Timer: Interval complete, switching to Event class
+VI  2  Event: Entering Event class
+VI  2  Event: Left Lever Light On
+Resetting VI Loop
+Entering VI  3
+VI 3 Timer: Initiating timer
+VI  3  Timer: Turned off lever light
+VI  3  Timer: Starting timer
+ITI  10 : Tone On
+ITI Finished
