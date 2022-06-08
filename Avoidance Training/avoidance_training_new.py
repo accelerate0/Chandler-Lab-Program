@@ -17,7 +17,7 @@ VI1_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random numbe
 VI2_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # (mean average, standard deviation, amount of numbers)
 VI3_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # 3 for 3 VI intervals
 # Declaring Global Variables That Will Change During ITI:
-ITI_Ticker = 0
+ITI_Ticker = 1
 ITI_Float = 0
 ITI_T_1 = int(np.round(np.random.normal(const_ITI,5,1)))
 ITI_T = 0
@@ -52,11 +52,10 @@ class Always:   #StateID = 0
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         # ===== Conditional Based ITI Scheduling: 1 Time ===== #
         elif count == ITI_T_1:
-            print('ITI 1: Initiating')
+            print('ITI 1: Initiating ITI Intervaling')
             print('ITI 1: Generated', ITI_T_1, '(sec) as the first ITI')
             ITI_T_28 = ITI_T_1 + 28
             ITI_T_30 = ITI_T_1 + 30
-            ITI_Ticker = ITI_Ticker + 1
             p_Rig.o_Tone.turnOn()
             print('ITI 1: Tone On')
         # ===== Conditional Based ITI Scheduling: Looping 2-9 ===== #
