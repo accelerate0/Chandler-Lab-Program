@@ -46,7 +46,7 @@ class Always:   #StateID = 0
         print('Switching to PreTrial class')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
-        global ITI_Ticker, ITI_Float, ITI_T, ITI_T_28, ITI_T_30
+        global ITI_Ticker, ITI_Float, ITI_T, ITI_T_28, ITI_T_30, ITI_T_1
         if count == const_ExperimentTime:
             print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
@@ -73,6 +73,7 @@ class Always:   #StateID = 0
                 ITI_T = 0
                 ITI_T_28 = 0
                 ITI_T_30 = 0
+                ITI_T_1 = 0
             ITI_T_28 = ITI_T + 28
             ITI_T_30 = ITI_T + 30
             p_Rig.o_Tone.turnOn()
