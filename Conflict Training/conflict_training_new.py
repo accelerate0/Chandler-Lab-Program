@@ -18,11 +18,9 @@ ITI_T_28 = 0
 ITI_T_30 = 0                        # Summated ITI Timer (sec)
 ITI_Float = 0                       # ITI Timer (sec)
 
-
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
-
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
@@ -33,8 +31,7 @@ class Always:   #StateID = 0
         p_Timer.Global_T.start() # Turn on timer
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
-        "const_ITI =", const_ITI, '\n', '\n', '\n'
-        )
+        "const_ITI =", const_ITI, '\n', '\n', '\n')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         if count == 900:

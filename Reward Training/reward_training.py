@@ -17,11 +17,9 @@ ITI_T = 0                           # Summated ITI Timer (sec)
 ITI_T_30 = 0                        # Summated ITI Timer (sec)
 ITI_Float = 0                       # ITI Timer (sec)
 
-
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
-
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
