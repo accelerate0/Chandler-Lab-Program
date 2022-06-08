@@ -73,7 +73,7 @@ class Always:   #StateID = 0
                     ITI_T = ITI_T + 300
                     ITI_T_28 = ITI_T + 28
                     ITI_T_30 = ITI_T + 30
-                else
+                else:
                     ITI_T_28 = ITI_T + 28
                     ITI_T_30 = ITI_T + 30
                 p_Rig.o_Tone.turnOn()
