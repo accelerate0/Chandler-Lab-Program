@@ -103,7 +103,6 @@ class PreTrial:    #StateID = ?
 class VI_Timer:    #StateID = ?
     def s_State_enter():
         global VI_Ticker
-        print('Entering VI ', VI_Ticker)
         if VI_Ticker == 1:
             p_Timer.VI_T.setRepeats(VI1_Float)
             print('VI 1 Timer: Initiating timer')
@@ -118,6 +117,7 @@ class VI_Timer:    #StateID = ?
             print('VI Interval reset back to VI 1')
             print('VI 1 Timer: Initiating timer')
             VI_Ticker = 1
+        print('Entering VI ', VI_Ticker)
         p_Rig.o_L_Lever_Light.turnOff()
         print('VI ', VI_Ticker,' Timer: Turned off lever light')
         p_Timer.VI_T.setPeriod(1) # First random ~30 sec timer
