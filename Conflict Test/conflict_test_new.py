@@ -33,16 +33,8 @@ class Always:   #StateID = 0
         "const_ITI =", const_ITI, '\n', '\n', '\n')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
-        if count == 900:
-            print('15 minutes have passed')
-        elif count == 1800:
-            print('30 minutes have passed')
-        elif count == 2700:
-            print('45 minutes have passed')
-        elif count == 3600:
-            print('60 minutes have passed')
-        elif count == const_ExperimentTime:
-            print('75 min has passed and experiment is completed')
+        if count == const_ExperimentTime:
+            print(const_ExperimentTime, 'sec has passed and experiment is completed, shutting down')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
 
 # =================+++++++================= #

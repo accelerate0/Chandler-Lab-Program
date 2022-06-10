@@ -2,9 +2,7 @@
 
 import numpy as np
 import time
-# ISSUES
-# ITI Tone is 300 seconds FIXED?
-# Keeps going after ITI 9 FIXED?
+
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
