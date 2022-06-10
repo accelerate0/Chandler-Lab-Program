@@ -10,21 +10,21 @@ import time
 # Global Static Variables:
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
 const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
-const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
+const_ITI = 180                 # Mean Inter-Trial Interval (ITI) (in sec)
 const_ExperimentTime = 3600     # Time of Entire Experiment
 # Static VI Timers:
 VI1_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random number generator via floating point of Gaussian function
 VI2_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # (mean average, standard deviation, amount of numbers)
 VI3_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # 3 for 3 VI intervals
 # Declaring Global Variables That Will Change During ITI:
-ITI_Ticker = 1
-ITI_Float = 0
-ITI_T_1 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_T = 0
-ITI_T_28 = 0
-ITI_T_30 = 0
+ITI_Ticker = 1      # Keeps track of how many ITI iterations have passed, starts at ITI 1 interval
+ITI_Float = 0       # Randomly generated number for ITI intervaling, in sec
+ITI_T_1 = int(np.round(np.random.normal(const_ITI,5,1)))    # The first ITI_Float in sec that will be utilized
+ITI_T = 0           # The actual ITI summation value in sec which triggers the tone
+ITI_T_28 = 0        # 28 sec after ITI_T, so the 2 sec shock trigger as it is between 28 sec and 30 sec
+ITI_T_30 = 0        # 30 sec after ITI_T, turning off tone and shock
 # Declaring Global Variables That Will Change During VI:
-VI_Ticker = 1
+VI_Ticker = 1       # Keeps track of how many VI iterations have passed, starts at VI 1 interval
 
 #==========================================================#
 #                   Actual Program                         #
