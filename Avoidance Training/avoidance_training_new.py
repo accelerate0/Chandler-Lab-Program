@@ -104,7 +104,8 @@ class PreTrial:    #StateID = ?
 class VI_Timer:    #StateID = ?
     def s_State_enter():
         global VI_Ticker
-        if VI_Ticker == 1:
+        if VI_Ticker == 1 or VI_Ticker == 4:
+            VI_Ticker = 1
             p_Timer.VI_T.setRepeats(VI1_Float)
             print('VI 1 Timer: Initiating timer')
         elif VI_Ticker == 2:
@@ -113,11 +114,6 @@ class VI_Timer:    #StateID = ?
         elif VI_Ticker == 3:
             p_Timer.VI_T.setRepeats(VI3_Float)
             print('VI 3 Timer: Initiating timer')
-        elif VI_Ticker == 4:
-            p_Timer.VI_T.setRepeats(VI1_Float)
-            print('VI Interval reset back to VI 1')
-            print('VI 1 Timer: Initiating timer')
-            VI_Ticker = 1
         print('Entering VI ', VI_Ticker)
         p_Rig.o_L_Lever_Light.turnOff()
         print('VI ', VI_Ticker,' Timer: Turned off lever light')
