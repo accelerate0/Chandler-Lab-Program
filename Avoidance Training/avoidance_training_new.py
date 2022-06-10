@@ -114,7 +114,6 @@ class VI_Timer:    #StateID = ?
         elif VI_Ticker == 3:
             p_Timer.VI_T.setRepeats(VI3_Float)
             print('VI 3 Timer: Initiating timer')
-        print('Entering VI ', VI_Ticker)
         p_Rig.o_L_Lever_Light.turnOff()
         print('VI ', VI_Ticker,' Timer: Turned off lever light')
         p_Timer.VI_T.setPeriod(1) # First random ~30 sec timer
@@ -154,7 +153,10 @@ class VI_Reset:   #StateID = ?
     def s_State_enter():
         global VI_Ticker
         VI_Ticker = VI_Ticker + 1
-        print('VI Reset: Resetting VI Loop')
+        if VI_Ticker == 4:
+            print('VI Reset: Ending', VI_Ticker - 1, 'VI and Reseting to VI 1')
+        else:
+            print('VI Reset: Ending', VI_Ticker - 1, 'VI and Entering VI', VI_Ticker)
         p_State.switch(VI_Timer)
 
 
