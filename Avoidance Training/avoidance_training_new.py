@@ -73,8 +73,9 @@ class Always:   #StateID = 0
             ITI_T = ITI_T_30 + ITI_Float
             ITI_Ticker = ITI_Ticker + 1
             print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
-            if 1 < ITI_Ticker =< 10:
+            if 1 < ITI_Ticker <= 10:
                 if ITI_Ticker == 4 or 7:
+                    print('Entering an additional 300 second ITI Delay')
                     ITI_T = ITI_T + 300
                     ITI_T_28 = ITI_T + 28
                     ITI_T_30 = ITI_T + 30
