@@ -74,7 +74,7 @@ class Always:   #StateID = 0
             ITI_Ticker = ITI_Ticker + 1
             print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
             if 1 < ITI_Ticker <= 10:
-                if ITI_Ticker == 4 or 7:
+                if ITI_Ticker == 4 or ITI_Ticker == 7:
                     print('Entering an additional 300 second ITI Delay')
                     ITI_T = ITI_T + 300
                     ITI_T_28 = ITI_T + 28
@@ -84,7 +84,9 @@ class Always:   #StateID = 0
                 else:
                     ITI_T_28 = ITI_T + 28
                     ITI_T_30 = ITI_T + 30
-        elif count == ITI_T
+            else:
+                pass
+        elif count == ITI_T:
             p_Rig.o_Tone.turnOn()
             print('ITI ', ITI_Ticker,': Tone On')
 
