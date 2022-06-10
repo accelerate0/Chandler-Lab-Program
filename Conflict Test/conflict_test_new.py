@@ -99,10 +99,10 @@ class ITI_Timer_Loop:      #StateID = ?
         if ITI_Ticker == 4: # In between 3-4 ITI
             print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
             ITI_T = ITI_T + 300
-        if ITI_Ticker == 7: # In between 6-7 ITI
+        elif ITI_Ticker == 7: # In between 6-7 ITI
             print('ITI ', ITI_Ticker,' Extending additional 300 sec after 6th ITI')
             ITI_T = ITI_T + 300
-        if ITI_Ticker == 10:
+        elif ITI_Ticker == 10:
             print('ITI ', ITI_Ticker,' Loop: ITI has ended the 9th trial')
             p_State.switch(Finish)
     def s_Global_T_tick(count):
