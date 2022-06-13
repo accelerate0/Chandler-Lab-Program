@@ -94,8 +94,8 @@ class ITI_Timer_Loop:      #StateID = ?
         ITI_Ticker = ITI_Ticker + 1
         print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
         print('ITI ', ITI_Ticker,' Loop: Total time elapsed is', ITI_T, 'sec')
-        if ITI_Ticker == 20:
-            print('ITI ', ITI_Ticker,' Loop: ITI has reached 20th trial')
+        if ITI_Ticker == 21:
+            print('ITI ', ITI_Ticker,' Loop: ITI has ended the 20th trial')
             p_State.switch(Finish)
     def s_Global_T_tick(count):
         if count == ITI_T:
@@ -126,7 +126,7 @@ class ITI_Event_Loop:      #StateID = ?
 
 class Finish:      #StateID = ?
     def s_State_enter():
-        print('ITI 20: ITI Intervaling Finished, entering grace period')
+        print('ITI 21: ITI Intervaling Finished, entering grace period')
     def s_Global_T_tick(count):
         print(const_ExperimentTime - count, 'sec before shutdown (Experiment Finished)')
 
