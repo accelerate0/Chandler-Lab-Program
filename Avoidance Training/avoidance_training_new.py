@@ -69,14 +69,15 @@ class Always:   #StateID = 0
             print('ITI ', ITI_Ticker,': Tone & Shock Off')
             ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
             ITI_Ticker = ITI_Ticker + 1
-            print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
             if 1 < ITI_Ticker <= 9:
                 if ITI_Ticker == 4 or ITI_Ticker == 7:
+                    print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
                     print('Entering an additional 300 second ITI Delay')
                     ITI_T = ITI_T_30 + ITI_Float + 300
                     ITI_T_28 = ITI_T + 28
                     ITI_T_30 = ITI_T + 30
                 else:
+                    print('ITI', ITI_Ticker, ': Using', ITI_Float, '(sec) for', ITI_Ticker, 'ITI interval')
                     ITI_T = ITI_T_30 + ITI_Float
                     ITI_T_28 = ITI_T + 28
                     ITI_T_30 = ITI_T + 30
