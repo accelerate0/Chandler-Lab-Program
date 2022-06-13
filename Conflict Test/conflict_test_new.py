@@ -56,7 +56,7 @@ class ITI_Timer_First:      #StateID = ?
         ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
         ITI_T = ITI_Float
         ITI_Ticker = ITI_Ticker + 1
-        print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
+        print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 9')
         print('ITI 1 Timer: Total time elapsed is 0 sec')
     def s_Global_T_tick(count):
         if count == ITI_T:
@@ -94,7 +94,7 @@ class ITI_Timer_Loop:      #StateID = ?
         ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
         ITI_T = ITI_Float + ITI_T_30
         ITI_Ticker = ITI_Ticker + 1
-        print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
+        print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 9')
         print('ITI ', ITI_Ticker,' Loop: Total time elapsed is', ITI_T, 'sec')
         if ITI_Ticker == 4 or ITI_Ticker == 7: # In between 3-4 ITI
             print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
