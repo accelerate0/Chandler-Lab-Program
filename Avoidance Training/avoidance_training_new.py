@@ -82,11 +82,10 @@ class Always:   #StateID = 0
                     ITI_T_30 = ITI_T + 30
             elif ITI_Ticker == 10:
                 print('ITI Finished')
-            else:
-                pass
         elif count == ITI_T:
-            p_Rig.o_Tone.turnOn()
-            print('ITI ', ITI_Ticker,': Tone On')
+            if 1 =< ITI_Ticker <= 9:
+                p_Rig.o_Tone.turnOn()
+                print('ITI ', ITI_Ticker,': Tone On')
 
 # =================+++++++================= #
 
