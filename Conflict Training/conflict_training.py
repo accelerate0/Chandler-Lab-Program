@@ -7,62 +7,20 @@ import time
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
 
-# Global Variables:
-const_ITI = 180                 # Mean InterTrial Interval (ITI) (in sec)
-const_ExperimentTime = 3600    # Time of Entire Experiment
+# Global Variables that are constant:
+const_ITI = 180                      # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
+const_ExperimentTime = 3600          # Time of Entire Experiment
 
-# Creating ITI Scheduling
-ITI_Float_1 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_2 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_3 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_4 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_5 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_6 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_7 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_8 = int(np.round(np.random.normal(const_ITI,5,1)))
-ITI_Float_9 = int(np.round(np.random.normal(const_ITI,5,1)))
-
-ITI_T1 = ITI_Float_1
-ITI_T1_28 = ITI_T1 + 28
-ITI_T1_30 = ITI_T1 + 30
-
-ITI_T2 = ITI_T1 + ITI_Float_2 + 30
-ITI_T2_28 = ITI_T2 + 28
-ITI_T2_30 = ITI_T2 + 30
-
-ITI_T3 = ITI_T2 + ITI_Float_3 + 30
-ITI_T3_28 = ITI_T3 + 28
-ITI_T3_30 = ITI_T3 + 30
-
-ITI_T4 = ITI_T3 + ITI_Float_4 + 300 + 30
-ITI_T4_28 = ITI_T4 + 28
-ITI_T4_30 = ITI_T4 + 30
-
-ITI_T5 = ITI_T4 + ITI_Float_5 + 30
-ITI_T5_28 = ITI_T5 + 28
-ITI_T5_30 = ITI_T5 + 30
-
-ITI_T6 = ITI_T5 + ITI_Float_6 + 30
-ITI_T6_28 = ITI_T6 + 28
-ITI_T6_30 = ITI_T6 + 30
-
-ITI_T7 = ITI_T6 + ITI_Float_7 + 300 + 30
-ITI_T7_28 = ITI_T7 + 28
-ITI_T7_30 = ITI_T7 + 30
-
-ITI_T8 = ITI_T7 + ITI_Float_8 + 30
-ITI_T8_28 = ITI_T8 + 28
-ITI_T8_30 = ITI_T8 + 30
-
-ITI_T9 = ITI_T8 + ITI_Float_9 + 30
-ITI_T9_28 = ITI_T9 + 28
-ITI_T9_30 = ITI_T9 + 30
+# Global Variables that are changing:
+ITI_Ticker = 0                      # Tracks amount of time ITI has looped
+ITI_T = 0                           # Summated ITI Timer (sec)
+ITI_T_28 = 0
+ITI_T_30 = 0                        # Summated ITI Timer (sec)
+ITI_Float = 0                       # ITI Timer (sec)
 
 #==========================================================#
 #                   Actual Program                         #
 #==========================================================#
-# Always class: Special class for Pynapse where conditionals here is always being checked
-
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
@@ -73,19 +31,11 @@ class Always:   #StateID = 0
         p_Timer.Global_T.start() # Turn on timer
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
-        "const_ITI =", const_ITI, '\n', '\n', '\n',
-        "The ITI numbers generated are ", ITI_Float_1, ITI_Float_2, ITI_Float_3, ITI_Float_4, ITI_Float_5, ITI_Float_6, ITI_Float_7, ITI_Float_8, ITI_Float_9, "seconds"'\n', '\n'
-        )
+        "const_ITI =", const_ITI, '\n', '\n', '\n')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
-        if count == 900:
-            print('15 minutes have passed')
-        elif count == 1800:
-            print('30 minutes have passed')
-        elif count == 2700:
-            print('45 minutes have passed')
-        elif count == const_ExperimentTime:
-            print('60 min has passed and experiment is completed')
+        if count == const_ExperimentTime:
+            print(const_ExperimentTime, 'sec has passed and experiment is completed, shutting down')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
 
 # =================+++++++================= #
@@ -96,310 +46,107 @@ class PreTrial:    #StateID = ?
         print('Pretrial: House Light is On')
         p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
         print('Pretrial: Left Lever is Out')
-        p_State.switch(ITI_1_Timer) # Switches to Trial class
-
+        p_State.switch(ITI_Timer_First) # Switches to Trial class
 
 # =================+++++++================= #
-# === Conditional Based ITI Scheduling === #
 
-# _____________ # ITI 1
-
-class ITI_1_Timer:      #StateID = ?
+class ITI_Timer_First:      #StateID = ?
     def s_State_enter():
-        print('ITI 1: Timer Started')
+        global ITI_Float, ITI_T, ITI_Ticker
+        print('ITI 1 Timer:, Timer is initiating')
+        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+        ITI_T = ITI_Float
+        ITI_Ticker = ITI_Ticker + 1
+        print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 9')
+        print('ITI 1 Timer: Total time elapsed is 0 sec')
     def s_Global_T_tick(count):
-        if count == ITI_T1:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 1: Tone On')
-            p_State.switch(ITI_1_Event)
+        if count == ITI_T:
+            print('ITI Event: Switching to ITI Event')
+            p_State.switch(ITI_Event_First)
 
-class ITI_1_Event:      #StateID = ?
+class ITI_Event_First:      #StateID = ?
     def s_State_enter():
-        print('ITI 1: Event Started')
+        p_Rig.o_Tone.turnOn()
+        print('ITI 1 Event: Event Started')
+        p_Rig.o_L_Lever_Light.turnOn()
+        print('ITI 1 Event: Left Lever Light and Tone Turned On')
     def s_i_L_Lever_Press_rise():
+        print('ITI 1 Event: Left Lever was pressed')
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
         time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 1: Sucrose Dispensed')
+        print('ITI 1 Event: Sucrose Dispensed')
     def s_Global_T_tick(count):
-        if count == ITI_T1_28:
+        global ITI_T_28, ITI_T_30
+        ITI_T_28 =  ITI_T + 28
+        ITI_T_30 = ITI_T + 30
+        if count == ITI_T_28:
             p_Rig.o_Shock.turnOn()
-            print('ITI 1: Shock On')
-        elif count == ITI_T1_30:
+            print('ITI ', ITI_Ticker,' Event: Turning Shock On')
+        if count == ITI_T_30:
+            p_Rig.o_Shock.turnOff()
             p_Rig.o_Tone.turnOff()
             p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 1: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 1: Completed')
-            p_State.switch(ITI_2_Timer)
+            print('ITI 1 Event: Turn off Left Lever Light, Shock, and Tone')
+            print('ITI 1 Event: Completed')
+            p_State.switch(ITI_Timer_Loop)
 
-# _____________ # ITI 2
+# =================+++++++================= #
 
-class ITI_2_Timer:      #StateID = ?
+class ITI_Timer_Loop:      #StateID = ?
     def s_State_enter():
-        print('ITI 2: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T2:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 2: Tone On')
-            p_State.switch(ITI_2_Event)
-
-class ITI_2_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 2: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 2: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T2_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 2: Shock On')
-        elif count == ITI_T2_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 2: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 2: Completed')
-            p_State.switch(ITI_3_Timer)
-
-# _____________ # ITI 3
-
-class ITI_3_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 3: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T3:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 3: Tone On')
-            p_State.switch(ITI_3_Event)
-
-class ITI_3_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 3: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 3: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T3_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 3: Shock On')
-        elif count == ITI_T3_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 3: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 3: Completed')
-            p_State.switch(ITI_4_Timer)
-
-# _____________ # ITI 4
-
-class ITI_4_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 4: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T4:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 4: Tone On')
-            p_State.switch(ITI_4_Event)
-
-class ITI_4_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 4: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 4: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T4_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 4: Shock On')
-        elif count == ITI_T4_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 4: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 4: Completed')
-            p_State.switch(ITI_5_Timer)
-
-# _____________ # ITI 5
-
-class ITI_5_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 5: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T5:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 5: Tone On')
-            p_State.switch(ITI_5_Event)
-
-class ITI_5_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 5: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 5: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T5_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 5: Shock On')
-        elif count == ITI_T5_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 5: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 5: Completed')
-            p_State.switch(ITI_6_Timer)
-
-# _____________ # ITI 6
-
-class ITI_6_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 6: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T6:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 6: Tone On')
-            p_State.switch(ITI_6_Event)
-
-class ITI_6_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 6: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 6: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T6_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 6: Shock On')
-        elif count == ITI_T6_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 6: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 6: Completed')
-            p_State.switch(ITI_7_Timer)
-
-# _____________ # ITI 7
-
-class ITI_7_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 7: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T7:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 7: Tone On')
-            p_State.switch(ITI_7_Event)
-
-class ITI_7_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 7: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 7: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T7_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 7: Shock On')
-        elif count == ITI_T7_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 7: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 7: Completed')
-            p_State.switch(ITI_8_Timer)
-
-# _____________ # ITI 8
-
-class ITI_8_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 8: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T8:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 8: Tone On')
-            p_State.switch(ITI_8_Event)
-
-class ITI_8_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 8: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 8: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T8_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 8: Shock On')
-        elif count == ITI_T8_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 8: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 8: Completed')
-            p_State.switch(ITI_9_Timer)
-
-# _____________ # ITI 9
-
-class ITI_9_Timer:      #StateID = ?
-    def s_State_enter():
-        print('ITI 9: Timer Started')
-    def s_Global_T_tick(count):
-        if count == ITI_T9:
-            p_Rig.o_Tone.turnOn()
-            p_Rig.o_L_Lever_Light.turnOn()
-            print('ITI 9: Tone On')
-            p_State.switch(ITI_9_Event)
-
-class ITI_9_Event:      #StateID = ?
-    def s_State_enter():
-        print('ITI 9: Event Started')
-    def s_i_L_Lever_Press_rise():
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI 9: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        if count == ITI_T9_28:
-            p_Rig.o_Shock.turnOn()
-            print('ITI 9: Shock On')
-        elif count == ITI_T9_30:
-            p_Rig.o_Tone.turnOff()
-            p_Rig.o_L_Lever_Light.turnOff()
-            p_Rig.o_Shock.turnOff()
-            print('ITI 9: Turn off Shock & Left Lever Light & Tone')
-            print('ITI 9: Completed')
+        global ITI_Float, ITI_T, ITI_Ticker
+        print('ITI Loop: Timer is initiating')
+        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+        ITI_T = ITI_Float + ITI_T_30
+        ITI_Ticker = ITI_Ticker + 1
+        if 1 <= ITI_Ticker <= 9:
+            print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 9')
+            print('ITI ', ITI_Ticker,' Loop: Total time elapsed is', ITI_T, 'sec')
+            if ITI_Ticker == 4 or ITI_Ticker == 7:
+                print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
+                ITI_T = ITI_T + 300
+        elif ITI_Ticker == 10:
+            print('ITI ', ITI_Ticker,' Loop: ITI has ended the 9th trial')
             p_State.switch(Finish)
+    def s_Global_T_tick(count):
+        if count == ITI_T:
+            print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
+            p_State.switch(ITI_Event_Loop)
+
+class ITI_Event_Loop:      #StateID = ?
+    def s_State_enter():
+        print('ITI ', ITI_Ticker,' Event: Event Started')
+        p_Rig.o_L_Lever_Light.turnOn()
+        p_Rig.o_Tone.turnOn()
+        print('ITI ', ITI_Ticker,' Event: Left Lever Light Turned and Tone On')
+    def s_i_L_Lever_Press_rise():
+        print('ITI ', ITI_Ticker,' Event: Left Lever was pressed')
+        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+        time.sleep(1)
+        p_Rig.o_Pellet_Dispenser.turnOff()
+        print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
+    def s_Global_T_tick(count):
+        global ITI_T_28, ITI_T_30
+        ITI_T_28 =  ITI_T + 28
+        ITI_T_30 = ITI_T + 30
+        if count == ITI_T_28:
+            p_Rig.o_Shock.turnOn()
+            print('ITI ', ITI_Ticker,' Event: Turning Shock On')
+        if count == ITI_T_30:
+            p_Rig.o_Shock.turnOff()
+            p_Rig.o_L_Lever_Light.turnOff()
+            p_Rig.o_Tone.turnOff()
+            print('ITI 1 Event: Turn off Left Lever Light, Shock, and Tone')
+            print('ITI ', ITI_Ticker,' Event: Completed')
+            p_State.switch(ITI_Timer_Loop)
+
+# =================+++++++================= #
 
 class Finish:      #StateID = ?
     def s_State_enter():
-        print('ITI Intervaling Finished, entering grace period')
+        print('ITI 9: ITI Intervaling Finished, entering grace period')
     def s_Global_T_tick(count):
-        print(const_ExperimentTime - count, 'sec before shutdown')
-
-
-
-
-
-
+        print(const_ExperimentTime - count, 'sec before shutdown (Experiment Finished)')
 
 # = #
