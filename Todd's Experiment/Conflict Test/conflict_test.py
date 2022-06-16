@@ -9,7 +9,7 @@ import time
 
 # Global Variables that are constant:
 const_ITI = 180                      # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
-const_ExperimentTime = 3600          # Time of Entire Experiment
+const_ExperimentTime = 4500          # Time of Entire Experiment
 
 # Global Variables that are changing:
 ITI_Ticker = 0                      # Tracks amount of time ITI has looped
