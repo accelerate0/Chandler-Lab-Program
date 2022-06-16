@@ -103,6 +103,6 @@ Webbed diagrams are available on how the scripts work using draw.io. To use draw
 | Script Name | Draw.io Link |
 |--|--|
 | Platform Avoidance Training | [Link](https://app.diagrams.net/#G1HNz9VDa9wyPsMvxQO9PCpvsV23HluM3-) |
-| Reward Training | [https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FReward%20Training%2FReward%20Training](Link) |
-| Conflict Test | [https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Test%2FConflict%20Test](Link) |
-| Conflict Training | [https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Training%2FConflict%20Training](Link) |
+| Reward Training | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FReward%20Training%2FReward%20Training) |
+| Conflict Test | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Test%2FConflict%20Test) |
+| Conflict Training | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Training%2FConflict%20Training) |
