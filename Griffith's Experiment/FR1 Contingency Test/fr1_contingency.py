@@ -38,7 +38,7 @@ class PreTrial:    #StateID = ?
         print('Pretrial: House Light is On')
         p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
         print('Pretrial: Left Lever is Out')
-        p_Rig.o_R_Lever_Extension.turnOn() # Turns on left lever
+        p_Rig.o_R_Lever_Extension.turnOn() # Turns on right lever
         print('Pretrial: Right Lever is Out')
         p_State.switch(Trial) # Switches to Trial class
 

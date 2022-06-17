@@ -12,6 +12,7 @@ const_ExperimentTime = 1800         # Time of Entire Experiment (sec)
 const_DispenseTime = 1.665          # Dispense rate of the liquid dispenser (sec)
 const_Float = 30                    # Median of the floating point number randomly generated (sec)
 const_CorrectResponse = 3           # Threshold window of opportunity that allows dispensing (sec)
+const_J = 0                         # J Factor
 
 #==========================================================#
 #                   Actual Program                         #
@@ -40,7 +41,7 @@ class PreTrial:    #StateID = ?
         print('Pretrial: House Light is On')
         p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
         print('Pretrial: Left Lever is Out')
-        p_Rig.o_R_Lever_Extension.turnOn() # Turns on left lever
+        p_Rig.o_R_Lever_Extension.turnOn() # Turns on right lever
         print('Pretrial: Right Lever is Out')
         p_State.switch(Timer) # Switches to Trial class
 
