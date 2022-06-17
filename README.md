@@ -1,3 +1,4 @@
+
 # Pynapse Scripts for Dr. Chandler Lab Experiments
 
 This repository contains collections of Python 3 scripts for utilization in the Pynapse runtime environment.
@@ -13,6 +14,8 @@ By Erick Won
 	- Everything in Pynapse is *case-sensitive*
 	- Never use spaces or non-alphanumeric characters, always use underscore (_) to denote spaces
 	- Whenever it mentions `Epoc` this is referring to time stamping functionalities in the Pynapse software and will show up in the recorded data respectively.
+- **Script Overview:**
+	- Some scripts have the tag `legacy`in the script name. This denotes that the method and fashion of coding is more verbose, but rather ineffecient and no longer used.
 
 ## How To Run the Scripts
 
@@ -89,11 +92,14 @@ Assigning channels for in
 
 | Timer Name | Variable Name | Epoc Store ID | Description |
 | ------ | ------ | ------ | ------ |
-| Global Timer | Global_T | GloT | x |
-| VI Timer | VI_T | VIT | x |
-| Trial Timer | Trial_T | TT | x |
+| Global Timer | Global_T | GloT | Timer that controls most experimental function and when finished, ends the experiment. This is controlled by the `const_ExperimentTime ` constant. |
+| VI Timer | VI_T | VIT | Timer that is modified during runtime of the script and should not be modified by the user. Responsible for VI scheduling and randomly generated in avoidance training. |
+| Trial Timer | Trial_T | TT | Timer that is modified during runtime of the script and should not be modified by the user. Responsible for scheduling in the RI30 script and randomly generated. |
 
-
+## Variable Assignment
+At the top of each scripts denotes 2 types of global variables used in the experiment
+- **Global Static Variables:** These are variables that can be changed by the user as a preset and includes experimental timer settings and so forth.
+- **Global Dynamic Variables:** These are variables that are changed during the course of the experiment and hsould not be changed by the user.
 
 ## Draw.io Diagrams for Script Visualization
 
