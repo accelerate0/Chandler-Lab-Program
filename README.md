@@ -100,9 +100,19 @@ Assigning channels for in
 Webbed diagrams are available on how the scripts work using draw.io. To use draw.io (editing and viewing), you must download the addon which is available here:
 - https://chrome.google.com/webstore/detail/drawio-for-notion/plhaalebpkihaccllnkdaokdoeaokmle
 
+**Todd's Experiment:**
 | Script Name | Draw.io Link |
 |--|--|
 | Platform Avoidance Training | [Link](https://app.diagrams.net/#G1HNz9VDa9wyPsMvxQO9PCpvsV23HluM3-) |
 | Reward Training | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FReward%20Training%2FReward%20Training) |
 | Conflict Test | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Test%2FConflict%20Test) |
 | Conflict Training | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Training%2FConflict%20Training) |
+
+**Griffith's Experiment:** *Working on it*
+| Script Name | Draw.io Link |
+|--|--|
+| Contingency Degradation | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
+| FR1 Contingency Training  | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
+| FR1 Contingency Test | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
+| RI30 Test | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
+| Well Habituation | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
