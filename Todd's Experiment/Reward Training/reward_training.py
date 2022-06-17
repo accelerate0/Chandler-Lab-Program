@@ -95,7 +95,7 @@ class ITI_Timer_Loop:      #StateID = ?
         if 1 <= ITI_Ticker <= 20:
             print('ITI ', ITI_Ticker,' Loop: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 20')
             print('ITI ', ITI_Ticker,' Loop: Total time elapsed is', ITI_T, 'sec')
-            if ITI_Ticker == 4 or ITI_Ticker == 7 or ITI_Ticker == 10 or ITI_Ticker == 13 or ITI_Ticker == 16 ITI_Ticker == 19:
+            if ITI_Ticker == 4 or ITI_Ticker == 7 or ITI_Ticker == 10 or ITI_Ticker == 13 or ITI_Ticker == 16 or ITI_Ticker == 19:
                 print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
                 ITI_T = ITI_T + 300
         elif ITI_Ticker == 21:
