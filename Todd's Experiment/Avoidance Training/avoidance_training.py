@@ -2,6 +2,7 @@
 
 import numpy as np
 import time
+import pyopcond_dep as pyop
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -9,20 +10,24 @@ import time
 
 # Global Static Variables:
 const_VISchedule = 30           # Variable interval schedule with mean interval (in sec)
+const_VISchedule_Amt = 10       # Amount of VI schedule numbers generated
+const_ITISchedule_Amt = 5       # Amount of ITI schedule numbers generated
 const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITI = 180                 # Mean Inter-Trial Interval (ITI) (in sec)
 const_ExperimentTime = 3600     # Time of Entire Experiment
-# Global Static VI Timer Variables:
-VI1_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # Random number generator via floating point of Gaussian function
-VI2_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # (mean average, standard deviation, amount of numbers)
-VI3_Float = int(np.round(np.random.normal(const_VISchedule,5,1))) # 3 for 3 VI intervals
-# Dynamic Global Variables That Will Change During ITI:
+# Global Dynamic VI Timer Variables:
+VI1_Float = 0
+VI2_Float = 0
+VI3_Float = 0
+VI_Pool = 0
+# Global Dynamic Variables That Will Change During ITI:
 ITI_Ticker = 1      # Keeps track of how many ITI iterations have passed, starts at ITI 1 interval
 ITI_Float = 0       # Randomly generated number for ITI intervaling, in sec
-ITI_T_1 = int(np.round(np.random.normal(const_ITI,5,1)))    # The first ITI_Float in sec that will be utilized
+ITI_T_1 = 0         # The first ITI_Float in sec that will be utilized
 ITI_T = 0           # The actual ITI summation value in sec which triggers the tone
 ITI_T_28 = 0        # 28 sec after ITI_T, so the 2 sec shock trigger as it is between 28 sec and 30 sec
 ITI_T_30 = 0        # 30 sec after ITI_T, turning off tone and shock
+ITI_Pool = 0
 # Global Dynamic Variables That Will Change During VI:
 VI_Ticker = 1       # Keeps track of how many VI iterations have passed, starts at VI 1 interval
 
@@ -32,20 +37,34 @@ VI_Ticker = 1       # Keeps track of how many VI iterations have passed, starts 
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
+        global VI1_Float, VI2_Float, VI3_Float, ITI_T_1, ITI_Pool, VI_Pool
+        # Setting Up Global Timer
         print('Setting up Global Timer ')
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         print('Starting the global experimental 3600 sec timer')
         p_Timer.Global_T.start() # Turn on timer
+        # Printing Constants on Console
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
         "const_VISchedule =", const_VISchedule, '\n',
         "const_CorrectResponse =", const_CorrectResponse, '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
-        "const_ITI =", const_ITI, '\n', '\n', '\n',
-        "The VI numbers generated are ", VI1_Float, " ", VI2_Float, " ", VI3_Float, " seconds", '\n', '\n')
+        "const_ITI =", const_ITI, '\n', '\n', '\n')
+        # Setting Up VI Timer Schedule
+        VI_Pool = pyop.var_int(const_VISchedule_Amt, const_VISchedule)
+        print("VI: Generated:", VI_Pool, "VI Pool from PyOp")
+        VI1_Float = int(random.choice(VI_Pool))
+        VI2_Float = int(random.choice(VI_Pool))
+        VI3_Float = int(random.choice(VI_Pool))
+        print("VI: The VI numbers generated are ", VI1_Float, " ", VI2_Float, " ", VI3_Float, " seconds", '\n', '\n')
+        # Setting Up ITI Timer Schedule
+        ITI_Pool = pyop.var_int(const_ITISchedule_Amt, const_ITI)
+        print("ITI: Generated:", ITI_Pool, "ITI Pool from PyOp")
+        print('ITI: Initiating ITI Intervaling')
+        ITI_T_1 = int(random.choice(ITI_Pool))
+        print('ITI: Generated', ITI_T_1, '(sec) as the first ITI')
+        # Switch to PreTria class
         print('Switching to PreTrial class')
-        print('ITI 1: Initiating ITI Intervaling')
-        print('ITI 1: Generated', ITI_T_1, '(sec) as the first ITI')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         global ITI_Ticker, ITI_Float, ITI_T, ITI_T_28, ITI_T_30
@@ -67,7 +86,7 @@ class Always:   #StateID = 0
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI ', ITI_Ticker,': Tone & Shock Off')
-            ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+            ITI_Float = int(random.choice(ITI_Pool))
             ITI_Ticker = ITI_Ticker + 1
             if 1 < ITI_Ticker <= 9:
                 if ITI_Ticker == 4 or ITI_Ticker == 7:

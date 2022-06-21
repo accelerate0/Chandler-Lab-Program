@@ -1,4 +1,5 @@
 
+
 # Pynapse Scripts for Dr. Chandler Lab Experiments
 
 This repository contains collections of Python 3 scripts for utilization in the Pynapse runtime environment.
@@ -23,6 +24,11 @@ By Erick Won
  2. Click the "Raw" button which is on the top right of the code display box
 3. Copy and Paste the code into Pynapse
 4. Click Commit, make sure no error messages are displayed and the file has been loaded successfully
+
+## Dependencies
+
+ - Many mathematical modules such as random, numpy, and so forth are dependencies. However, these come pre-installed with Pynapse.
+ - One dependency that requires manual installation is PyOp. File, usage, and installation guide can be found in the [PyOp Repository](https://github.com/accelerate0/PyOp-Conditioning).
 
 ## Channel Assignments
 
