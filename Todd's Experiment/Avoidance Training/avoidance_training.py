@@ -15,6 +15,9 @@ const_ITISchedule_Amt = 5       # Amount of ITI schedule numbers generated
 const_CorrectResponse = 3       # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITI = 180                 # Mean Inter-Trial Interval (ITI) (in sec)
 const_ExperimentTime = 3600     # Time of Entire Experiment
+
+# =================+++++++================= #
+
 # Global Dynamic VI Timer Variables:
 VI1_Float = 0
 VI2_Float = 0
@@ -51,19 +54,21 @@ class Always:   #StateID = 0
         "const_ExperimentTime =", const_ExperimentTime, '\n',
         "const_ITI =", const_ITI, '\n', '\n', '\n')
         # Setting Up VI Timer Schedule
-        VI_Pool = pyop.var_int(const_VISchedule_Amt, const_VISchedule)
+        pyop.var_int(const_VISchedule_Amt, const_VISchedule)
+        VI_Pool = var_int.output_straight
         print("VI: Generated:", VI_Pool, "VI Pool from PyOp")
         VI1_Float = int(random.choice(VI_Pool))
         VI2_Float = int(random.choice(VI_Pool))
         VI3_Float = int(random.choice(VI_Pool))
         print("VI: The VI numbers generated are ", VI1_Float, " ", VI2_Float, " ", VI3_Float, " seconds", '\n', '\n')
         # Setting Up ITI Timer Schedule
-        ITI_Pool = pyop.var_int(const_ITISchedule_Amt, const_ITI)
+        pyop.var_int(const_ITISchedule_Amt, const_ITI)
+        ITI_Pool = var_int.output_straight
         print("ITI: Generated:", ITI_Pool, "ITI Pool from PyOp")
         print('ITI: Initiating ITI Intervaling')
         ITI_T_1 = int(random.choice(ITI_Pool))
         print('ITI: Generated', ITI_T_1, '(sec) as the first ITI')
-        # Switch to PreTria class
+        # Switch to PreTrial class
         print('Switching to PreTrial class')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
