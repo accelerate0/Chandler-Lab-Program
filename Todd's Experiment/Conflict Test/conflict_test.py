@@ -2,6 +2,8 @@
 
 import numpy as np
 import time
+import random
+import pyopcond_dep as pyop
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -10,12 +12,14 @@ import time
 # Global Static Variables:
 const_ITI = 180                      # Mean InterTrial Interval (ITI) (in sec) CHANGE IT TO 180
 const_ExperimentTime = 4500          # Time of Entire Experiment
+const_ITISchedule_Amt = 5
 
 # Global Dynamic Variables:
 ITI_Ticker = 0                      # Tracks amount of time ITI has looped
 ITI_T = 0                           # Summated ITI Timer (sec)
 ITI_T_30 = 0                        # Summated ITI Timer (sec)
 ITI_Float = 0                       # ITI Timer (sec)
+ITI_Pool = 0
 
 #==========================================================#
 #                   Actual Program                         #
@@ -23,6 +27,7 @@ ITI_Float = 0                       # ITI Timer (sec)
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
+        global ITI_Pool
         print('Setting up Global Timer ')
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
@@ -31,6 +36,10 @@ class Always:   #StateID = 0
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
         "const_ITI =", const_ITI, '\n', '\n', '\n')
+        print('Generating ITI Timer Pools')
+        pyop.var_int(const_ITISchedule_Amt, const_ITI)
+        ITI_Pool = var_int.output_straight
+        print("ITI: Generated:", ITI_Pool, "ITI Pool from PyOp")
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         if count == const_ExperimentTime:
@@ -51,9 +60,10 @@ class PreTrial:    #StateID = ?
 
 class ITI_Timer_First:      #StateID = ?
     def s_State_enter():
-        global ITI_Float, ITI_T, ITI_Ticker
+        global ITI_Float, ITI_T, ITI_Ticker, ITI_Pool
         print('ITI 1 Timer:, Timer is initiating')
-        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+        ITI_Pool
+        ITI_Float = int(random.choice(ITI_Pool))
         ITI_T = ITI_Float
         ITI_Ticker = ITI_Ticker + 1
         print('ITI 1 Timer: Randomly chose', ITI_Float, 'sec for the', ITI_Ticker, 'interval out of 9')
@@ -91,7 +101,7 @@ class ITI_Timer_Loop:      #StateID = ?
     def s_State_enter():
         global ITI_Float, ITI_T, ITI_Ticker
         print('ITI Loop: Timer is initiating')
-        ITI_Float = int(np.round(np.random.normal(const_ITI,5,1)))
+        ITI_Float = int(random.choice(ITI_Pool))
         ITI_T = ITI_Float + ITI_T_30
         ITI_Ticker = ITI_Ticker + 1
         if 1 <= ITI_Ticker <= 9:

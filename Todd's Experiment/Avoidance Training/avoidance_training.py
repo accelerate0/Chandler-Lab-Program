@@ -2,6 +2,7 @@
 
 import numpy as np
 import time
+import random
 import pyopcond_dep as pyop
 
 #==========================================================#
