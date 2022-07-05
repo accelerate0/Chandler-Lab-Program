@@ -38,7 +38,7 @@ ITI_Float = 0       # Randomly generated number for ITI intervaling, in sec
 ITI_T = 1           # The actual ITI summation value in sec which triggers the tone
 ITI_Pool = 0
 ITI_Interval = 0
-ITI_Switch = 0
+ITI_Switch = 1
 
 #==========================================================#
 #                   Actual Program                         #
@@ -88,42 +88,43 @@ class Always:   #StateID = 0
         if count == const_ExperimentTime:
             print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
-        # ITI control triggering
-        if count == ITI_Switch:
-            print('ITI Timer: Initializing the ITI Timer')
-            p_Timer.ITI_T.setPeriod(1)
-            p_Timer.ITI_T.setRepeats(ITI_Switch)
-            p_Timer.ITI_T.start()
 
     # ===== Conditional Based ITI Scheduling ===== #
     def s_ITI_T_tick(count):
         global ITI_Float, ITI_T, ITI_Ticker, ITI_Switch
-        if count == 0:
+        if count == ITI_Switch:
+            print('ITI Timer: Setting up the ITI Timer')
             if ITI_Ticker <= const_ITI_Interval:
                 ITI_Ticker = ITI_Ticker + 1
+                print('ITI Timer', ITI_Ticker, ': Entered')
                 ITI_T = 0
                 ITI_Float = 0
                 while ITI_Float == 0:
                     ITI_Float = int(random.choice(ITI_Pool))
+                    print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
                     if ITI_Ticker == 4 or ITI_Ticker == 7:
                         ITI_T = ITI_Float + const_ITI_Add_Delay
+                        print('ITI Timer', ITI_Ticker, ': Added additional', const_ITI_Add_Delay, 'delay')
                     break
                 ITI_T = ITI_T + 30
                 p_Timer.ITI_T.setPeriod(1)
                 p_Timer.ITI_T.setRepeats(ITI_T)
-                print('Global: Starting the ITI Timer')
+                print('ITI Timer', ITI_Ticker, ': Started ITI Timer')
                 p_Timer.ITI_T.start()
-        if count == ITI_T - 30:
+        elif count == ITI_T - 30:
             p_Rig.o_Tone.turnOn()
             print('ITI Timer', ITI_Ticker, ': Tone On')
-        if count == ITI_T - 28:
+        elif count == ITI_T - 28:
             p_Rig.o_Shock.turnOn()
             print('ITI Timer', ITI_Ticker, ': Shock On')
-        if count == ITI_T:
+        elif count == ITI_T:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI Timer', ITI_Ticker, ': Shock & Tone Off')
-            ITI_Switch = ITI_T + ITI_Switch
+            print('ITI Timer', ITI_Ticker, ': Reinitializing ITI Timer')
+            p_Timer.ITI_T.setPeriod(1)
+            p_Timer.ITI_T.setRepeats(ITI_Switch)
+            p_Timer.ITI_T.start()
 
 # =================+++++++================= #
 
@@ -134,6 +135,13 @@ class PreTrial:    #StateID = ?
         print('Pretrial: Light is On')
         p_Rig.o_L_Lever_Extension.turnOn()
         print('Pretrial: Lever is Out')
+        print('Pretrial: Switching to VI Timer Class')
+        # Creating + Starting ITI Timer
+        print('Pretrial: Initializing the ITI Timer')
+        p_Timer.ITI_T.setPeriod(1)
+        p_Timer.ITI_T.setRepeats(ITI_Switch)
+        p_Timer.ITI_T.start()
+        # Switch Class
         print('Pretrial: Switching to VI Timer Class')
         p_State.switch(VI_Timer)
 
