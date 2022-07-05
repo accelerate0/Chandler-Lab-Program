@@ -55,7 +55,6 @@ class Always:   #StateID = 0
         "Global: const_ExperimentTime =", const_ExperimentTime, '\n',
         "Global: const_VI_Mean =", const_VI_Mean, '\n',
         "Global: const_VISchedule_Amt =", const_VISchedule_Amt, '\n',
-        "Global: const_VICorrectResponse =", const_VICorrectResponse, '\n',
         "Global: const_ITISchedule_Amt =", const_ITISchedule_Amt, '\n',
         "Global: const_ITI_Interval =", const_ITI_Interval, '\n',
         "Global: const_ITI_Add_Delay =", const_ITI_Add_Delay, '\n',
