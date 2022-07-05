@@ -10,16 +10,19 @@ import pyopcond_dep as pyop
 #==========================================================#
 
 # Global Static Variables:
-const_ITI = 180                      # Mean InterTrial Interval (ITI) (in sec)
-const_ExperimentTime = 4500         # Time of Entire Experiment
-const_ITISchedule_Amt = 5
-const_ITI_Interval = 20
+const_ITI = 180                     # Mean value of ITI (sec)
+const_ExperimentTime = 4500         # Time of Entire Experiment (sec)
+const_ITISchedule_Amt = 5           # How many ITI number candidates are generated from PyOp
+const_ITI_Interval = 20             # Amount of ITI
+
+# =================+++++++================= #
+# ! DO NOT CHANGE ANYTHING HERE !
 
 # Global Dynamic Variables:
 ITI_Ticker = 0                      # Tracks amount of time ITI has looped
 ITI_T = 0                           # Summated ITI Timer (sec)
 ITI_Float = 0                       # ITI Timer (sec)
-ITI_Pool = 0
+ITI_Pool = 0                        # Array store of ITI numbers from PyOp
 
 #==========================================================#
 #                   Actual Program                         #
@@ -89,7 +92,7 @@ class ITI_Timer:      #StateID = ?
             p_Timer.ITI_T.setRepeats(ITI_T)
             p_Timer.ITI_T.start()
         else:
-            print('ITI Timer: Ending ITI, Switching to FInish Class')
+            print('ITI Timer: Ending ITI, Switching to Finish Class')
             p_State.switch(Finish)
     def s_ITI_T_tick(count):
         if count == ITI_T:
