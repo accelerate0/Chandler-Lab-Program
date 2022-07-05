@@ -31,7 +31,7 @@ VI2_Float = 0
 VI3_Float = 0
 VI_Pool = 0
 VI_Ticker = 1       # Keeps track of how many VI iterations have passed, starts at VI 1 interval
-VI_Timer = 0
+VI_Timing = 0
 # Global Dynamic Variables That Will Change During ITI:
 ITI_Ticker = 0      # Keeps track of how many ITI iterations have passed, starts at ITI 1 interval
 ITI_Float = 0       # Randomly generated number for ITI intervaling, in sec
@@ -84,47 +84,57 @@ class Always:   #StateID = 0
         print('Global: Switching to PreTrial class')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
+        global ITI_Switch
         # Shuts down entire experiment
         if count == const_ExperimentTime:
             print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
+        if count == count:
+            if ITI_Switch == 2:
+                ITI_Switch = 1
+                p_Timer.ITI_T.setPeriod(1)
+                p_Timer.ITI_T.setRepeats(ITI_Switch)
+                p_Timer.ITI_T.start()
 
     # ===== Conditional Based ITI Scheduling ===== #
     def s_ITI_T_tick(count):
         global ITI_Float, ITI_T, ITI_Ticker, ITI_Switch
         if count == ITI_Switch:
+            ITI_Switch = -1
             print('ITI Timer: Setting up the ITI Timer')
             if ITI_Ticker <= const_ITI_Interval:
                 ITI_Ticker = ITI_Ticker + 1
                 print('ITI Timer', ITI_Ticker, ': Entered')
                 ITI_T = 0
                 ITI_Float = 0
-                while ITI_Float == 0:
+                while ITI_Float <= 30:
                     ITI_Float = int(random.choice(ITI_Pool))
                     print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
-                    if ITI_Ticker == 4 or ITI_Ticker == 7:
-                        ITI_T = ITI_Float + const_ITI_Add_Delay
-                        print('ITI Timer', ITI_Ticker, ': Added additional', const_ITI_Add_Delay, 'delay')
                     break
-                ITI_T = ITI_T + 30
+                if ITI_Ticker == 4 or ITI_Ticker == 7:
+                    ITI_T = ITI_Float + const_ITI_Add_Delay
+                    print('ITI Timer', ITI_Ticker, ': Added additional', const_ITI_Add_Delay, 'delay')
+                else:
+                    ITI_T = ITI_Float
                 p_Timer.ITI_T.setPeriod(1)
                 p_Timer.ITI_T.setRepeats(ITI_T)
                 print('ITI Timer', ITI_Ticker, ': Started ITI Timer')
                 p_Timer.ITI_T.start()
-        elif count == ITI_T - 30:
+                ITI_Switch = 3
+        if count == ITI_T - 30 and ITI_Switch == 3:
             p_Rig.o_Tone.turnOn()
             print('ITI Timer', ITI_Ticker, ': Tone On')
-        elif count == ITI_T - 28:
+        if count == ITI_T - 28 and ITI_Switch == 3:
             p_Rig.o_Shock.turnOn()
             print('ITI Timer', ITI_Ticker, ': Shock On')
-        elif count == ITI_T:
+        if count == ITI_T and ITI_Switch == 3:
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
             print('ITI Timer', ITI_Ticker, ': Shock & Tone Off')
             print('ITI Timer', ITI_Ticker, ': Reinitializing ITI Timer')
-            p_Timer.ITI_T.setPeriod(1)
-            p_Timer.ITI_T.setRepeats(ITI_Switch)
-            p_Timer.ITI_T.start()
+            ITI_Switch = 2
+
+
 
 # =================+++++++================= #
 
@@ -149,25 +159,25 @@ class PreTrial:    #StateID = ?
 
 class VI_Timer:    #StateID = ?
     def s_State_enter():
-        global VI_Timer
-        VI_Timer = 0
+        global VI_Timing
+        VI_Timing = 0
         if VI_Ticker == 1:
-            VI_Timer = VI1_Float
+            VI_Timing = VI1_Float
             p_Timer.VI_T.setRepeats(VI1_Float)
             print('VI ', VI_Ticker,' Timer: Initiating timer')
         elif VI_Ticker == 2:
-            VI_Timer = VI2_Float
+            VI_Timing = VI2_Float
             p_Timer.VI_T.setRepeats(VI2_Float)
             print('VI ', VI_Ticker,' Timer: Initiating timer')
         elif VI_Ticker == 3:
-            VI_Timer = VI3_Float
+            VI_Timing = VI3_Float
             p_Timer.VI_T.setRepeats(VI3_Float)
             print('VI ', VI_Ticker,' Timer: Initiating timer')
         p_Timer.VI_T.setPeriod(1)
         p_Timer.VI_T.start()
         print('VI ', VI_Ticker,' Timer: VI Timer Started')
     def s_VI_T_tick(count):
-        if count == VI_Timer:
+        if count == VI_Timing:
             print('VI ', VI_Ticker,' Timer: Interval complete, switching to VI Event class')
             p_State.switch(VI_Event)
 
