@@ -48,19 +48,19 @@ class Trial:      #StateID = ?
     def s_State_enter():
         print('Trial: Initiating Trial class')
     def s_i_L_Lever_Press_rise():
-        print('Trial: Left Lever was pressed, switching to Reward class')
-        p_State.switch(Reward)
-    def s_i_R_Lever_Press_rise():
-        print('Trial: Right Lever was pressed, switching to Reward class')
-        p_State.switch(Reward)
-
-class Reward:      #StateID = ?
-    def s_State_enter():
-        print('Reward: Initiating Dispense')
+        print('Event: Left Lever (active lever) was pressed, Initiating Dispense')
         p_Rig.o_Liq_Dispenser.turnOn()
         time.sleep(const_DispenseTime)
         p_Rig.o_Liq_Dispenser.turnOff()
-        print('Reward: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
+        print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
         p_State.switch(Trial)
+    def s_i_R_Lever_Press_rise():
+        print('Event: Right Lever (active lever) was pressed, Initiating Dispense')
+        p_Rig.o_Liq_Dispenser.turnOn()
+        time.sleep(const_DispenseTime)
+        p_Rig.o_Liq_Dispenser.turnOff()
+        print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
+        p_State.switch(Trial)
+
 
 # = #
