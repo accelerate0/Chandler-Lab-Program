@@ -143,9 +143,11 @@ class Always:   #StateID = 0
             p_Rig.o_Shock.turnOff()
             print('ITI Timer', ITI_Ticker, ': Shock & Tone Off')
             print('ITI Timer', ITI_Ticker, ': Reinitializing ITI Timer')
-            ITI_Switch = 3
-
-
+            if ITI_Ticker > const_ITI_Interval:
+                ITI_Switch = -1
+                print('ITI Timer: ITI scheduling is finished')
+            else:
+                ITI_Switch = 3
 
 # =================+++++++================= #
 
