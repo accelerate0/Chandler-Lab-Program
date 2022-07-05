@@ -53,11 +53,13 @@ class Timer:      #StateID = ?
     def s_State_enter():
         global RI_Float, RI_Pool
         print('Trial: Initiating Trial class')
-        RI_Pool = rand_int(const_RIFloat, const_RIAmount)
+        pyop.rand_int(const_RIFloat, const_RIAmount)
+        RI_Pool = pyop.rand_int.output
         RI_Float = int(random.choice(RI_Pool))
         print('Setting up Trial Timer', '\n',
-        'Generated', Float, 'sec as the random number', '\n',
-        'Using mean of', const_Float, 'sec', '\n')
+        'Chose', RI_Float, 'sec for the RI30 Timer', '\n',
+        'Generated', RI_Pool, 'sec as the pool', '\n',
+        'Used mean of', RI_Float, 'sec', '\n')
         p_Timer.Trial_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Trial_T.setRepeats(RI_Float) # Amount of ticks
         p_Timer.Trial_T.start() # Turn on timer
