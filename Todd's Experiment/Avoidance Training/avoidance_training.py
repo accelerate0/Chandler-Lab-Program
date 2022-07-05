@@ -93,7 +93,7 @@ class Always:   #StateID = 0
             if ITI_Switch == 0:
                 # Creating + Starting ITI Timer
                 print('ITI: Initializing the ITI Timer for the first time')
-                ITI_Switch == 1
+                ITI_Switch = 1
                 p_Timer.ITI_T.setPeriod(1)
                 p_Timer.ITI_T.setRepeats(ITI_Switch)
                 p_Timer.ITI_T.start()
