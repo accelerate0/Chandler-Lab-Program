@@ -15,30 +15,32 @@ import pyopcond_dep as pyop
 
 # Global Static Variables:
 const_ExperimentTime = 3600     # Time of Entire Experiment
-const_VI_Mean = 30              # Variable interval schedule with mean interval (in sec)
+const_VI_Mean = 30              # VI scheduling mean interval (sec)
 const_VISchedule_Amt = 10       # Amount of VI schedule numbers generated
-const_VICorrectResponse = 3     # Right lever press timeout threshold window following the end of the VI timer (in sec)
 const_ITISchedule_Amt = 5       # Amount of ITI schedule numbers generated
-const_ITI_Mean = 180            # Mean Inter-Trial Interval (ITI) (in sec)
-const_ITI_Interval = 9          # Amount of ITI
-const_ITI_Add_Delay = 300       # Additional ITI Interval Delay
+const_ITI_Mean = 180            # ITI scheduling mean interval (sec)
+const_ITI_Interval = 9          # Amount of ITI's scheduling
+const_ITI_Add_Delay = 300       # Additional ITI Delay
 
 # =================+++++++================= #
+# ! DO NOT CHANGE ANYTHING HERE !
+# This is for controlling program flow and to follow & ensure specific, sequential executions of functions
 
 # Global Dynamic VI Timer & Related Variables:
-VI1_Float = 0
-VI2_Float = 0
-VI3_Float = 0
-VI_Pool = 0
+VI1_Float = 0       # Related to VI Timer 1 declaration & mathematics
+VI2_Float = 0       # Related to VI Timer 2 declaration & mathematics
+VI3_Float = 0       # Related to VI Timer 3 declaration & mathematics
+VI_Pool = 0         # Related to PyOp VI array generation in number pools
 VI_Ticker = 1       # Keeps track of how many VI iterations have passed, starts at VI 1 interval
-VI_Timing = 0
+VI_Timing = 0       # The actual VI Timer setting (sec) that is executed
+
 # Global Dynamic Variables That Will Change During ITI:
 ITI_Ticker = 0      # Keeps track of how many ITI iterations have passed, starts at ITI 1 interval
-ITI_Float = 0       # Randomly generated number for ITI intervaling, in sec
+ITI_Float = 0       # Randomly generated number for ITI intervaling choosing from ITI_Pool, in sec
 ITI_T = 1           # The actual ITI summation value in sec which triggers the tone
-ITI_Pool = 0
-ITI_Interval = 0
-ITI_Switch = 0
+ITI_Pool = 0        # Array generation of ITI number pools from PyOp
+ITI_Interval = 0    # Keeps track of how many ITI's passed
+ITI_Switch = 0      # Controls program flow and ensures correct order of execution in ITI
 
 #==========================================================#
 #                   Actual Program                         #
@@ -90,14 +92,17 @@ class Always:   #StateID = 0
             print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
         if count == count: # Anything here is always being checked and executed
+            # Related to ITI, hacking Pynapse to allow parallel execution of ITI alongside VI
+            # Using short 1 sec timers to force ITI's to occur and switching from ITI to ITI
             if ITI_Switch == 0:
-                # Creating + Starting ITI Timer
+                # Initiating ITI Timer creation for the first time
                 print('ITI: Initializing the ITI Timer for the first time')
                 ITI_Switch = 1
                 p_Timer.ITI_T.setPeriod(1)
                 p_Timer.ITI_T.setRepeats(ITI_Switch)
                 p_Timer.ITI_T.start()
             if ITI_Switch == 3:
+                # Initiating ITI Timer creation subsequently
                 ITI_Switch = 1
                 p_Timer.ITI_T.setPeriod(1)
                 p_Timer.ITI_T.setRepeats(ITI_Switch)
