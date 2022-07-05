@@ -91,11 +91,13 @@ class ITI_Timer:      #StateID = ?
             p_Timer.ITI_T.setPeriod(1)
             p_Timer.ITI_T.setRepeats(ITI_T)
             p_Timer.ITI_T.start()
+            print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
+            p_State.switch(ITI_Event)
         else:
             print('ITI Timer: Ending ITI, Switching to Finish Class')
             p_State.switch(Finish)
     def s_ITI_T_tick(count):
-        if count == ITI_T:
+        if count == ITI_T - 30:
             print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
             p_State.switch(ITI_Event)
 
@@ -110,11 +112,12 @@ class ITI_Event:      #StateID = ?
         time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
-    def s_Global_T_tick(count):
-        p_Rig.o_L_Lever_Light.turnOff()
-        print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light')
-        print('ITI ', ITI_Ticker,' Event: Completed, switching to ITI Timer Class')
-        p_State.switch(ITI_Timer)
+    def s_ITI_T_tick(count):
+        if count == ITI_T:
+            p_Rig.o_L_Lever_Light.turnOff()
+            print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light')
+            print('ITI ', ITI_Ticker,' Event: Completed, switching to ITI Timer Class')
+            p_State.switch(ITI_Timer)
 
 # =================+++++++================= #
 

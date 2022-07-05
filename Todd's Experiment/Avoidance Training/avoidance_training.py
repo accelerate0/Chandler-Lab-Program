@@ -135,7 +135,7 @@ class Always:   #StateID = 0
         if count == ITI_T - 30 and ITI_Switch == 2:
             p_Rig.o_Tone.turnOn()
             print('ITI Timer', ITI_Ticker, ': Tone On')
-        if count == ITI_T - 28 and ITI_Switch == 2:
+        if count == ITI_T - 2 and ITI_Switch == 2:
             p_Rig.o_Shock.turnOn()
             print('ITI Timer', ITI_Ticker, ': Shock On')
         if count == ITI_T and ITI_Switch == 2:
