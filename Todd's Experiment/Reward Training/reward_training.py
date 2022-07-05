@@ -11,7 +11,7 @@ import pyopcond_dep as pyop
 
 # Global Static Variables:
 const_ITI = 180                     # Mean value of ITI (sec)
-const_ExperimentTime = 4500         # Time of Entire Experiment (sec)
+const_ExperimentTime = 9999         # Time of Entire Experiment (sec)
 const_ITISchedule_Amt = 5           # How many ITI number candidates are generated from PyOp
 const_ITI_Interval = 20             # Amount of ITI
 
@@ -78,8 +78,8 @@ class ITI_Timer:      #StateID = ?
                 # Choosing ITI Number randomly for ITI timer
                 print('ITI ', ITI_Ticker,' Timer: Creating ITI Timer')
                 ITI_Float = int(random.choice(ITI_Pool))
-                print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
-                break
+                print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
+            print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
             # Exceptional case for ITI iterations
             if ITI_Ticker == 4 or ITI_Ticker == 7 or ITI_Ticker == 10 or ITI_Ticker == 13 or ITI_Ticker == 16 or ITI_Ticker == 19:
                 print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
@@ -123,8 +123,7 @@ class ITI_Event:      #StateID = ?
 
 class Finish:      #StateID = ?
     def s_State_enter():
-        print('ITI Finish: ITI Scheduling Finished, entering grace period')
-    def s_Global_T_tick(count):
-        print(const_ExperimentTime - count, 'sec before shutdown (Experiment Finished)')
+        print('ITI Finish: ITI Scheduling finished, shutting down')
+        syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
 
 # = #

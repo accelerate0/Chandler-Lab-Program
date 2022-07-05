@@ -121,7 +121,7 @@ class Always:   #StateID = 0
                 while ITI_Float <= 30:
                     ITI_Float = int(random.choice(ITI_Pool))
                     print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
-                    break
+                print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
                 if ITI_Ticker == 4 or ITI_Ticker == 7:
                     ITI_T = ITI_Float + const_ITI_Add_Delay
                     print('ITI Timer', ITI_Ticker, ': Added additional', const_ITI_Add_Delay, 'delay')

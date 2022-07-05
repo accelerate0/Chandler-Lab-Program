@@ -11,7 +11,7 @@ import pyopcond_dep as pyop
 
 # Global Static Variables:
 const_ITI = 180                     # Mean value of ITI (sec)
-const_ExperimentTime = 4500         # Time of Entire Experiment (sec)
+const_ExperimentTime = 9999         # Time of Entire Experiment (sec)
 const_ITISchedule_Amt = 5           # How many ITI number candidates are generated from PyOp
 const_ITI_Interval = 9              # Amount of ITI
 
@@ -78,8 +78,8 @@ class ITI_Timer:      #StateID = ?
                 # Choosing ITI Number randomly for ITI timer
                 print('ITI ', ITI_Ticker,' Timer: Creating ITI Timer')
                 ITI_Float = int(random.choice(ITI_Pool))
-                print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
-                break
+                print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
+            print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
             # Exceptional case for ITI iterations
             if ITI_Ticker == 4 or ITI_Ticker == 7 or ITI_Ticker == 10 or ITI_Ticker == 13 or ITI_Ticker == 16 or ITI_Ticker == 19:
                 print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
@@ -105,7 +105,7 @@ class ITI_Event:      #StateID = ?
     def s_State_enter():
         print('ITI ', ITI_Ticker,' Event: Event Started')
         p_Rig.o_L_Lever_Light.turnOn()
-        P_Rig.o_Tone.turnOn()
+        p_Rig.o_Tone.turnOn()
         print('ITI ', ITI_Ticker,' Event: Left Lever Light Turned & Tone On')
     def s_i_L_Lever_Press_rise():
         print('ITI ', ITI_Ticker,' Event: Left Lever was pressed')
@@ -116,7 +116,7 @@ class ITI_Event:      #StateID = ?
     def s_ITI_T_tick(count):
         if count == ITI_T:
             p_Rig.o_L_Lever_Light.turnOff()
-            P_Rig.o_Tone.turnOff()
+            p_Rig.o_Tone.turnOff()
             print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light & Tone')
             print('ITI ', ITI_Ticker,' Event: Completed, switching to ITI Timer Class')
             p_State.switch(ITI_Timer)
@@ -125,8 +125,7 @@ class ITI_Event:      #StateID = ?
 
 class Finish:      #StateID = ?
     def s_State_enter():
-        print('ITI Finish: ITI Scheduling Finished, entering grace period')
-    def s_Global_T_tick(count):
-        print(const_ExperimentTime - count, 'sec before shutdown (Experiment Finished)')
+        print('ITI Finish: ITI Scheduling finished, shutting down')
+        syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
 
 # = #
