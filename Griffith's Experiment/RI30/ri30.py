@@ -14,7 +14,8 @@ const_RIFloat = 30
 const_RIAmount = 8
 const_CorrectResponse = 3           # Threshold window of opportunity that allows dispensing (sec)
 # Global Dynamic Variables:
-Float = 0
+RI_Float = 0
+RI_Pool = 0
 
 #==========================================================#
 #                   Actual Program                         #
@@ -78,7 +79,7 @@ class Event:      #StateID = ?
         time.sleep(const_DispenseTime)
         p_Rig.o_Liq_Dispenser.turnOff()
         print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
-        p_State.switch(Trial)
+        p_State.switch(Timer)
     def s_i_R_Lever_Press_rise():
         print('Event: Right Lever (inactive lever) was pressed, nothing happens')
 
