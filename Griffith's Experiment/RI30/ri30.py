@@ -2,6 +2,8 @@
 
 import numpy as np
 import time
+import pyopcond_dep as pyop
+import random
 
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
@@ -60,9 +62,9 @@ class Timer:      #StateID = ?
         print('Setting up Trial Timer', '\n',
         'Chose', RI_Float, 'sec for the RI30 Timer', '\n',
         'Generated', RI_Pool, 'sec as the pool', '\n',
-        'Used mean of', RI_Float, 'sec', '\n')
-        p_Timer.Trial_T.setPeriod(1) # Length between ticks (sec)
-        p_Timer.Trial_T.setRepeats(RI_Float) # Amount of ticks
+        'Used mean of', const_RIFloat, 'sec', '\n')
+        p_Timer.Trial_T.setPeriod(1) 
+        p_Timer.Trial_T.setRepeats(RI_Float)
         p_Timer.Trial_T.start() # Turn on timer
         print('Timer: Trial Timer initiated')
     def s_Trial_T_tick(count):
