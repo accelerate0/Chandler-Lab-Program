@@ -38,7 +38,7 @@ class Always:   #StateID = 0
         "const_DispenseTime =", const_DispenseTime, '\n',
         "const_RIFloat =", const_RIFloat, '\n')
         # Setting up RI Schedule via PyOp
-        RI_Amount = const_ExperimentTime/const_RIFloat
+        RI_Amount = int(const_ExperimentTime/const_RIFloat)
         pyop.rand_int(const_RIFloat, RI_Amount)
         pyop.rand_int.output.sort()
         RI_Pool = pyop.rand_int.output
