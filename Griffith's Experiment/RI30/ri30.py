@@ -1,6 +1,5 @@
 # Pynapse Source #
 
-import numpy as np
 import time
 import pyopcond_dep as pyop
 import random
@@ -15,7 +14,8 @@ const_DispenseTime = 1.665          # Dispense rate of the liquid dispenser (sec
 const_RIFloat = 30
 const_RIAmount = 8
 const_CorrectResponse = 3           # Threshold window of opportunity that allows dispensing (sec)
-# Global Dynamic Variables:
+
+# Global Dynamic Variables (Do Not Change):
 RI_Float = 0
 RI_Pool = 0
 
@@ -31,7 +31,11 @@ class Always:   #StateID = 0
         print('Starting the global experimental', const_ExperimentTime,'sec timer')
         p_Timer.Global_T.start() # Turn on timer
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
-        "const_ExperimentTime =", const_ExperimentTime, '\n')
+        "const_ExperimentTime =", const_ExperimentTime, '\n',
+        "const_DispenseTime =", const_DispenseTime, '\n',
+        "const_RIFloat =", const_RIFloat, '\n',
+        "const_RIAmount =", const_RIAmount, '\n',
+        "const_CorrectResponse =", '\n')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
         if count == const_ExperimentTime:
@@ -63,7 +67,7 @@ class Timer:      #StateID = ?
         'Chose', RI_Float, 'sec for the RI30 Timer', '\n',
         'Generated', RI_Pool, 'sec as the pool', '\n',
         'Used mean of', const_RIFloat, 'sec', '\n')
-        p_Timer.Trial_T.setPeriod(1) 
+        p_Timer.Trial_T.setPeriod(1)
         p_Timer.Trial_T.setRepeats(RI_Float)
         p_Timer.Trial_T.start() # Turn on timer
         print('Timer: Trial Timer initiated')
@@ -73,8 +77,6 @@ class Timer:      #StateID = ?
             p_State.switch(Event)
 
 class Event:      #StateID = ?
-    def s_State_enter():
-        print('Event: Threshold window set to', const_CorrectResponse, 'sec, waiting on left lever press')
     def s_i_L_Lever_Press_rise():
         print('Event: Left Lever (active lever) was pressed, Initiating Dispense')
         p_Rig.o_Liq_Dispenser.turnOn()

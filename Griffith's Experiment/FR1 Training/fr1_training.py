@@ -1,6 +1,5 @@
 # Pynapse Source #
 
-import numpy as np
 import time
 
 #==========================================================#

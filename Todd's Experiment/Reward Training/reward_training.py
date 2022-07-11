@@ -91,8 +91,6 @@ class ITI_Timer:      #StateID = ?
             p_Timer.ITI_T.setPeriod(1)
             p_Timer.ITI_T.setRepeats(ITI_T)
             p_Timer.ITI_T.start()
-            print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
-            p_State.switch(ITI_Event)
         else:
             print('ITI Timer: Ending ITI, Switching to Finish Class')
             p_State.switch(Finish)
