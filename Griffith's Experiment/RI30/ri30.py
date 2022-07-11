@@ -11,13 +11,13 @@ import random
 # Global Static Variables:
 const_ExperimentTime = 1800         # Time of Entire Experiment (sec)
 const_DispenseTime = 1.665          # Dispense rate of the liquid dispenser (sec)
-const_RIFloat = 30
-const_RIAmount = 8
-const_CorrectResponse = 3           # Threshold window of opportunity that allows dispensing (sec)
+const_RIFloat = 30                  # RI mean based scheduling (sec), for example, an RI30 would be 30
 
 # Global Dynamic Variables (Do Not Change):
 RI_Float = 0
 RI_Pool = 0
+RI_Ticker = -1
+RI_Amount = 0
 
 #==========================================================#
 #                   Actual Program                         #
@@ -25,22 +25,36 @@ RI_Pool = 0
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
+        global RI_Pool, RI_Amount
+        # Setting up experimental timer
         print('Setting up Global Timer ')
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         print('Starting the global experimental', const_ExperimentTime,'sec timer')
         p_Timer.Global_T.start() # Turn on timer
+        # Printing constants
         print( "EXPERIMENTAL PRESETS:", '\n', '\n',
         "const_ExperimentTime =", const_ExperimentTime, '\n',
         "const_DispenseTime =", const_DispenseTime, '\n',
-        "const_RIFloat =", const_RIFloat, '\n',
-        "const_RIAmount =", const_RIAmount, '\n',
-        "const_CorrectResponse =", '\n')
+        "const_RIFloat =", const_RIFloat, '\n')
+        # Setting up RI Schedule via PyOp
+        RI_Amount = const_ExperimentTime/const_RIFloat
+        pyop.rand_int(const_RIFloat, RI_Amount)
+        pyop.rand_int.output.sort()
+        RI_Pool = pyop.rand_int.output
+        print("(PyOP RI) Probability factor (prob/sec):", pyop.rand_int.prob)
+        print("(PyOP RI) RI mean (sec):", pyop.rand_int.interval)
+        print("(PyOP RI) Amount of RI intervals (This multiplied by RI mean should be equal to experimental time):", pyop.rand_int.amount)
+        print('(PyOP RI) Generated RI Schedule:', '\n',
+        'Generated', RI_Pool, '(sec) as the pool', '\n')
+        # Switch
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
+        # Global Timer expiration condition
         if count == const_ExperimentTime:
             print(const_ExperimentTime, 'sec has passed and experiment is completed, shutting down')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
+
 
 # =================+++++++================= #
 
@@ -58,23 +72,23 @@ class PreTrial:    #StateID = ?
 
 class Timer:      #StateID = ?
     def s_State_enter():
-        global RI_Float, RI_Pool
-        print('Trial: Initiating Trial class')
-        pyop.rand_int(const_RIFloat, const_RIAmount)
-        RI_Pool = pyop.rand_int.output
-        RI_Float = int(random.choice(RI_Pool))
-        print('Setting up Trial Timer', '\n',
-        'Chose', RI_Float, 'sec for the RI30 Timer', '\n',
-        'Generated', RI_Pool, 'sec as the pool', '\n',
-        'Used mean of', const_RIFloat, 'sec', '\n')
-        p_Timer.Trial_T.setPeriod(1)
-        p_Timer.Trial_T.setRepeats(RI_Float)
-        p_Timer.Trial_T.start() # Turn on timer
-        print('Timer: Trial Timer initiated')
-    def s_Trial_T_tick(count):
-        if count == RI_Float:
-            print('Timer: Trial Timer finished, switching to Event class')
+        global RI_Float, RI_Ticker, RI_State
+        RI_State = 0
+        RI_Ticker = RI_Ticker + 1
+        RI_Float = int(RI_Pool[RI_Ticker])
+        print('Timer: Chose the', RI_Ticker, '-th number on the RI List Array')
+        print('Timer: Waiting until', RI_Float, 'sec until reward opportunity')
+        RI_State = 1
+    def s_Global_T_tick(count):
+        global RI_State
+        if count == RI_Float and RI_State == 1:
+            RI_State = 2
+            print('Timer:', RI_Float, 'sec reached, switching to Event class')
             p_State.switch(Event)
+        elif count > RI_Float and RI_State == 1:
+            print('Timer: Due to latency in code execution or subject input, ', RI_Float, 'sec',
+            'at', RI_Ticker, 'interval could not be completed, skipping & resetting back to Timer Class')
+            p_State.switch(Timer)
 
 class Event:      #StateID = ?
     def s_i_L_Lever_Press_rise():
