@@ -15,7 +15,7 @@ const_CorrectResponse = 3           # Threshold window of opportunity that allow
 const_Reinforcers = 0               # Involved in calculating the "J Factor" which is done automatically
 
 # Global Variables that are dyanmic (Do Not Change):
-J = 0 # The "J Factor", or Variable for INterval
+J = 0 # The "J Factor", or Variable for Interval
 
 #==========================================================#
 #                   Actual Program                         #
