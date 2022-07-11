@@ -76,7 +76,7 @@ class Timer:      #StateID = ?
         RI_State = 0
         RI_Ticker = RI_Ticker + 1
         RI_Float = int(RI_Pool[RI_Ticker])
-        print('Timer: Chose the', RI_Ticker, '-th number on the RI List Array')
+        print('Timer: Chose the', RI_Ticker + 1, '-th number on the RI Pool')
         print('Timer: Waiting until', RI_Float, 'sec until reward opportunity')
         RI_State = 1
     def s_Global_T_tick(count):
