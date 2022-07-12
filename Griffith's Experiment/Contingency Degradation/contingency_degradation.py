@@ -68,7 +68,7 @@ class Timer:      #StateID = ?
             time.sleep(const_DispenseTime)
             p_Rig.o_Liq_Dispenser.turnOff()
             print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
-            p_State.switch(Event)
+            p_State.switch(Timer)
 
 
 # = #
