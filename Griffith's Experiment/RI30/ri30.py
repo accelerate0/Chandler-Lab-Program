@@ -39,12 +39,12 @@ class Always:   #StateID = 0
         "const_RIFloat =", const_RIFloat, '\n')
         # Setting up RI Schedule via PyOp
         RI_Amount = int(const_ExperimentTime/const_RIFloat)
-        pyop.rand_int(const_RIFloat, RI_Amount)
-        pyop.rand_int.output.sort()
-        RI_Pool = pyop.rand_int.output
-        print("(PyOP RI) Probability factor (prob/sec):", pyop.rand_int.prob)
-        print("(PyOP RI) RI mean (sec):", pyop.rand_int.interval)
-        print("(PyOP RI) Amount of RI intervals (This multiplied by RI mean should be equal to experimental time):", pyop.rand_int.amount)
+        pyop.rand_int_withpi(const_RIFloat, RI_Amount)
+        pyop.rand_int_withpi.output.sort()
+        RI_Pool = pyop.rand_int_withpi.output
+        print("(PyOP RI) Probability factor (prob/sec):", pyop.rand_int_withpi.prob)
+        print("(PyOP RI) RI mean (sec):", pyop.rand_int_withpi.interval)
+        print("(PyOP RI) Amount of RI intervals (This multiplied by RI mean should be equal to experimental time):", pyop.rand_int_withpi.amount)
         print('(PyOP RI) Generated RI Schedule:', '\n',
         'Generated', RI_Pool, '(sec) as the pool', '\n')
         # Switch
