@@ -194,16 +194,16 @@ class VI_Timer:    #StateID = ?
 class VI_Event:    #StateID = ?
     def s_State_enter():
         print('VI ', VI_Ticker,' Event: Entering Event class')
-        p_Rig.o_R_Lever_Light.turnOn()
-        print('VI ', VI_Ticker,' Event: Left Lever Light On')
     def s_i_R_Lever_Press_rise():
-        print('VI ', VI_Ticker,' Event: Lever was pressed')
+        print('VI ', VI_Ticker,' Event: Right Lever was pressed')
         p_Rig.o_Pellet_Dispenser.turnOn()
+        print('VI ', VI_Ticker,' Event: Right Lever Light On')
+        p_Rig.o_R_Lever_Light.turnOn()
         time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI ', VI_Ticker,' Event: Reward dispensed')
         p_Rig.o_R_Lever_Light.turnOff()
-        print('VI ', VI_Ticker,' Event: Lever Lever Light Off')
+        print('VI ', VI_Ticker,' Event: Right Lever Light Off')
         print('VI ', VI_Ticker,' Event: Switching to VI Check Class')
         p_State.switch(VI_Check)
 
