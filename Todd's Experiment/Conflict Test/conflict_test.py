@@ -59,7 +59,7 @@ class PreTrial:    #StateID = ?
     def s_State_enter():
         p_Rig.o_House_Light.turnOn() # Turns on light
         print('Pretrial: House Light is On')
-        p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
+        p_Rig.o_R_Lever_Extension.turnOn() # Turns on left lever
         print('Pretrial: Left Lever is Out')
         p_State.switch(ITI_Timer) # Switches to Trial class
 
@@ -102,10 +102,10 @@ class ITI_Timer:      #StateID = ?
 class ITI_Event:      #StateID = ?
     def s_State_enter():
         print('ITI ', ITI_Ticker,' Event: Event Started')
-        p_Rig.o_L_Lever_Light.turnOn()
+        p_Rig.o_R_Lever_Light.turnOn()
         p_Rig.o_Tone.turnOn()
         print('ITI ', ITI_Ticker,' Event: Left Lever Light Turned & Tone On')
-    def s_i_L_Lever_Press_rise():
+    def s_i_R_Lever_Press_rise():
         print('ITI ', ITI_Ticker,' Event: Left Lever was pressed')
         p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
         time.sleep(1)
@@ -113,7 +113,7 @@ class ITI_Event:      #StateID = ?
         print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
     def s_ITI_T_tick(count):
         if count == ITI_T:
-            p_Rig.o_L_Lever_Light.turnOff()
+            p_Rig.o_R_Lever_Light.turnOff()
             p_Rig.o_Tone.turnOff()
             print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light & Tone')
             print('ITI ', ITI_Ticker,' Event: Completed, switching to ITI Timer Class')

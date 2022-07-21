@@ -48,9 +48,9 @@ ITI_Switch = 0      # Controls program flow and ensures correct order of executi
 
 class Always:   #StateID = 0
     def s_Mode_recprev():
-        # Declaring changing Global Variables
+        # Declaring Dynamic Global Vars for in-class changes
         global VI1_Float, VI2_Float, VI3_Float, VI_Pool, ITI_Pool
-        # Printing Constants on Console
+        # Printing Constants (Static Global Vars) on Console
         print( "Global: Printing Experimental Presets", '\n', '\n',
         "Global: const_ExperimentTime =", const_ExperimentTime, '\n',
         "Global: const_VI_Mean =", const_VI_Mean, '\n',
@@ -61,7 +61,6 @@ class Always:   #StateID = 0
         "Global: const_ITI_Mean =", const_ITI_Mean,
         '\n', '\n', '\n')
         # Setting Up Global Timer
-        print('Global: Setting up Global Timer ')
         p_Timer.Global_T.setPeriod(1)
         p_Timer.Global_T.setRepeats(const_ExperimentTime)
         print('Global: Starting the global experimental', const_ExperimentTime, ' sec timer')
@@ -70,10 +69,13 @@ class Always:   #StateID = 0
         pyop.var_int(const_VISchedule_Amt, const_VI_Mean)
         VI_Pool = pyop.var_int.output_straight
         print("Global: Generated", VI_Pool, "VI Pool from PyOp")
+        # Setting Up VI_Float values
         while VI1_Float == 0 and VI2_Float == 0 and VI3_Float == 0:
             VI1_Float = int(random.choice(VI_Pool))
             VI2_Float = int(random.choice(VI_Pool))
             VI3_Float = int(random.choice(VI_Pool))
+            # Using integer function may cause VI to be 0
+            # In whatever case, break VI Generation loop once the VI_Float numbers are valid
             if VI1_Float > 0 and VI2_Float > 0 and VI3_Float > 0:
                 print("Global: The VI numbers generated are ", VI1_Float, " ", VI2_Float, " ", VI3_Float, " seconds", '\n', '\n')
                 break
@@ -156,7 +158,7 @@ class PreTrial:    #StateID = ?
         # Creates static experimental environment
         p_Rig.o_House_Light.turnOn()
         print('Pretrial: Light is On')
-        p_Rig.o_L_Lever_Extension.turnOn()
+        p_Rig.o_R_Lever_Extension.turnOn()
         print('Pretrial: Lever is Out')
         print('Pretrial: Switching to VI Timer Class')
         # Switch Class
@@ -192,15 +194,15 @@ class VI_Timer:    #StateID = ?
 class VI_Event:    #StateID = ?
     def s_State_enter():
         print('VI ', VI_Ticker,' Event: Entering Event class')
-        p_Rig.o_L_Lever_Light.turnOn()
+        p_Rig.o_R_Lever_Light.turnOn()
         print('VI ', VI_Ticker,' Event: Left Lever Light On')
-    def s_i_L_Lever_Press_rise():
+    def s_i_R_Lever_Press_rise():
         print('VI ', VI_Ticker,' Event: Lever was pressed')
         p_Rig.o_Pellet_Dispenser.turnOn()
         time.sleep(1)
         p_Rig.o_Pellet_Dispenser.turnOff()
         print('VI ', VI_Ticker,' Event: Reward dispensed')
-        p_Rig.o_L_Lever_Light.turnOff()
+        p_Rig.o_R_Lever_Light.turnOff()
         print('VI ', VI_Ticker,' Event: Lever Lever Light Off')
         print('VI ', VI_Ticker,' Event: Switching to VI Check Class')
         p_State.switch(VI_Check)
