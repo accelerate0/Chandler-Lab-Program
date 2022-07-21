@@ -43,7 +43,7 @@ class PreTrial:    #StateID = ?
     def s_State_enter():
         p_Rig.o_House_Light.turnOn() # Turns on light
         print('Pretrial: House Light is On')
-        p_State.switch(Trial_Timer) # Switches to Trial class
+        p_State.switch(Trial_Timer_1) # Switches to Trial class
 
 # =================+++++++================= #
 
@@ -75,16 +75,16 @@ class Trial_Event:      #StateID = ?
             p_Timer.Trial_T.start()
             p_Rig.o_Tone.turnOn()
             print('Trial ', Trial_Ticker,' Event: Tone On')
-        def s_Trial_T_tick(count):
-            if count == const_Latency:
-                if const_Options == 1:
-                    p_Rig.o_R_Lever_Light.turnOff()
-                    print('Trial ', Trial_Ticker,' Event: Right Lever Light Off')
-                elif const_Options == 2:
-                    p_Rig.o_Tone.turnOff()
-                    print('Trial ', Trial_Ticker,' Event: Tone Off')
-                print('Trial ', Trial_Ticker,' Event:', const_Latency, 'sec Trial Timer Finished')
-                p_State.switch(Trial_Timer_2)
+    def s_Trial_T_tick(count):
+        if count == const_Latency:
+            if const_Options == 1:
+                p_Rig.o_R_Lever_Light.turnOff()
+                print('Trial ', Trial_Ticker,' Event: Right Lever Light Off')
+            elif const_Options == 2:
+                p_Rig.o_Tone.turnOff()
+                print('Trial ', Trial_Ticker,' Event: Tone Off')
+            print('Trial ', Trial_Ticker,' Event:', const_Latency, 'sec Trial Timer Finished')
+            p_State.switch(Trial_Timer_2)
 
 class Trial_Timer_2:      #StateID = ?
     def s_State_enter():
