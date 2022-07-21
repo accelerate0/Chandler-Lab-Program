@@ -50,42 +50,55 @@ class PreTrial:    #StateID = ?
 
 # =================+++++++================= #
 
-class Trial_Timer:      #StateID = ?
+class Trial_Timer_1:      #StateID = ?
     def s_State_enter():
-        global Trial_Ticker,
+        global Trial_Ticker
         Trial_Ticker = Trial_Ticker + 1
         if Trial_Ticker <= const_Trial_Amount:
-            print('Trial ', Trial_Ticker,' Timer: Starting Trial 1 Timer')
             p_Timer.Trial_T.setPeriod(1)
             p_Timer.Trial_T.setRepeats(const_Trial_T1)
             p_Timer.Trial_T.start()
-            print('Trial ', Trial_Ticker,' Timer: Trial 1 Timer Finished')
+            print('Trial ', Trial_Ticker,' Timer: Trial 1 Timer On')
         else:
             p_State.switch(Finish)
     def s_Trial_T_tick(count):
         if count == const_Trial_T1:
+            print('Trial ', Trial_Ticker,' Timer: Trial 1 Timer Finished')
             p_State.switch(Trial_Event)
 
 class Trial_Event:      #StateID = ?
     def s_State_enter():
+        p_Timer.Trial_T.setPeriod(1)
+        p_Timer.Trial_T.setRepeats(const_Latency)
         if const_Options == 1:
+            p_Timer.Trial_T.start()
             p_Rig.o_R_Lever_Light.turnOn()
-            time.sleep(const_Latency)
-            p_Rig.o_R_Lever_Light.turnOff()
-            print('Trial ', Trial_Ticker,' Event: Blinked Right Lever Light')
+            print('Trial ', Trial_Ticker,' Event: Right Lever Light On')
         elif const_Options == 2:
+            p_Timer.Trial_T.start()
             p_Rig.o_Tone.turnOn()
-            time.sleep(const_Latency)
-            p_Rig.o_Tone.turnOff()
-            print('Trial ', Trial_Ticker,' Event: Tone Initiated')
-        print('Trial ', Trial_Ticker,' Event: Starting Trial 2 Timer')
+            print('Trial ', Trial_Ticker,' Event: Tone On')
+        def s_Trial_T_tick(count):
+            if count == const_Latency:
+                if const_Options == 1:
+                    p_Rig.o_R_Lever_Light.turnOff()
+                    print('Trial ', Trial_Ticker,' Event: Right Lever Light Off')
+                elif const_Options == 2:
+                    p_Rig.o_Tone.turnOff()
+                    print('Trial ', Trial_Ticker,' Event: Tone Off')
+                print('Trial ', Trial_Ticker,' Event:', const_Latency, 'sec Trial Timer Finished')
+                p_State.switch(Trial_Timer_2)
+
+class Trial_Timer_2:      #StateID = ?
+    def s_State_enter():
         p_Timer.Trial_T.setPeriod(1)
         p_Timer.Trial_T.setRepeats(const_Trial_T2)
         p_Timer.Trial_T.start()
+        print('Trial ', Trial_Ticker,' Event: Trial 2 Timer On')
     def s_Trial_T_tick(count):
         if count == const_Trial_T2:
             print('Trial ', Trial_Ticker,' Event: Trial 2 Timer Finished')
-            p_State.switch(Trial_Timer)
+            p_State.switch(Trial_Timer_1)
 
 # =================+++++++================= #
 
