@@ -1,8 +1,5 @@
 # Pynapse Source #
 
-import time
-import pyopcond_dep as pyop
-
 #==========================================================#
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
