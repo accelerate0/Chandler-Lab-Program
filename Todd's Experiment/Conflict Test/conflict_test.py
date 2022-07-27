@@ -14,6 +14,8 @@ const_ITI = 180                     # Mean value of ITI (sec)
 const_ExperimentTime = 9999         # Time of Entire Experiment (sec)
 const_ITISchedule_Amt = 5           # How many ITI number candidates are generated from PyOp
 const_ITI_Interval = 9              # Amount of ITI
+const_ITI_Delay_Amount = 300        # Delay amount (sec)
+const_ITI_Delay_Div = 3             # Divisibility of the ITI delay ("Example: After every 3rd ITI interval is (3)")
 
 # =================+++++++================= #
 # ! DO NOT CHANGE ANYTHING HERE !
@@ -23,6 +25,7 @@ ITI_Ticker = 0                      # Tracks amount of time ITI has looped
 ITI_T = 0                           # Summated ITI Timer (sec)
 ITI_Float = 0                       # ITI Timer (sec)
 ITI_Pool = 0                        # Array store of ITI numbers from PyOp
+ITI_Ticker_Math = 0                 # Related to finding the divisibility of the ITI for ITI delays
 
 #==========================================================#
 #                   Actual Program                         #
@@ -67,7 +70,7 @@ class PreTrial:    #StateID = ?
 
 class ITI_Timer:      #StateID = ?
     def s_State_enter():
-        global ITI_Float, ITI_Ticker, ITI_T
+        global ITI_Float, ITI_Ticker, ITI_T, ITI_Ticker_Math
         # Resetting ITI Variables
         ITI_T = 0
         ITI_Float = 0
@@ -81,9 +84,10 @@ class ITI_Timer:      #StateID = ?
                 print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
             print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
             # Exceptional case for ITI iterations
-            if ITI_Ticker == 4 or ITI_Ticker == 7 or ITI_Ticker == 10 or ITI_Ticker == 13 or ITI_Ticker == 16 or ITI_Ticker == 19:
-                print('ITI ', ITI_Ticker,' Extending additional 300 sec after 3rd ITI')
-                ITI_T = ITI_Float + 300
+            ITI_Ticker_Math = ITI_Ticker - 1
+            if ITI_Ticker_Math%const_ITI_Delay_Div==0 and ITI_Ticker > 1:
+                print('ITI ', ITI_Ticker,' Extending additional', const_ITI_Delay_Amount,'sec after', const_ITI_Delay_Div,' ITI')
+                ITI_T = ITI_Float + const_ITI_Delay_Amount
             else:
                 ITI_T = ITI_Float
             # Starting ITI Timer
