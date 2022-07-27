@@ -45,7 +45,6 @@ class PreTrial:    #StateID = ?
 
 class Trial:      #StateID = ?
     def s_State_enter():
-        print('Trial: Initiating Trial class')
         p_Timer.Trial_T.setPeriod(1)
         p_Timer.Trial_T.setRepeats(const_T)
         p_Timer.Trial_T.start()
