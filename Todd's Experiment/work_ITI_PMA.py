@@ -122,6 +122,7 @@ class Always:   #StateID = 0
                 ITI_Switch = 2
                 if ITI_Ticker <= const_ITI_Interval:
                     ITI_Ticker = ITI_Ticker + 1
+                    ITI_Ticker_Math = ITI_Ticker - 1
                     print('ITI Timer', ITI_Ticker, ': Setting up the ITI Timer')
                     ITI_T = 0
                     ITI_Float = 0
@@ -160,7 +161,7 @@ class Always:   #StateID = 0
             p_Rig.o_Shock.turnOff()
             print('ITI Timer', ITI_Ticker, ': Shock & Tone Off, Reinitializing ITI Timer')
             # Checking ITI iterations
-            if ITI_Ticker > const_ITI_Interval:
+            if ITI_Ticker == const_ITI_Interval:
                 # Finished ITI case
                 ITI_Switch = 4
                 print('ITI Timer: ITI scheduling is finished')
