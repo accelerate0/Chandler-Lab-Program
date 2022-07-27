@@ -39,7 +39,7 @@ const_Mode = 2
 
 # =================Custom Mode Related================= #
 const_ITI_Interval = 20             # Amount of ITI Intervals (Only in Custom Mode)
-
+# Edit "pass" function with desired triggers
 
 
 # =================Dynamic Variables================= #
@@ -51,15 +51,6 @@ ITI_T = 0                           # Summated ITI Timer (sec)
 ITI_Float = 0                       # ITI Timer (sec)
 ITI_Pool = 0                        # Array store of ITI numbers from PyOp
 ITI_Ticker_Math = 0
-
-
-
-
-
-
-
-
-
 
 
 #==========================================================#
@@ -135,7 +126,7 @@ class ITI_Timer:      #StateID = ?
             print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
             # Exceptional case for ITI iterations for additional delays
             if const_ITI_Delay_Control == 1:
-                if ITI_Ticker_Math%const_ITI_Delay_Div==0:
+                if ITI_Ticker_Math%const_ITI_Delay_Div==0 and ITI_Ticker > 1:
                     print('ITI ', ITI_Ticker,' Extending additional', const_ITI_Delay_Amount,'sec after', const_ITI_Delay_Div,' ITI')
                     ITI_T = ITI_Float + const_ITI_Delay_Amount
                 else:
