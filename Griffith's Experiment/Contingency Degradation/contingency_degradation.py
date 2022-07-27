@@ -61,12 +61,11 @@ class Timer:      #StateID = ?
         p_Timer.Trial_T.start() # Turn on timer
     def s_Trial_T_tick(count):
         if count == J:
-            print('Timer: Trial Timer finished, switching to Event class')
-            print('Event: Left Lever (active lever) was pressed, initiating Dispense')
+            print('Timer: Trial Timer finished')
             p_Rig.o_Liq_Dispenser.turnOn()
             time.sleep(const_DispenseTime)
             p_Rig.o_Liq_Dispenser.turnOff()
-            print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
+            print('Event: Dispended at', const_DispenseTime, 'sec, reinitializing Trial Timer')
             p_State.switch(Loop)
 
 class Loop:      #StateID = ?
