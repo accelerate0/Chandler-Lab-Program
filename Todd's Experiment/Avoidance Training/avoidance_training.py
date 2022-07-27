@@ -13,16 +13,26 @@ import pyopcond_dep as pyop
 #             Setting Variables, Constant, Etc             #
 #==========================================================#
 
-# Global Static Variables:
-const_ExperimentTime = 3600     # Time of Entire Experiment
-const_VI_Mean = 30              # VI scheduling mean interval (sec)
-const_VISchedule_Amt = 10       # Amount of VI schedule numbers generated
-const_ITISchedule_Amt = 5       # Amount of ITI schedule numbers generated
-const_ITI_Mean = 180            # ITI scheduling mean interval (sec)
-const_ITI_Interval = 9          # Amount of ITI's scheduling
-const_ITI_Add_Delay = 300       # Additional ITI Delay
+# =================Global Static Variables:================= #
 
-# =================+++++++================= #
+# Global Timer Variables:
+const_ExperimentTime = 3600         # Time of Entire Experiment
+
+# PyOp Related VI Variables:
+const_VI_Mean = 30                  # VI scheduling mean interval (sec)
+const_VISchedule_Amt = 10           # Amount of VI schedule numbers generated
+
+# PyOp Related ITI Variables:
+const_ITISchedule_Amt = 5           # Amount of ITI schedule candidate numbers generated
+const_ITI_Mean = 180                # ITI scheduling mean interval (sec)
+
+# ITI Scheduling Related Variables:
+const_ITI_Interval = 9              # Amount of ITI's scheduling
+const_ITI_Delay_Control = 1         # Enable (1) or Disable (0) additional delay after certain ITI's
+const_ITI_Delay_Amount = 300        # ITI elay amount (sec)
+const_ITI_Delay_Div = 3             # Divisibility of the ITI delay ("Example: After every 3rd ITI interval is (3)")
+
+# =================Global Dynamic Variables================= #
 # ! DO NOT CHANGE ANYTHING HERE !
 # This is for controlling program flow and to follow & ensure specific, sequential executions of functions
 
@@ -41,6 +51,7 @@ ITI_T = 1           # The actual ITI summation value in sec which triggers the t
 ITI_Pool = 0        # Array generation of ITI number pools from PyOp
 ITI_Interval = 0    # Keeps track of how many ITI's passed
 ITI_Switch = 0      # Controls program flow and ensures correct order of execution in ITI
+ITI_Ticker_Math = 0 # Related to finding the divisibility of the ITI for ITI delays
 
 #==========================================================#
 #                   Actual Program                         #
@@ -57,7 +68,7 @@ class Always:   #StateID = 0
         "Global: const_VISchedule_Amt =", const_VISchedule_Amt, '\n',
         "Global: const_ITISchedule_Amt =", const_ITISchedule_Amt, '\n',
         "Global: const_ITI_Interval =", const_ITI_Interval, '\n',
-        "Global: const_ITI_Add_Delay =", const_ITI_Add_Delay, '\n',
+        "Global: const_ITI_Delay_Amount =", const_ITI_Delay_Amount, '\n',
         "Global: const_ITI_Mean =", const_ITI_Mean,
         '\n', '\n', '\n')
         # Setting Up Global Timer
@@ -87,69 +98,76 @@ class Always:   #StateID = 0
         print('Global: Switching to PreTrial class')
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
-        global ITI_Switch
+        global ITI_Float, ITI_T, ITI_Ticker, ITI_Switch, ITI_Ticker_Math
         # Shuts down entire experiment
         if count == const_ExperimentTime:
-            print(const_ExperimentTime, ' sec (60 min) has passed and experiment is completed')
+            print(const_ExperimentTime, ' sec has passed and experiment is completed')
             syn.setModeStr('Idle') # Shuts down Synapse (based on Synapse API)
+
+        # ===== Conditional Based ITI Scheduling ===== #
         if count == count: # Anything here is always being checked and executed
             # Related to ITI, hacking Pynapse to allow parallel execution of ITI alongside VI
-            # Using short 1 sec timers to force ITI's to occur and switching from ITI to ITI
+            # Using ITI_Switch and constant code checking via count==count of the global timer counter to force ITI's to occur and looping ITI's
+            # ITI_Switch variable changes and assures controlled sequential code execution
+                # ITI_Switch = 0, State that triggers ITI timer initialization at the very start of experiment
+                # ITI_Switch = 1, State that triggers ITI timer set up
+                # ITI_Switch = 2, State during ITI timer set up and subsequent ITI timer triggering
+                # ITI_Switch = 3, State thatoccurs during ITI and allows ITI event triggers (shock, tone, etc)
+                # ITI_Switch = 4, State that shuts down ITI once all ITI is finished
             if ITI_Switch == 0:
                 # Initiating ITI Timer creation for the first time
                 print('ITI: Initializing the ITI Timer for the first time')
                 ITI_Switch = 1
-                p_Timer.ITI_T.setPeriod(1)
-                p_Timer.ITI_T.setRepeats(ITI_Switch)
-                p_Timer.ITI_T.start()
-            if ITI_Switch == 3:
-                # Initiating ITI Timer creation subsequently
-                ITI_Switch = 1
-                p_Timer.ITI_T.setPeriod(1)
-                p_Timer.ITI_T.setRepeats(ITI_Switch)
-                p_Timer.ITI_T.start()
+            if ITI_Switch == 1:
+                ITI_Switch = 2
+                if ITI_Ticker <= const_ITI_Interval:
+                    ITI_Ticker = ITI_Ticker + 1
+                    ITI_Ticker_Math = ITI_Ticker - 1
+                    print('ITI Timer', ITI_Ticker, ': Setting up the ITI Timer')
+                    ITI_T = 0
+                    ITI_Float = 0
+                    # PyOp ITI number generator
+                    while ITI_Float <= 30:
+                        ITI_Float = int(random.choice(ITI_Pool))
+                        print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
+                    print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
+                    # Special Iteration case for ITI after every const_ITI_Delay_Div (default 3) for an additional const_ITI_Delay_Amount (sec) delay
+                    if ITI_Ticker_Math%const_ITI_Delay_Div==0 and ITI_Ticker > 1:
+                        print('ITI ', ITI_Ticker,' Extending additional', const_ITI_Delay_Amount,'sec after', const_ITI_Delay_Div,' ITI')
+                        ITI_T = ITI_Float + const_ITI_Delay_Amount
+                    else:
+                        ITI_T = ITI_Float
+                    # Starting ITI Timer
+                    p_Timer.ITI_T.setPeriod(1)
+                    p_Timer.ITI_T.setRepeats(ITI_T)
+                    p_Timer.ITI_T.start()
+                    print('ITI Timer', ITI_Ticker, ': Started ITI Timer')
+                    ITI_Switch = 3
 
     # ===== Conditional Based ITI Scheduling ===== #
     def s_ITI_T_tick(count):
-        global ITI_Float, ITI_T, ITI_Ticker, ITI_Switch
-        if count == 1 and ITI_Switch == 1:
-            ITI_Switch = -1
-            print('ITI Timer: Setting up the ITI Timer')
-            if ITI_Ticker <= const_ITI_Interval:
-                ITI_Ticker = ITI_Ticker + 1
-                print('ITI Timer', ITI_Ticker, ': Entered')
-                ITI_T = 0
-                ITI_Float = 0
-                while ITI_Float <= 30:
-                    ITI_Float = int(random.choice(ITI_Pool))
-                    print('ITI Timer', ITI_Ticker, ': Generated', ITI_Float, 'sec for ITI')
-                print('ITI Timer', ITI_Ticker, ': Chose', ITI_Float, 'sec for ITI')
-                if ITI_Ticker == 4 or ITI_Ticker == 7:
-                    ITI_T = ITI_Float + const_ITI_Add_Delay
-                    print('ITI Timer', ITI_Ticker, ': Added additional', const_ITI_Add_Delay, 'delay')
-                else:
-                    ITI_T = ITI_Float
-                p_Timer.ITI_T.setPeriod(1)
-                p_Timer.ITI_T.setRepeats(ITI_T)
-                print('ITI Timer', ITI_Ticker, ': Started ITI Timer')
-                p_Timer.ITI_T.start()
-                ITI_Switch = 2
-        if count == ITI_T - 30 and ITI_Switch == 2:
+        global ITI_Switch
+        if count == ITI_T - 30 and ITI_Switch == 3:
+            # 30 sec tone on
             p_Rig.o_Tone.turnOn()
             print('ITI Timer', ITI_Ticker, ': Tone On')
-        if count == ITI_T - 2 and ITI_Switch == 2:
+        if count == ITI_T - 2 and ITI_Switch == 3:
+            # Last 2 sec shock on
             p_Rig.o_Shock.turnOn()
             print('ITI Timer', ITI_Ticker, ': Shock On')
-        if count == ITI_T and ITI_Switch == 2:
+        if count == ITI_T and ITI_Switch == 3:
+            # Turning off tone shock after 30 sec
             p_Rig.o_Tone.turnOff()
             p_Rig.o_Shock.turnOff()
-            print('ITI Timer', ITI_Ticker, ': Shock & Tone Off')
-            print('ITI Timer', ITI_Ticker, ': Reinitializing ITI Timer')
-            if ITI_Ticker > const_ITI_Interval:
-                ITI_Switch = -1
+            print('ITI Timer', ITI_Ticker, ': Shock & Tone Off, Reinitializing ITI Timer')
+            # Checking ITI iterations
+            if ITI_Ticker == const_ITI_Interval:
+                # Finished ITI case
+                ITI_Switch = 4
                 print('ITI Timer: ITI scheduling is finished')
             else:
-                ITI_Switch = 3
+                # Looping-back ITI case
+                ITI_Switch = 1
 
 # =================+++++++================= #
 
