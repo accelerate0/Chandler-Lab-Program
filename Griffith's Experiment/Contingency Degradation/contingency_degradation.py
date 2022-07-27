@@ -12,7 +12,7 @@ const_ExperimentTime = 900          # Time of Entire Experiment (sec)
 const_DispenseTime = 1.665          # Dispense rate of the liquid dispenser (sec)
 const_Float = 30                    # Median of the floating point number randomly generated (sec)
 const_CorrectResponse = 3           # Threshold window of opportunity that allows dispensing (sec)
-const_Reinforcers = 0               # Involved in calculating the "J Factor" which is done automatically
+const_Reinforcers = 90               # Involved in calculating the "J Factor" which is done automatically
 
 # Global Variables that are dyanmic (Do Not Change):
 J = 0 # The "J Factor", or Variable for Interval
@@ -55,6 +55,7 @@ class PreTrial:    #StateID = ?
 
 # =================+++++++================= #
 
+
 class Timer:      #StateID = ?
     def s_State_enter():
         p_Timer.Trial_T.setPeriod(1)
@@ -68,7 +69,12 @@ class Timer:      #StateID = ?
             time.sleep(const_DispenseTime)
             p_Rig.o_Liq_Dispenser.turnOff()
             print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
-            p_State.switch(Timer)
+            p_State.switch(Loop)
+
+
+class Loop:      #StateID = ?
+    def s_State_enter():
+        p_State.switch(Timer)
 
 
 # = #
