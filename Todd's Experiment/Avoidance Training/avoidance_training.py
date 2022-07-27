@@ -28,7 +28,7 @@ const_ITI_Mean = 180                # ITI scheduling mean interval (sec)
 
 # ITI Scheduling Related Variables:
 const_ITI_Interval = 9              # Amount of ITI's scheduling
-const_ITI_Delay_Amount = 300        # ITI elay amount (sec)
+const_ITI_Delay_Amount = 300        # Additional ITI delay amount (sec)
 const_ITI_Delay_Div = 3             # Divisibility of the ITI delay ("Example: After every 3rd ITI interval is (3)")
 
 # =================Global Dynamic Variables================= #

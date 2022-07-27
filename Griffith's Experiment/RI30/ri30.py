@@ -12,8 +12,12 @@ import random
 const_ExperimentTime = 1800         # Time of Entire Experiment (sec)
 const_DispenseTime = 1.665          # Dispense rate of the liquid dispenser (sec)
 const_RIFloat = 30                  # RI mean based scheduling (sec), for example, an RI30 would be 30
+const_Mode = 1                      # Set the active lever (both levers will be extended regardless)
+# const_Mode = 1  , Left Lever active
+# const_Mode = 2  , Right Lever active
+# const_Mode = 3  , All Levers active
 
-# Global Dynamic Variables (Do Not Change):
+# Global Dynamic Variables (!Do Not Change!):
 RI_Float = 0
 RI_Pool = 0
 RI_Ticker = -1
@@ -27,25 +31,26 @@ class Always:   #StateID = 0
     def s_Mode_recprev():
         global RI_Pool, RI_Amount
         # Setting up experimental timer
-        print('Setting up Global Timer ')
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
-        print('Starting the global experimental', const_ExperimentTime,'sec timer')
         p_Timer.Global_T.start() # Turn on timer
+        print('Pretrial: Started the Global Timer for', const_ExperimentTime,'sec')
         # Printing constants
-        print( "EXPERIMENTAL PRESETS:", '\n', '\n',
-        "const_ExperimentTime =", const_ExperimentTime, '\n',
-        "const_DispenseTime =", const_DispenseTime, '\n',
-        "const_RIFloat =", const_RIFloat, '\n')
+        print("Pretrial: EXPERIMENTAL PRESETS:", '\n', '\n',
+        "const_ExperimentTime (sec) =", const_ExperimentTime, '\n',
+        "const_DispenseTime (sec) =", const_DispenseTime, '\n',
+        "const_RIFloat (sec) =", const_RIFloat, '\n',
+        "const_Mode = ", const_Mode, '\n',
+        '\n')
         # Setting up RI Schedule via PyOp
         RI_Amount = int(const_ExperimentTime/const_RIFloat)
         pyop.rand_int_withpi(const_RIFloat, RI_Amount)
         pyop.rand_int_withpi.output.sort()
         RI_Pool = pyop.rand_int_withpi.output
-        print("(PyOP RI) Probability factor (prob/sec):", pyop.rand_int_withpi.prob)
-        print("(PyOP RI) RI mean (sec):", pyop.rand_int_withpi.interval)
-        print("(PyOP RI) Amount of RI intervals (This multiplied by RI mean should be equal to experimental time):", pyop.rand_int_withpi.amount)
-        print('(PyOP RI) Generated RI Schedule:', '\n',
+        print("Pretrial (PyOP RI): Probability factor (prob/sec):", pyop.rand_int_withpi.prob)
+        print("Pretrial (PyOP RI): RI mean (sec):", pyop.rand_int_withpi.interval)
+        print("Pretrial (PyOP RI): Amount of RI intervals (This multiplied by RI mean should be equal to experimental time):", pyop.rand_int_withpi.amount)
+        print('Pretrial (PyOP RI): Generated RI Schedule:', '\n',
         'Generated', RI_Pool, '(sec) as the pool', '\n')
         # Switch
         p_State.switch(PreTrial)
@@ -92,13 +97,29 @@ class Timer:      #StateID = ?
 
 class Event:      #StateID = ?
     def s_i_L_Lever_Press_rise():
-        print('Event: Left Lever (active lever) was pressed, Initiating Dispense')
+        if const_Mode == 1:
+            print('Event: Left Lever (active lever) was pressed, initiating Dispense')
+            p_State.switch(Reward)
+        if const_Mode == 2:
+            print('Event: Left Lever (inactive lever) was pressed, nothing happens')
+        if const_Mode == 3:
+            print('Event: Left Lever (active lever) was pressed, initiating Dispense')
+            p_State.switch(Reward)
+    def s_i_R_Lever_Press_rise():
+        if const_Mode == 1:
+            print('Event: Right Lever (inactive lever) was pressed, nothing happens')
+        if const_Mode == 2:
+            print('Event: Right Lever (active lever) was pressed, initiating Dispense')
+            p_State.switch(Reward)
+        if const_Mode == 3:
+            print('Event: Right Lever (active lever) was pressed, initiating Dispense')
+            p_State.switch(Reward)
+
+class Reward:      #StateID = ?
+    def s_State_enter():
         p_Rig.o_Liq_Dispenser.turnOn()
         time.sleep(const_DispenseTime)
         p_Rig.o_Liq_Dispenser.turnOff()
-        print('Event: Dispended at', const_DispenseTime, 'sec, switching back to Trial class')
+        print('Event: Dispensed at', const_DispenseTime, 'sec, reinitializing Trial Timer')
         p_State.switch(Timer)
-    def s_i_R_Lever_Press_rise():
-        print('Event: Right Lever (inactive lever) was pressed, nothing happens')
-
 # = #
