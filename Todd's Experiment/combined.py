@@ -30,9 +30,6 @@ const_ITI_Delay_Control = 1         # Enable (1) or Disable (0) additional delay
 const_ITI_Delay_Amount = 300        # Delay amount (sec)
 const_ITI_Delay_Div = 3             # Divisibility of the ITI delay ("Example: After every 3rd ITI interval is (3)")
 
-# Logging Console Output
-const_Log_Name = "log.log"          # Name of the log for console output, do not delete "" and must end in .log
-
 # =================Program Mode Selection================= #
 
 # Set the mode of the Program
@@ -94,11 +91,6 @@ class Always:   #StateID = 0
         pyop.var_int(const_ITISchedule_Amt, const_ITI)
         ITI_Pool = pyop.var_int.output_straight
         print("PreTrial (PyOp): Generated:", ITI_Pool, "ITI Pool from PyOp")
-        # Logging Functionality
-        logging.basicConfig(level=logging.INFO, format='%(message)s')
-        logger = logging.getLogger()
-        logger.addHandler(logging.FileHandler(const_Log_Name, 'a'))
-        print = logger.info
         # Switching to PreTrial Class
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
