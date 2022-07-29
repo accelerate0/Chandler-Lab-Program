@@ -3,9 +3,6 @@
 # NOTE THIS IS A WORK IN PROGRESS
 # Combination of Reward Training, Conflict Test, and Conflict Training with additional customizable functions
 
-
-import logging
-# Testing Logging
 import numpy as np
 import time
 import random
@@ -66,7 +63,7 @@ class Always:   #StateID = 0
         p_Timer.Global_T.setPeriod(1) # Length between ticks (sec)
         p_Timer.Global_T.setRepeats(const_ExperimentTime) # Amount of ticks
         p_Timer.Global_T.start() # Turn on timer
-        print('PreTrial: Started the global timer')
+        print('Pretrial: Started the global timer')
         # Option switching
         if const_Mode > 0:
             if const_Mode == 1:
@@ -81,7 +78,7 @@ class Always:   #StateID = 0
                 const_ITI_Interval = 9
                 print('PreTrial: Mode set to 4 (Conflict Training)')
         # Printing Experimental Constants on console
-        print( "EXPERIMENTAL PRESETS:", '\n', '\n',
+        print( "Pretrial: EXPERIMENTAL PRESETS:", '\n', '\n',
         "const_ExperimentTime (sec) = ", const_ExperimentTime, '\n',
         "const_ITI (sec) = ", const_ITI, '\n',
         "const_ITISchedule_Amt (PyOp) = ", const_ITISchedule_Amt, '\n',
@@ -90,7 +87,7 @@ class Always:   #StateID = 0
         # Generating ITI number pool from PyOp
         pyop.var_int(const_ITISchedule_Amt, const_ITI)
         ITI_Pool = pyop.var_int.output_straight
-        print("PreTrial (PyOp): Generated:", ITI_Pool, "ITI Pool from PyOp")
+        print("Pretrial (PyOp): Generated:", ITI_Pool, "ITI Pool from PyOp")
         # Switching to PreTrial Class
         p_State.switch(PreTrial)
     def s_Global_T_tick(count):
