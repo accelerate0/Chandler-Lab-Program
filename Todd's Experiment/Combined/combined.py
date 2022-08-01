@@ -42,9 +42,20 @@ const_Lever_Mode = 1 # Set left or right lever
 
 
 # =================Custom Mode Related================= #
-const_ITI_Interval = 20             # Amount of ITI Intervals (Only in Custom Mode)
-# Edit "pass" function with desired triggers
+# Edit "pass" function with desired triggers below <<if const_Lever_Mode == 1:>> ie tone/shock
 
+const_ITI_Interval = 20             # Amount of ITI Intervals (Only in Custom Mode)
+# Preset a speciifc amount of ITI's
+
+const_ITI_Custom_Time_Switch = 30     # Configure when program switches to event mode, used as ITI - const_ITI_Custom_Time_Switch
+const_ITI_Custom_Time_Trig_1 = 2      # Configuring time setting for triggering (sec)
+const_ITI_Custom_Time_Trig_2 = 2
+const_ITI_Custom_Time_Trig_3 = 2
+# Add up to 3 specific time triggering events in custom mode
+# For example, a value of 2 would be whatever the ITI value is (sec) minus 2 sec
+# Use the pass function to ignore
+# Note, the variable accounts backwards in relationship to the ITI value (which is the timer variable)
+# ITI variable is the total ITI time (sec)
 
 # =================Dynamic Variables================= #
 # ! DO NOT CHANGE ANYTHING HERE !
@@ -154,6 +165,9 @@ class ITI_Timer:      #StateID = ?
         if count == ITI_T - 30:
             print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
             p_State.switch(ITI_Event)
+        elif if const_Mode == 1: # Custom mode related
+            if count == ITI_T - const_ITI_Custom_Time_Switch:
+            p_State.switch(ITI_Event)
 
 class ITI_Event:      #StateID = ?
     def s_State_enter():
@@ -165,7 +179,7 @@ class ITI_Event:      #StateID = ?
             p_Rig.o_R_Lever_Light.turnOn()
             print('ITI ', ITI_Ticker,' Event: Right Lever Light Turned On')
         if const_Mode == 1:
-            pass
+            pass # Add turning on triggers
         if const_Mode == 3:
             p_Rig.o_Tone.turnOn()
         if const_Mode == 4:
@@ -185,9 +199,14 @@ class ITI_Event:      #StateID = ?
             p_Rig.o_Pellet_Dispenser.turnOff()
             print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
     def s_ITI_T_tick(count):
+        if const_Mode == 1:
+            if count == ITI_T - const_ITI_Custom_Time_Trig_1:
+                pass # Add turning off triggers for when x sec minus total ITI Time
+            if count == ITI_T - const_ITI_Custom_Time_Trig_2:
+                pass # Add turning off triggers for when x sec minus total ITI Time
+            if count == ITI_T - const_ITI_Custom_Time_Trig_3:
+                pass # Add turning off triggers for when x sec minus total ITI Time
         if count == ITI_T - 2:
-            if const_Mode == 1:
-                pass
             if const_Mode == 4:
                 p_Rig.o_Shock.turnOn()
         if count == ITI_T:
@@ -198,7 +217,7 @@ class ITI_Event:      #StateID = ?
                 p_Rig.o_R_Lever_Light.turnOff()
                 print('ITI ', ITI_Ticker,' Event: Right Lever Light Turned Off')
             if const_Mode == 1:
-                pass
+                pass # Add triggers when ITI ends
             if const_Mode == 3:
                 p_Rig.o_Tone.turnOff()
             if const_Mode == 4:
