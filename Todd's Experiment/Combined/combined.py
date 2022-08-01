@@ -55,7 +55,7 @@ const_ITI_Custom_Time_Trig_3 = 2
 # For example, a value of 2 would be whatever the ITI value is (sec) minus 2 sec
 # Use the pass function to ignore
 # Note, the variable accounts backwards in relationship to the ITI value (which is the timer variable)
-# ITI variable is the total ITI time (sec)
+# ITI_T variable is the total ITI time (sec)
 
 # =================Dynamic Variables================= #
 # ! DO NOT CHANGE ANYTHING HERE !
