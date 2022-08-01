@@ -1,6 +1,7 @@
 
 
 
+
 # Pynapse Scripts for Dr. Chandler Lab Experiments
 
 This repository contains collections of Python 3 scripts for utilization in the Pynapse runtime environment.
@@ -58,22 +59,22 @@ Assigning channels for Pynapse:
 **iH10_1 Controller:**
 | Channel | Variable Name | Epoc Store ID |
 | ------ | ------ | ------ |
-| Channel 1 | o_L_Lever_Extension | x |
-| Channel 2 | i_L_Lever_Press | x |
-| Channel 3 | o_L_Lever_Light | x |
-| Channel 4 | o_Reward_R_Light | x |
-| Channel 5 | o_House_Light | x |
-| Channel 6 | o_Tone | x |
-| Channel 7 | i_Reward_R_B_B | x |
-| Channel 9 | o_Pellet_Dispenser | x |
-| Channel 10 | o_Shock | x |
+| Channel 1 | o_L_Lever_Extension | n/a |
+| Channel 2 | i_L_Lever_Press | iLLP |
+| Channel 3 | o_L_Lever_Light | n/a |
+| Channel 4 | o_Reward_R_Light | n/a |
+| Channel 5 | o_House_Light | n/a |
+| Channel 6 | o_Tone | oTon |
+| Channel 7 | i_Reward_R_B_B | iRRB |
+| Channel 9 | o_Pellet_Dispenser | oPDi |
+| Channel 10 | o_Shock | oSho |
 
 **iH10_2 Controller:**
 | Channel | Variable Name | Epoc Store ID |
 | ------ | ------ | ------ |
-| Channel 1 | o_R_Lever_Extension | x |
-| Channel 2 | i_R_Lever_Press | x |
-| Channel 3 | o_R_Lever_Light | x |
+| Channel 1 | o_R_Lever_Extension | n/a |
+| Channel 2 | i_R_Lever_Press | oRLP |
+| Channel 3 | o_R_Lever_Light | oLiq |
 
 ## Timer Assignment
 
