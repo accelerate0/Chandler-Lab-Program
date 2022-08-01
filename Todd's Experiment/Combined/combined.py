@@ -1,6 +1,5 @@
 # Pynapse Source #
 
-# NOTE THIS IS A WORK IN PROGRESS
 # Combination of Reward Training, Conflict Test, and Conflict Training with additional customizable functions
 
 import numpy as np
@@ -162,11 +161,11 @@ class ITI_Timer:      #StateID = ?
             print('ITI Timer: Ending ITI, Switching to Finish Class')
             p_State.switch(Finish)
     def s_ITI_T_tick(count):
-        if count == ITI_T - 30:
-            print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
-            p_State.switch(ITI_Event)
-        elif if const_Mode == 1: # Custom mode related
+        if const_Mode == 1: # Custom mode related
             if count == ITI_T - const_ITI_Custom_Time_Switch:
+                p_State.switch(ITI_Event)
+        elif count == ITI_T - 30:
+            print('ITI ', ITI_Ticker,' Event: Switching to ITI Event')
             p_State.switch(ITI_Event)
 
 class ITI_Event:      #StateID = ?
