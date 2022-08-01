@@ -1,5 +1,6 @@
 
 
+
 # Pynapse Scripts for Dr. Chandler Lab Experiments
 
 This repository contains collections of Python 3 scripts for utilization in the Pynapse runtime environment.
@@ -15,6 +16,7 @@ By Erick Won
 	- Everything in Pynapse is *case-sensitive*
 	- Never use spaces or non-alphanumeric characters, always use underscore (_) to denote spaces
 	- Whenever it mentions `Epoc` this is referring to time stamping functionalities in the Pynapse software and will show up in the recorded data respectively.
+	- Pynapse automatically records inputs or outputs by enabling Epoc Store ID in Channel Assignments
 - **Script Overview:**
 	- Some scripts have the tag `legacy`in the script name. This denotes that the method and fashion of coding is more verbose, but rather ineffecient and no longer used.
 
@@ -27,7 +29,7 @@ By Erick Won
 
 ## Dependencies
 
- - Many mathematical modules such as random, numpy, and so forth are dependencies. However, these come pre-installed with Pynapse.
+ - Many mathematical modules such as random, numpy, time, and so forth are dependencies. However, these come pre-installed with Pynapse.
  - One dependency that requires manual installation is PyOp. File, usage, and installation guide can be found in the [PyOp Repository](https://github.com/accelerate0/PyOp-Conditioning).
 
 ## Channel Assignments
@@ -41,7 +43,7 @@ Information Regarding Channel Assignment:
 		- *L/R* for Left/Right
 	- Spaces are denoted by underscores
 
-Assigning channels for in
+Assigning channels for Pynapse:
 
  1. Go to the `iCon Controller Settings`
  2. Fill in the variable names
@@ -76,7 +78,8 @@ Assigning channels for in
 ## Timer Assignment
 
 - Fill timers into timer slot in the Synapse software
-- Up to 6 runtime timers can be assigned in Pynapse
+- Up to 4 runtime timers can be assigned in Pynapse
+	- These are filled as followed on the bottom table
 - Unused timers that are assigned are allowed
 - Naming matters as well as presetting certain things in Pynapse+Synapse.
 	- Therefore the following attributes needs to be declared in the Synapse program itself
@@ -100,7 +103,8 @@ Assigning channels for in
 | ------ | ------ | ------ | ------ |
 | Global Timer | Global_T | GloT | Timer that controls most experimental function and when finished, ends the experiment. This is controlled by the `const_ExperimentTime ` constant. |
 | VI Timer | VI_T | VIT | Timer that is modified during runtime of the script and should not be modified by the user. Responsible for VI scheduling and randomly generated in avoidance training. |
-| Trial Timer | Trial_T | TT | Timer that is modified during runtime of the script and should not be modified by the user. Responsible for scheduling in the RI30 script and randomly generated. |
+| Trial Timer | Trial_T | TT | Timer that is modified during runtime of the script when it is not VI or ITI related. |
+| ITI Timer | ITI_T | ITIT | Timer that is modified during runtime of the script and responsible for ITI Timing. |
 
 ## Variable Assignment
 At the top of each scripts denotes 2 types of global variables used in the experiment
@@ -112,19 +116,8 @@ At the top of each scripts denotes 2 types of global variables used in the exper
 Webbed diagrams are available on how the scripts work using draw.io. To use draw.io (editing and viewing), you must download the addon which is available here:
 - https://chrome.google.com/webstore/detail/drawio-for-notion/plhaalebpkihaccllnkdaokdoeaokmle
 
-**Todd's Experiment:**
-| Script Name | Draw.io Link |
-|--|--|
-| Platform Avoidance Training | [Link](https://app.diagrams.net/#G1HNz9VDa9wyPsMvxQO9PCpvsV23HluM3-) |
-| Reward Training | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FReward%20Training%2FReward%20Training) |
-| Conflict Test | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Test%2FConflict%20Test) |
-| Conflict Training | [Link](https://app.diagrams.net/#Haccelerate0%2FChandler-Lab-Program%2Fmain%2FTodd%27s%20Experiment%2FConflict%20Training%2FConflict%20Training) |
-
-**Griffith's Experiment:** *Working on it*
-| Script Name | Draw.io Link |
-|--|--|
-| Contingency Degradation | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
-| FR1 Contingency Training  | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
-| FR1 Contingency Test | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
-| RI30 Test | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
-| Well Habituation | [Link](https://github.com/accelerate0/Chandler-Lab-Program) |
+## Trouble Shooting
+- *ipy kernel related issues* or *python error code related issues*
+	- Restart the synapse software via closing out the program. This may require multiple restarts or even a system reboot.
+- *Inputs and Outputs are turning on/off randomly, constant FPS drop on camera*
+	- Switch the iCon controller off then on
