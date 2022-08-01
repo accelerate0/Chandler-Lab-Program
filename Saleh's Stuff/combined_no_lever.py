@@ -10,8 +10,12 @@ const_Trial_T2 = 120                # Setting of second trial timer (sec) (2 min
 const_Trial_Amount = 1              # Amount of Trials
 const_Latency = 30                  # Set the latency (sec) between on/off for tone, light blinking, etc
 const_Options = 1                   # Set the program option
-                                    # 1 = Right Lever Light Blink
+                                    # 1 = Lever Light Blink
                                     # 2 = Tone
+const_Options_LR = 1 # Set Left or Right lever light blink
+# 1 = left
+# 2 = right
+
 
 # =================+++++++================= #
 # ! DO NOT CHANGE ANYTHING HERE !
@@ -33,6 +37,7 @@ class Always:   #StateID = 0
         "const_Trial_T2 (sec) =", const_Trial_T2, '\n',
         "const_Latency (sec) =", const_Latency, '\n',
         "const_Options =", const_Options, '\n',
+        "const_Options_LR =", const_Options_LR, '\n',
         '\n')
         # Switching to PreTrial Class
         p_State.switch(PreTrial)
@@ -69,8 +74,12 @@ class Trial_Event:      #StateID = ?
         p_Timer.Trial_T.setRepeats(const_Latency)
         if const_Options == 1:
             p_Timer.Trial_T.start()
-            p_Rig.o_R_Lever_Light.turnOn()
-            print('Trial ', Trial_Ticker,' Event: Right Lever Light On')
+            if const_Options_LR == 1:
+                p_Rig.o_L_Lever_Light.turnOn()
+                print('Trial ', Trial_Ticker,' Event: Left Lever Light On')
+            if const_Options_LR == 2:
+                p_Rig.o_R_Lever_Light.turnOn()
+                print('Trial ', Trial_Ticker,' Event: Right Lever Light On')
         elif const_Options == 2:
             p_Timer.Trial_T.start()
             p_Rig.o_Tone.turnOn()
@@ -78,8 +87,12 @@ class Trial_Event:      #StateID = ?
     def s_Trial_T_tick(count):
         if count == const_Latency:
             if const_Options == 1:
-                p_Rig.o_R_Lever_Light.turnOff()
-                print('Trial ', Trial_Ticker,' Event: Right Lever Light Off')
+                if const_Options_LR == 1:
+                    p_Rig.o_L_Lever_Light.turnOff()
+                    print('Trial ', Trial_Ticker,' Event: Left Lever Light Off')
+                if const_Options_LR == 2:
+                    p_Rig.o_R_Lever_Light.turnOff()
+                    print('Trial ', Trial_Ticker,' Event: Right Lever Light Off')
             elif const_Options == 2:
                 p_Rig.o_Tone.turnOff()
                 print('Trial ', Trial_Ticker,' Event: Tone Off')

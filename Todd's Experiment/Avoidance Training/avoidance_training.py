@@ -31,6 +31,10 @@ const_ITI_Interval = 9              # Amount of ITI's scheduling
 const_ITI_Delay_Amount = 300        # Additional ITI delay amount (sec)
 const_ITI_Delay_Div = 3             # Divisibility of the ITI delay ("Example: After every 3rd ITI interval is (3)")
 
+const_Lever_Mode = 1 # Set left or right lever
+# 1 = left lever
+# 2 = right lever
+
 # =================Global Dynamic Variables================= #
 # ! DO NOT CHANGE ANYTHING HERE !
 # This is for controlling program flow and to follow & ensure specific, sequential executions of functions
@@ -68,7 +72,8 @@ class Always:   #StateID = 0
         "Global: const_ITISchedule_Amt =", const_ITISchedule_Amt, '\n',
         "Global: const_ITI_Interval =", const_ITI_Interval, '\n',
         "Global: const_ITI_Delay_Amount =", const_ITI_Delay_Amount, '\n',
-        "Global: const_ITI_Mean =", const_ITI_Mean,
+        "Global: const_ITI_Mean =", const_ITI_Mean, '\n',
+        "Global: const_Lever_Mode =", const_Lever_Mode, '\n',
         '\n', '\n', '\n')
         # Setting Up Global Timer
         p_Timer.Global_T.setPeriod(1)
@@ -175,9 +180,12 @@ class PreTrial:    #StateID = ?
         # Creates static experimental environment
         p_Rig.o_House_Light.turnOn()
         print('Pretrial: Light is On')
-        p_Rig.o_R_Lever_Extension.turnOn()
-        print('Pretrial: Lever is Out')
-        print('Pretrial: Switching to VI Timer Class')
+        if const_Lever_Mode == 1:
+            p_Rig.o_L_Lever_Extension.turnOn()
+            print('Pretrial: Left Lever is Out')
+        if const_Lever_Mode == 2:
+            p_Rig.o_R_Lever_Extension.turnOn()
+            print('Pretrial: Right Lever is Out')
         # Switch Class
         print('Pretrial: Switching to VI Timer Class')
         p_State.switch(VI_Timer)
@@ -211,18 +219,32 @@ class VI_Timer:    #StateID = ?
 class VI_Event:    #StateID = ?
     def s_State_enter():
         print('VI ', VI_Ticker,' Event: Entering Event class')
+    def s_i_L_Lever_Press_rise():
+        if const_Lever_Mode == 1:
+            print('VI ', VI_Ticker,' Event: Left Lever was pressed')
+            p_Rig.o_Pellet_Dispenser.turnOn()
+            print('VI ', VI_Ticker,' Event: Left Lever Light On')
+            p_Rig.o_L_Lever_Light.turnOn()
+            time.sleep(1)
+            p_Rig.o_Pellet_Dispenser.turnOff()
+            print('VI ', VI_Ticker,' Event: Reward dispensed')
+            p_Rig.o_L_Lever_Light.turnOff()
+            print('VI ', VI_Ticker,' Event: Left Lever Light Off')
+            print('VI ', VI_Ticker,' Event: Switching to VI Check Class')
+            p_State.switch(VI_Check)
     def s_i_R_Lever_Press_rise():
-        print('VI ', VI_Ticker,' Event: Right Lever was pressed')
-        p_Rig.o_Pellet_Dispenser.turnOn()
-        print('VI ', VI_Ticker,' Event: Right Lever Light On')
-        p_Rig.o_R_Lever_Light.turnOn()
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('VI ', VI_Ticker,' Event: Reward dispensed')
-        p_Rig.o_R_Lever_Light.turnOff()
-        print('VI ', VI_Ticker,' Event: Right Lever Light Off')
-        print('VI ', VI_Ticker,' Event: Switching to VI Check Class')
-        p_State.switch(VI_Check)
+        if const_Lever_Mode == 2:
+            print('VI ', VI_Ticker,' Event: Right Lever was pressed')
+            p_Rig.o_Pellet_Dispenser.turnOn()
+            print('VI ', VI_Ticker,' Event: Right Lever Light On')
+            p_Rig.o_R_Lever_Light.turnOn()
+            time.sleep(1)
+            p_Rig.o_Pellet_Dispenser.turnOff()
+            print('VI ', VI_Ticker,' Event: Reward dispensed')
+            p_Rig.o_R_Lever_Light.turnOff()
+            print('VI ', VI_Ticker,' Event: Right Lever Light Off')
+            print('VI ', VI_Ticker,' Event: Switching to VI Check Class')
+            p_State.switch(VI_Check)
 
 class VI_Check:   #StateID = ?
     def s_State_enter():

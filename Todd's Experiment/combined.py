@@ -27,6 +27,7 @@ const_ITI_Delay_Control = 1         # Enable (1) or Disable (0) additional delay
 const_ITI_Delay_Amount = 300        # Delay amount (sec)
 const_ITI_Delay_Div = 3             # Divisibility of the ITI delay ("Example: After every 3rd ITI interval is (3)")
 
+
 # =================Program Mode Selection================= #
 
 # Set the mode of the Program
@@ -35,6 +36,10 @@ const_Mode = 2
 # 2 = Reward Training
 # 3 = Conflict Test
 # 4 = Conflict Training
+const_Lever_Mode = 1 # Set left or right lever
+# 1 = left lever
+# 2 = right lever
+
 
 # =================Custom Mode Related================= #
 const_ITI_Interval = 20             # Amount of ITI Intervals (Only in Custom Mode)
@@ -83,6 +88,7 @@ class Always:   #StateID = 0
         "const_ITI (sec) = ", const_ITI, '\n',
         "const_ITISchedule_Amt (PyOp) = ", const_ITISchedule_Amt, '\n',
         "const_ITI_Interval (Amount of ITI) = ", const_ITI_Interval, '\n',
+        "const_Lever_Mode = ", const_Lever_Mode, '\n',
         '\n', '\n', '\n')
         # Generating ITI number pool from PyOp
         pyop.var_int(const_ITISchedule_Amt, const_ITI)
@@ -101,8 +107,12 @@ class PreTrial:    #StateID = ?
     def s_State_enter():
         p_Rig.o_House_Light.turnOn() # Turns on light
         print('Pretrial: House Light is On')
-        p_Rig.o_R_Lever_Extension.turnOn() # Turns on right lever
-        print('Pretrial: Left Lever is Out')
+        if const_Lever_Mode == 1:
+            p_Rig.o_L_Lever_Extension.turnOn() # Turns on left lever
+            print('Pretrial: Left Lever is Out')
+        if const_Lever_Mode == 2:
+            p_Rig.o_R_Lever_Extension.turnOn() # Turns on right lever
+            print('Pretrial: Right Lever is Out')
         p_State.switch(ITI_Timer) # Switches to Trial class
 
 # =================+++++++================= #
@@ -148,20 +158,32 @@ class ITI_Timer:      #StateID = ?
 class ITI_Event:      #StateID = ?
     def s_State_enter():
         print('ITI ', ITI_Ticker,' Event: Event Started')
-        p_Rig.o_R_Lever_Light.turnOn()
-        print('ITI ', ITI_Ticker,' Event: Left Lever Light Turned On')
+        if const_Lever_Mode == 1:
+            p_Rig.o_L_Lever_Light.turnOn()
+            print('ITI ', ITI_Ticker,' Event: Left Lever Light Turned On')
+        if const_Lever_Mode == 2:
+            p_Rig.o_R_Lever_Light.turnOn()
+            print('ITI ', ITI_Ticker,' Event: Right Lever Light Turned On')
         if const_Mode == 1:
             pass
         if const_Mode == 3:
             p_Rig.o_Tone.turnOn()
         if const_Mode == 4:
             p_Rig.o_Tone.turnOn()
+    def s_i_L_Lever_Press_rise():
+        if const_Lever_Mode == 1:
+            print('ITI ', ITI_Ticker,' Event: Left Lever was pressed')
+            p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+            time.sleep(1)
+            p_Rig.o_Pellet_Dispenser.turnOff()
+            print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
     def s_i_R_Lever_Press_rise():
-        print('ITI ', ITI_Ticker,' Event: Left Lever was pressed')
-        p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
-        time.sleep(1)
-        p_Rig.o_Pellet_Dispenser.turnOff()
-        print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
+        if const_Lever_Mode == 2:
+            print('ITI ', ITI_Ticker,' Event: Right Lever was pressed')
+            p_Rig.o_Pellet_Dispenser.turnOn() # Gives sucrose as reward
+            time.sleep(1)
+            p_Rig.o_Pellet_Dispenser.turnOff()
+            print('ITI ', ITI_Ticker,' Event: Sucrose Dispensed')
     def s_ITI_T_tick(count):
         if count == ITI_T - 2:
             if const_Mode == 1:
@@ -169,8 +191,12 @@ class ITI_Event:      #StateID = ?
             if const_Mode == 4:
                 p_Rig.o_Shock.turnOn()
         if count == ITI_T:
-            p_Rig.o_R_Lever_Light.turnOff()
-            print('ITI ', ITI_Ticker,' Event: Turn off Left Lever Light')
+            if const_Lever_Mode == 1:
+                p_Rig.o_L_Lever_Light.turnOff()
+                print('ITI ', ITI_Ticker,' Event: Left Lever Light Turned Off')
+            if const_Lever_Mode == 2:
+                p_Rig.o_R_Lever_Light.turnOff()
+                print('ITI ', ITI_Ticker,' Event: Right Lever Light Turned Off')
             if const_Mode == 1:
                 pass
             if const_Mode == 3:
